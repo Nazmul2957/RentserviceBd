@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">My_Application</string>
+    <string name="splashscreen_text">I’m from JFJ</string>
+    <string name="signin_text">Sign In</string>
+    <string name="welcome_page">Welcome To RentService</string>
+    <string name="welcome_page_two">Rent online and get awesome delivered from stores
+        to your home in as fast as 1 hour .</string>
+    <string name="create_account">Create An Account</string>
+    <string name="create_account_two">Fill your details or continue with social media</string>
+    <string name="sign_in_page_text">Enter your phone number and
+password to access your account</string>
+
+</resources>
