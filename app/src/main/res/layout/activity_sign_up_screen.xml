@@ -7,133 +7,148 @@
     android:background="@drawable/background_image"
     tools:context=".Screens.SignUpScreen">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:padding="10dp">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
             android:layout_gravity="center"
-            android:orientation="vertical">
+            android:padding="10dp">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/create_account"
-                android:textColor="@color/text_color"
-                android:textSize="30sp"
-                android:textStyle="bold" />
+                android:layout_gravity="center"
+                android:orientation="vertical">
 
-            <TextView
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/create_account"
+                    android:textColor="@color/text_color"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:text="@string/create_account_two"
+                    android:textColor="@color/text_color_two"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:text="@string/create_account_two"
-                android:textColor="@color/text_color_two"
-                android:textSize="20sp" />
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:padding="10dp">
 
-        </LinearLayout>
+                <EditText
+                    android:id="@+id/took_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/round_edittext"
+                    android:drawableLeft="@drawable/union"
+                    android:drawablePadding="5dp"
+                    android:hint="Your Name"
+                    android:padding="5dp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="vertical"
-            android:padding="10dp">
-
-            <EditText
+            </LinearLayout>
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@drawable/round_edittext"
-                android:drawableLeft="@drawable/union"
-                android:drawablePadding="5dp"
-                android:hint="Your Name"
-                android:padding="5dp" />
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:padding="10dp">
 
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="vertical"
-            android:padding="10dp">
+                <EditText
+                    android:id="@+id/phn_no"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/round_edittext"
+                    android:drawableLeft="@drawable/bd_flag"
+                    android:drawablePadding="5dp"
+                    android:hint="Phone Number"
+                    android:padding="5dp" />
 
-            <EditText
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@drawable/round_edittext"
-                android:drawableLeft="@drawable/bd_flag"
-                android:drawablePadding="5dp"
-                android:hint="Phone Number"
-                android:padding="5dp" />
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:padding="10dp">
 
-        </LinearLayout>
+                <EditText
+                    android:id="@+id/took_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/round_edittext"
+                    android:drawableLeft="@drawable/union"
+                    android:drawablePadding="5dp"
+                    android:hint="Password"
+                    android:drawableRight="@drawable/ic_baseline_remove_red_eye_24"
+                    android:padding="5dp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="vertical"
-            android:padding="10dp">
+            </LinearLayout>
 
-            <EditText
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@drawable/round_edittext"
-                android:drawableLeft="@drawable/union"
-                android:drawablePadding="5dp"
-                android:hint="Password"
-                android:drawableRight="@drawable/ic_baseline_remove_red_eye_24"
-                android:padding="5dp" />
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:padding="10dp">
 
-        </LinearLayout>
+                <EditText
+                    android:id="@+id/took_confirm_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/round_edittext"
+                    android:drawableLeft="@drawable/union"
+                    android:drawablePadding="5dp"
+                    android:hint="Confirm Password"
+                    android:drawableRight="@drawable/ic_baseline_remove_red_eye_24"
+                    android:padding="5dp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="vertical"
-            android:padding="10dp">
+            </LinearLayout>
 
-            <EditText
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@drawable/round_edittext"
-                android:drawableLeft="@drawable/union"
-                android:drawablePadding="5dp"
-                android:hint="Confirm Password"
-                android:drawableRight="@drawable/ic_baseline_remove_red_eye_24"
-                android:padding="5dp" />
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:padding="10dp">
 
-        </LinearLayout>
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/sign_up"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/round_button"
+                    android:text="Sign up"
+                    android:textColor="@color/text_color"
+                    android:textSize="15dp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="vertical"
-            android:padding="10dp">
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/sign_up"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/round_button"
-                android:text="Sign up"
-                android:textColor="@color/text_color"
-                android:textSize="15dp" />
+            </LinearLayout>
 
 
         </LinearLayout>
 
 
-    </LinearLayout>
+    </ScrollView>
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,5 +9,8 @@
     <string name="create_account_two">Fill your details or continue with social media</string>
     <string name="sign_in_page_text">Enter your phone number and
 password to access your account</string>
+    <string name="otp_page_text">Enter Verification Code</string>
+    <string name="otp_page_text_one">We have sent SMS to your number</string>
+
 
 </resources>

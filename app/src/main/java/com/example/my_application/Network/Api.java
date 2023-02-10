@@ -12,4 +12,13 @@ public interface Api {
     @FormUrlEncoded
     @POST("login")
     Call<JsonObject> login(@Field("mobile") String email, @Field("password") String password);
+
+    @FormUrlEncoded
+    @POST("otp")
+    Call<JsonObject> Otp(@Field("mobile") String mobile);
+
+    @FormUrlEncoded
+    @POST("register")
+    Call<JsonObject> register(@Field("name") String name,@Field("mobile") String mObile,@Field("password")String Password,
+                              @Field("otp") String Otp);
 }

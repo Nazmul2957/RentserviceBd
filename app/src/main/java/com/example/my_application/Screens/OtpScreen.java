@@ -5,14 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
+import com.chaos.view.PinView;
 import com.example.my_application.Network.Api;
 import com.example.my_application.Network.RetrofitClient;
 import com.example.my_application.R;
@@ -24,61 +23,49 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SignUpScreen extends AppCompatActivity {
+public class OtpScreen extends AppCompatActivity {
 
-    Button GotoOtpPage;
-    EditText Name, Phone_Number, Pasword, Confrim_Password;
-    ProgressDialog progressDialog;
+    PinView MatchOtp;
+    Button Verification;
     Api api;
+    ProgressDialog progressDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up_screen);
+        setContentView(R.layout.activity_otp_screen);
 
-        GotoOtpPage = findViewById(R.id.sign_up);
-        Name = findViewById(R.id.took_name);
-        Phone_Number = findViewById(R.id.phn_no);
-        Pasword = findViewById(R.id.took_password);
-        Confrim_Password = findViewById(R.id.took_confirm_password);
+        MatchOtp = findViewById(R.id.pin_view);
+        Verification = findViewById(R.id.verify_otp);
 
-        progressDialog = new ProgressDialog(SignUpScreen.this);
+        String ReceiveName = getIntent().getStringExtra("fullname");
+        String ReceivePassword = getIntent().getStringExtra("pasPassword");
+        String ReceiveMobile = getIntent().getStringExtra("mbl");
+        //String SendOtp = MatchOtp.getText().toString();
+        Log.e("test", ReceiveName);
+        progressDialog = new ProgressDialog(OtpScreen.this);
         progressDialog.setMessage("Please Wait......");
         progressDialog.setCancelable(false);
 
-
-        GotoOtpPage.setOnClickListener(new View.OnClickListener() {
+        Verification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-                if (!TextUtils.isEmpty(Phone_Number.getText().toString())) {
+                if (!TextUtils.isEmpty(MatchOtp.getText().toString())) {
                     progressDialog.show();
                     api = RetrofitClient.noInterceptor().create(Api.class);
-                    Call<JsonObject> call = api.Otp(("88" + Phone_Number.getText().toString())
-                    );
+                    Call<JsonObject> call = api.register(ReceiveName,ReceivePassword,ReceiveMobile,MatchOtp.getText().toString());
                     call.enqueue(new Callback<JsonObject>() {
                         @Override
                         public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                             progressDialog.dismiss();
                             if (response.isSuccessful() && response.body() != null) {
-                                String passname = Name.getText().toString();
-                                String passingPassword = Pasword.getText().toString();
-                                String passConfrimPassword = Confrim_Password.getText().toString();
-                                String mobile = "88" + Phone_Number.getText().toString();
-
-                                Intent intent = new Intent(SignUpScreen.this, OtpScreen.class);
-                                intent.putExtra("fullname", passname);
-                                intent.putExtra("pasPassword", passingPassword);
-                                intent.putExtra("mbl", mobile);
-                                // startActivity(new Intent(SignUpScreen.this, OtpScreen.class));
-                                startActivity(intent);
-
+                                startActivity(new Intent(OtpScreen.this, SignInScreen.class));
                                 finish();
 
                             } else {
                                 progressDialog.dismiss();
-                                Toast.makeText(SignUpScreen.this, "Something Wrong", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(OtpScreen.this, "Something Wrong", Toast.LENGTH_SHORT).show();
                             }
                         }
 
@@ -88,13 +75,14 @@ public class SignUpScreen extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "Network or Server Error", Toast.LENGTH_SHORT).show();
                         }
                     });
+
                 } else {
-                    Phone_Number.setError("Input Valid Mobile Number");
-                    Phone_Number.requestFocus();
+                    MatchOtp.setError("Input Valid OTP Number");
+                    MatchOtp.requestFocus();
                 }
-
-
             }
         });
+
+
     }
 }

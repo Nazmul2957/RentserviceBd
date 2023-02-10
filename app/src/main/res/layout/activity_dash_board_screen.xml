@@ -6,10 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".Screens.DashBoardScreen">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Operation sUCCESSFULL"
-        android:textSize="30sp"/>
+   <Button
+       android:id="@+id/logout"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:text="logout"
+       android:gravity="center"
+       tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
