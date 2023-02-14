@@ -11,6 +11,8 @@
 password to access your account</string>
     <string name="otp_page_text">Enter Verification Code</string>
     <string name="otp_page_text_one">We have sent SMS to your number</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 
 
 </resources>

@@ -1,10 +1,12 @@
 package com.example.my_application.Network;
 
+import com.example.my_application.Data_Model.DashboardContainer;
 import com.google.gson.JsonObject;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface Api {
@@ -19,6 +21,9 @@ public interface Api {
 
     @FormUrlEncoded
     @POST("register")
-    Call<JsonObject> register(@Field("name") String name,@Field("mobile") String mObile,@Field("password")String Password,
+    Call<JsonObject> register(@Field("name") String name,@Field("mobile") String mobile,@Field("password")String Password,
                               @Field("otp") String Otp);
+
+    @GET("post")
+    Call<DashboardContainer> getdashboarddata();
 }

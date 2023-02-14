@@ -50,8 +50,6 @@ public class SignUpScreen extends AppCompatActivity {
         GotoOtpPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 if (!TextUtils.isEmpty(Phone_Number.getText().toString())) {
                     progressDialog.show();
                     api = RetrofitClient.noInterceptor().create(Api.class);

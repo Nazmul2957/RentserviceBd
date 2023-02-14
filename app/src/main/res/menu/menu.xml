@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/home_page"
+            android:title="Home Page" />
+        <item
+            android:id="@+id/add_post"
+            android:title="Add Post" />
+
+        <item
+            android:id="@+id/favourite_list"
+            android:title="Favorite" />
+
+        <item
+            android:id="@+id/profile_page"
+            android:title="Profile" />
+
+        <item
+            android:id="@+id/my_post_list"
+            android:title="My Post" />
+        <item
+            android:id="@+id/about_page"
+            android:title="About" />
+
+
+        <item
+            android:id="@+id/log_out"
+            android:title="Log out" />
+
+
+    </group>
+</menu>

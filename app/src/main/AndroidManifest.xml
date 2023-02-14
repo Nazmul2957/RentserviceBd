@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.My_Application">
         <activity
+            android:name=".Screens.AddPostScreen"
+            android:exported="false" />
+        <activity
             android:name=".Screens.OtpScreen"
             android:exported="false" />
         <activity

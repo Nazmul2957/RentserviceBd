@@ -55,6 +55,13 @@
                 android:textColor="@color/text_color"
                 android:textSize="20sp" />
 
+<!--            <EditText-->
+<!--                android:id="@+id/pin_view"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:inputType="number"-->
+<!--                android:layout_height="wrap_content"/>-->
+
             <com.chaos.view.PinView
                 android:id="@+id/pin_view"
                 style="@style/PinWidget.PinView"
