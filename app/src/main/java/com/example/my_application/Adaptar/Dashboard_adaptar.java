@@ -12,8 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.my_application.Data_Model.DashboardContainer;
-import com.example.my_application.Data_Model.Datum;
+import com.example.my_application.Data_Model.Dashboard.Datum;
 import com.example.my_application.R;
 
 import java.util.ArrayList;

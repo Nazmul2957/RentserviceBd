@@ -17,7 +17,7 @@
         <ImageView
             android:layout_width="300dp"
             android:layout_height="300dp"
-            android:src="@drawable/ic_final_logo"
+            android:src="@drawable/logot"
             tools:ignore="MissingConstraints" />
 
         <TextView

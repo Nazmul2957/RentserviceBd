@@ -1,5 +1,5 @@
 
-package com.example.my_application.Data_Model;
+package com.example.my_application.Data_Model.Dashboard;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

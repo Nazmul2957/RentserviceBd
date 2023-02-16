@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My_Application</string>
+    <string name="app_name">RentserviceBD</string>
     <string name="splashscreen_text">I’m from JFJ</string>
     <string name="signin_text">Sign In</string>
     <string name="welcome_page">Welcome To RentService</string>

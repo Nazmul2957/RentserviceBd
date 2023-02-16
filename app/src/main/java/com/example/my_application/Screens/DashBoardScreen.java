@@ -13,19 +13,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 
 import com.example.my_application.Adaptar.Dashboard_adaptar;
-import com.example.my_application.Data_Model.DashboardContainer;
+import com.example.my_application.Data_Model.Dashboard.DashboardContainer;
 import com.example.my_application.Network.Api;
 import com.example.my_application.Network.RetrofitClient;
 import com.example.my_application.R;
 import com.example.my_application.Util.MySharedPreference;
 import com.google.android.material.navigation.NavigationView;
-
-import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;

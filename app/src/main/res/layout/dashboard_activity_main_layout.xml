@@ -55,18 +55,18 @@
                         android:layout_height="wrap_content"
                         android:padding="5dp"
                         android:text="Welcome"
-                        android:textColor="#000"
+                        android:textColor="@color/text_color"
                         android:textSize="10sp"
-                        android:textStyle="normal" />
+                        android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/userPhone_tv"
+                        android:id="@+id/username"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
                         android:hint="Nazmul Hossain"
                         android:padding="5dp"
-                        android:textColor="#000"
+                        android:textColor="@color/text_color"
                         android:textSize="15sp"
                         android:textStyle="normal" />
 
