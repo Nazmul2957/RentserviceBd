@@ -3,14 +3,30 @@
     package="com.example.my_application">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_final_logo"
+        android:icon="@drawable/logot"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/ic_final_logo"
+        android:roundIcon="@drawable/logot"
         android:supportsRtl="true"
         android:theme="@style/Theme.My_Application">
+        <activity
+            android:name=".Screens.MyPostScreen"
+            android:exported="false" />
+        <activity
+            android:name=".Screens.SinglePostViewScreen"
+            android:exported="false" />
+        <activity
+            android:name=".Screens.Add_District_Screen"
+            android:exported="false" />
+        <activity
+            android:name=".Screens.InsertDivisionScreen"
+            android:exported="false" />
+        <activity
+            android:name=".Screens.InsertCategoryScreen"
+            android:exported="false" />
         <activity
             android:name=".Screens.AddPostScreen"
             android:exported="false" />
@@ -31,8 +47,8 @@
             android:exported="false" />
         <activity
             android:name=".Screens.MainActivity"
-            android:theme="@style/Theme.My_Application"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.My_Application">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

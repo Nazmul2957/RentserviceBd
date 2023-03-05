@@ -19,10 +19,10 @@
             android:padding="5dp">
 
             <EditText
+                android:id="@+id/insert_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/round_edittext"
-                android:drawableStart="@drawable/post_title"
                 android:hint="Title"
                 android:padding="15dp" />
 
@@ -74,6 +74,7 @@
 
 
                 <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/policestation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/round_edittext"
@@ -90,10 +91,11 @@
             android:padding="5dp">
 
             <EditText
+                android:id="@+id/insert_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/round_edittext"
-                android:drawableStart="@drawable/short_descrip"
+
                 android:hint="Write a short description"
                 android:padding="15dp" />
 
@@ -106,10 +108,11 @@
             android:padding="5dp">
 
             <EditText
+                android:id="@+id/insert_price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/round_edittext"
-                android:drawableStart="@drawable/post_price"
+
                 android:hint="300.00 BDT"
                 android:padding="15dp" />
 
@@ -122,10 +125,10 @@
             android:padding="5dp">
 
             <EditText
+                android:id="@+id/insert_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/round_edittext"
-                android:drawableStart="@drawable/ic_baseline_location_on_24"
                 android:hint="Location"
                 android:padding="15dp" />
 
@@ -173,7 +176,7 @@
             android:layout_marginTop="10dp">
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/sign_up"
+                android:id="@+id/Post"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"

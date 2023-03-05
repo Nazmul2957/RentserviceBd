@@ -1,10 +1,8 @@
 package com.example.my_application.Adaptar;
 
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,23 +12,20 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
-import com.example.my_application.Data_Model.Dashboard.Datum;
+import com.example.my_application.Data_Model.Mypost.MypostL;
 import com.example.my_application.R;
 import com.example.my_application.Screens.SinglePostViewScreen;
-import com.example.my_application.Util.Constant;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Dashboard_adaptar extends RecyclerView.Adapter<Dashboard_adaptar.ViewHolders> {
+public class MyPostListAdaptar extends RecyclerView.Adapter<MyPostListAdaptar.ViewHolders> {
 
-    List<Datum> postlist = new ArrayList<>();
+    List<MypostL> postlist = new ArrayList<>();
     Context context;
 
-
-    public Dashboard_adaptar(List<Datum> postlist, Context context) {
+    public MyPostListAdaptar(List<MypostL> postlist, Context context) {
         this.postlist = postlist;
         this.context = context;
     }
@@ -39,19 +34,18 @@ public class Dashboard_adaptar extends RecyclerView.Adapter<Dashboard_adaptar.Vi
     @Override
     public ViewHolders onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.dashboard_list_model, parent, false);
+                .inflate(R.layout.mypostlist_model, parent, false);
         return new ViewHolders(view);
-
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolders holder, @SuppressLint("RecyclerView") int position) {
-
         holder.Post_title.setText(String.valueOf(postlist.get(position).getTitle()));
         holder.Post_Descrip.setText(String.valueOf(postlist.get(position).getDescription()));
         holder.Post_Pp.setText(String.valueOf(postlist.get(position).getPrice()));
         Glide.with(context).load("https://rentservicebd.com/public/api/image/" +
                 postlist.get(position).getImage1()).into(holder.Post_image);
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,7 +70,6 @@ public class Dashboard_adaptar extends RecyclerView.Adapter<Dashboard_adaptar.Vi
 
         TextView Post_title, Post_Descrip, Post_Pp;
         ImageView Post_image;
-
 
         public ViewHolders(@NonNull View itemView) {
             super(itemView);
