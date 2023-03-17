@@ -11,7 +11,7 @@ public class RetrofitClient {
     private static Retrofit retrofit = null;
     private static Retrofit retrofitWithDifBase = null;
 
-    private static String BaseUrl="https://rentservicebd.com/public/api/";
+    private static String BaseUrl="http://rentservicebd.com/public/api/";
     private static Retrofit retrofitWithNoIntercepter = null;
 
     private RetrofitClient() {
@@ -45,7 +45,7 @@ public class RetrofitClient {
     public static Retrofit difBaseUrle() {
         if (retrofitWithDifBase == null) {
             retrofitWithDifBase = new Retrofit.Builder()
-                    .baseUrl("https://rentservicebd.com/public/api/")
+                    .baseUrl("http://rentservicebd.com/public/api/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }

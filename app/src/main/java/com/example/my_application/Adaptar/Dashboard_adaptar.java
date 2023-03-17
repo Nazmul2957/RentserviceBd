@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.my_application.Data_Model.Dashboard.Datum;
+import com.example.my_application.Listner.DashboardItemClickMenu;
 import com.example.my_application.R;
 import com.example.my_application.Screens.SinglePostViewScreen;
 import com.example.my_application.Util.Constant;
@@ -26,13 +28,17 @@ import java.util.List;
 
 public class Dashboard_adaptar extends RecyclerView.Adapter<Dashboard_adaptar.ViewHolders> {
 
+    public Dashboard_adaptar.OnItemClickListener listener;
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
     List<Datum> postlist = new ArrayList<>();
     Context context;
-
-
-    public Dashboard_adaptar(List<Datum> postlist, Context context) {
+    public Dashboard_adaptar(List<Datum> postlist, Context context, Dashboard_adaptar.OnItemClickListener listener) {
         this.postlist = postlist;
         this.context = context;
+        this.listener = listener;
     }
 
     @NonNull
@@ -52,6 +58,7 @@ public class Dashboard_adaptar extends RecyclerView.Adapter<Dashboard_adaptar.Vi
         holder.Post_Pp.setText(String.valueOf(postlist.get(position).getPrice()));
         Glide.with(context).load("https://rentservicebd.com/public/api/image/" +
                 postlist.get(position).getImage1()).into(holder.Post_image);
+        holder.Add_Favourite.setOnClickListener(new DashboardItemClickMenu(this, (OnItemClickListener) listener,holder,postlist.get(position)));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,7 +82,7 @@ public class Dashboard_adaptar extends RecyclerView.Adapter<Dashboard_adaptar.Vi
     public class ViewHolders extends RecyclerView.ViewHolder {
 
         TextView Post_title, Post_Descrip, Post_Pp;
-        ImageView Post_image;
+        ImageView Post_image, Add_Favourite;
 
 
         public ViewHolders(@NonNull View itemView) {
@@ -85,6 +92,7 @@ public class Dashboard_adaptar extends RecyclerView.Adapter<Dashboard_adaptar.Vi
             Post_Descrip = itemView.findViewById(R.id.post_description);
             Post_Pp = itemView.findViewById(R.id.post_price);
             Post_image = itemView.findViewById(R.id.post_img);
+            Add_Favourite = itemView.findViewById(R.id.add_favourite);
         }
     }
 }

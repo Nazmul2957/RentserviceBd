@@ -10,10 +10,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.my_application.Adaptar.Dashboard_adaptar;
 import com.example.my_application.Data_Model.Dashboard.DashboardContainer;
@@ -67,13 +71,19 @@ public class DashBoardScreen extends AppCompatActivity {
 
         navbar();
 
-       // Log.d("token_print", Token);
+        // Log.d("token_print", Token);
 
         api.getprofile(Token).enqueue(new Callback<ProfileContainer>() {
             @Override
             public void onResponse(Call<ProfileContainer> call, Response<ProfileContainer> response) {
                 Username.setText(response.body().getUserInfo().getName());
-                Log.d("profile", response.body().getUserInfo().getName());
+                String UserId=String.valueOf(response.body().getUserInfo().getId());
+//                SharedPreferences shr=getSharedPreferences("User_ID",MODE_PRIVATE);
+//                SharedPreferences.Editor editor=shr.edit();
+//                editor.putString("Constant.ID",UserId);
+//                editor.apply();
+              // String Userid= MySharedPreference.getInstance(DashBoardScreen.this).edit().putString("Constant.ID",UserId).apply();
+             //  Log.d("UserId", Constant.ID);
             }
 
             @Override
@@ -87,14 +97,18 @@ public class DashBoardScreen extends AppCompatActivity {
             public void onResponse(Call<DashboardContainer> call, Response<DashboardContainer> response) {
                 progressDialog.dismiss();
                 if (response.isSuccessful() && response.body() != null) {
-                   // Log.d("tesst", response.toString());
                     recyclerView.setHasFixedSize(true);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(),
                             LinearLayoutManager.VERTICAL, false));
-                   // Log.d("respons", String.valueOf(response.toString()));
+                    Dashboard_adaptar adaptar = new Dashboard_adaptar(response.body().getData(), getApplicationContext(),
+                            new Dashboard_adaptar.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(int position) {
+                                }
+                            });
 
-                    Dashboard_adaptar adaptar = new Dashboard_adaptar(response.body().getData(), getApplicationContext());
                     recyclerView.setAdapter(adaptar);
+
                     Log.d("respons", String.valueOf(response.body().getData().toString()));
 
                 }

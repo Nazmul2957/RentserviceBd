@@ -55,6 +55,7 @@
                         android:layout_height="wrap_content"
                         android:padding="5dp"
                         android:text="Welcome"
+                        android:fontFamily="@font/roboto_black"
                         android:textColor="@color/text_color"
                         android:textSize="10sp"
                         android:textStyle="bold" />
@@ -64,6 +65,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
+                        android:fontFamily="@font/roboto_black"
                         android:hint="Nazmul Hossain"
                         android:padding="5dp"
                         android:textColor="@color/text_color"

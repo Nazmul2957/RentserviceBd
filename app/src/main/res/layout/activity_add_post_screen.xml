@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -138,25 +138,53 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:background="@drawable/round_edittext"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:padding="10dp">
+            android:padding="10dp"
+            android:weightSum="2">
 
-            <ImageView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/post_image" />
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_weight="1">
 
-            <TextView
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/select_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Select or drop images"
+                    android:padding="15dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Select or drop images"
-                android:padding="15dp" />
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/imageshow"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:src="@drawable/post_image" />
+            </LinearLayout>
 
 
         </LinearLayout>
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content">-->
+
+<!--            <ImageView-->
+<!--                android:id="@+id/image_show"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="50dp" />-->
+
+
+<!--        </LinearLayout>-->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -191,4 +219,4 @@
     </LinearLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

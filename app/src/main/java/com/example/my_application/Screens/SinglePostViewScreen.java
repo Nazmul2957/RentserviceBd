@@ -3,6 +3,8 @@ package com.example.my_application.Screens;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -17,6 +19,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.my_application.Adaptar.Dashboard_adaptar;
+import com.example.my_application.Data_Model.Dashboard.DashboardContainer;
 import com.example.my_application.Data_Model.Profile.ProfileContainer;
 import com.example.my_application.Data_Model.SinglePost.SinglePostContainer;
 import com.example.my_application.Network.Api;
@@ -36,6 +40,7 @@ public class SinglePostViewScreen extends AppCompatActivity {
     ImageView imageView;
     Button CallButton;
     String PhoneNumber;
+    RecyclerView recyclerView;
     //String REQUEST_CODE = 0;
 
 
@@ -48,6 +53,7 @@ public class SinglePostViewScreen extends AppCompatActivity {
         imageView = findViewById(R.id.post_image);
         Price = findViewById(R.id.price_post);
         Post_Description = findViewById(R.id.post_description);
+        recyclerView = findViewById(R.id.dash_board_list);
         CallButton = findViewById(R.id.call_button);
         String PostId = getIntent().getStringExtra(Intent.EXTRA_UID);
         Log.e("pppp", PostId);
@@ -106,5 +112,33 @@ public class SinglePostViewScreen extends AppCompatActivity {
             }
         });
 
+//        api.getdashboarddata().enqueue(new Callback<DashboardContainer>() {
+//            @Override
+//            public void onResponse(Call<DashboardContainer> call, Response<DashboardContainer> response) {
+//                progressDialog.dismiss();
+//                if (response.isSuccessful() && response.body() != null) {
+//                    // Log.d("tesst", response.toString());
+//                    recyclerView.setHasFixedSize(true);
+//                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(),
+//                            LinearLayoutManager.VERTICAL, false));
+//                    // Log.d("respons", String.valueOf(response.toString()));
+//                    Dashboard_adaptar adaptar = new Dashboard_adaptar(response.body().getData(), getApplicationContext());
+//                    recyclerView.setAdapter(adaptar);
+//                    //Log.d("respons", String.valueOf(response.body().getData().toString()));
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<DashboardContainer> call, Throwable t) {
+//                progressDialog.dismiss();
+//            }
+//        });
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

@@ -74,15 +74,15 @@ public class SignInScreen extends AppCompatActivity {
                                 progressDialog.dismiss();
                                 if (response.isSuccessful() && response.body() != null) {
                                     String token = response.body().get("key").getAsString();
-                                    Log.e("test", token);
                                     MySharedPreference.getInstance(SignInScreen.this).edit()
                                             .putString(Constant.TOKEN, token).apply();
+                                    Log.e("test", token);
                                     startActivity(new Intent(SignInScreen.this, DashBoardScreen.class));
                                     finish();
 
                                 } else {
                                     progressDialog.dismiss();
-                                    Toast.makeText(SignInScreen.this, "Something Wrong", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(SignInScreen.this, "Something Wrong", Toast.LENGTH_LONG).show();
                                 }
 
                             }
@@ -90,7 +90,7 @@ public class SignInScreen extends AppCompatActivity {
                             @Override
                             public void onFailure(Call<JsonObject> call, Throwable t) {
                                 progressDialog.dismiss();
-                                Toast.makeText(getApplicationContext(), "Network or Server Error", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_SHORT).show();
                             }
                         });
 
