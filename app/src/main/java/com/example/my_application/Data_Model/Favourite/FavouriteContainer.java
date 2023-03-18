@@ -5,7 +5,6 @@ import com.google.gson.annotations.SerializedName;
 
 
 public class FavouriteContainer{
-
     @SerializedName("status")
     @Expose
     private String status;

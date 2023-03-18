@@ -28,7 +28,6 @@ public class DashboardItemClickMenu implements View.OnClickListener {
     ProgressDialog progressDialog;
     Api api;
     Context context;
-    String userid;
     String Token;
 
 
@@ -49,33 +48,17 @@ public class DashboardItemClickMenu implements View.OnClickListener {
         progressDialog.setMessage("Please Wait......");
         progressDialog.setCancelable(false);
 
-        api.getprofile(Token).enqueue(new Callback<ProfileContainer>() {
-            @Override
-            public void onResponse(Call<ProfileContainer> call, Response<ProfileContainer> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    userid = String.valueOf(response.body().getUserInfo().getId());
-                    Log.d("UserIdss", userid);
-                }
-            }
 
-            @Override
-            public void onFailure(Call<ProfileContainer> call, Throwable t) {
-
-            }
-        });
     }
 
     @Override
     public void onClick(View v) {
 
-        api.insertfavourite(Token, userid, String.valueOf(datum.getId())).enqueue(new Callback<JsonObject>() {
+        api.insertfavourite(Token, String.valueOf(datum.getId())).enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 progressDialog.show();
                 if (response.isSuccessful() && response.body() != null) {
-                    Log.e("Token", Token);
-                    Log.d("UserId", userid);
-//                    Log.d("pId", String.valueOf(datum.getId()));
                     progressDialog.dismiss();
                     Toast.makeText(context, "Item Added", Toast.LENGTH_SHORT).show();
                 }

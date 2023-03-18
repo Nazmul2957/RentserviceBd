@@ -135,25 +135,42 @@
                 android:textColor="@color/text_color"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:text="Related Product"/>
+                android:text="Comments"/>
 
 
         </LinearLayout>
 
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="5dp"-->
+<!--            android:padding="10dp">-->
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="5dp"
-            android:padding="5dp">
+<!--            <TextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:textColor="@color/text_color"-->
+<!--                android:textSize="20sp"-->
+<!--                android:textStyle="bold"-->
+<!--                android:text="Related Product"/>-->
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/dash_board_list"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:dividerHeight="10dp" />
 
-        </LinearLayout>
+<!--        </LinearLayout>-->
+
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_marginTop="5dp"-->
+<!--            android:padding="5dp">-->
+
+<!--            <androidx.recyclerview.widget.RecyclerView-->
+<!--                android:id="@+id/dash_board_list"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:dividerHeight="10dp" />-->
+
+<!--        </LinearLayout>-->
 
     </LinearLayout>
 

@@ -41,7 +41,7 @@ public class DashBoardScreen extends AppCompatActivity {
     RecyclerView recyclerView;
     ActionBarDrawerToggle toggle;
     DrawerLayout drawerLayout;
-    TextView Username;
+    TextView Username, HeadName;
     ProgressDialog progressDialog;
 
 
@@ -55,6 +55,7 @@ public class DashBoardScreen extends AppCompatActivity {
         nav = (NavigationView) findViewById(R.id.navbar);
         drawerLayout = findViewById(R.id.drawerlayout);
         Username = findViewById(R.id.username);
+        HeadName = findViewById(R.id.username_head);
 
         api = RetrofitClient.get(getApplicationContext()).create(Api.class);
         String Token = MySharedPreference.getInstance(getApplicationContext()).getString(Constant.TOKEN, "not found");
@@ -77,13 +78,8 @@ public class DashBoardScreen extends AppCompatActivity {
             @Override
             public void onResponse(Call<ProfileContainer> call, Response<ProfileContainer> response) {
                 Username.setText(response.body().getUserInfo().getName());
-                String UserId=String.valueOf(response.body().getUserInfo().getId());
-//                SharedPreferences shr=getSharedPreferences("User_ID",MODE_PRIVATE);
-//                SharedPreferences.Editor editor=shr.edit();
-//                editor.putString("Constant.ID",UserId);
-//                editor.apply();
-              // String Userid= MySharedPreference.getInstance(DashBoardScreen.this).edit().putString("Constant.ID",UserId).apply();
-             //  Log.d("UserId", Constant.ID);
+                //  HeadName.setText(response.body().getUserInfo().getName());
+
             }
 
             @Override
@@ -153,6 +149,11 @@ public class DashBoardScreen extends AppCompatActivity {
                     case R.id.Add_Dstrict:
                         Intent intentdistrict = new Intent(getApplicationContext(), Add_District_Screen.class);
                         startActivity(intentdistrict);
+                        // finish();
+                        break;
+                    case R.id.favourite_list:
+                        Intent intentfavouritelist = new Intent(getApplicationContext(), FavouriteListScreen.class);
+                        startActivity(intentfavouritelist);
                         // finish();
                         break;
                     case R.id.my_post_list:

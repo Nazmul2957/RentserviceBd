@@ -10,6 +10,7 @@
         <entry key="..\:/Flutter Project/My_Application/app/src/main/res/layout/activity_add_district_screen.xml" value="0.20260416666666667" />
         <entry key="..\:/Flutter Project/My_Application/app/src/main/res/layout/activity_add_post_screen.xml" value="0.2" />
         <entry key="..\:/Flutter Project/My_Application/app/src/main/res/layout/activity_dash_board_screen.xml" value="0.20260416666666667" />
+        <entry key="..\:/Flutter Project/My_Application/app/src/main/res/layout/activity_favourite_list_screen.xml" value="0.20260416666666667" />
         <entry key="..\:/Flutter Project/My_Application/app/src/main/res/layout/activity_insert_category_screen.xml" value="0.20260416666666667" />
         <entry key="..\:/Flutter Project/My_Application/app/src/main/res/layout/activity_insert_division_screen.xml" value="0.20260416666666667" />
         <entry key="..\:/Flutter Project/My_Application/app/src/main/res/layout/activity_login_screen.xml" value="0.20260416666666667" />
@@ -18,7 +19,7 @@
         <entry key="..\:/Flutter Project/My_Application/app/src/main/res/layout/activity_otp_screen.xml" value="0.25" />
         <entry key="..\:/Flutter Project/My_Application/app/src/main/res/layout/activity_sign_in_screen.xml" value="0.20260416666666667" />
         <entry key="..\:/Flutter Project/My_Application/app/src/main/res/layout/activity_sign_up_screen.xml" value="0.20260416666666667" />
-        <entry key="..\:/Flutter Project/My_Application/app/src/main/res/layout/activity_single_post_view_screen.xml" value="0.27032661570535094" />
+        <entry key="..\:/Flutter Project/My_Application/app/src/main/res/layout/activity_single_post_view_screen.xml" value="0.25" />
         <entry key="..\:/Flutter Project/My_Application/app/src/main/res/layout/category_list_model.xml" value="0.20260416666666667" />
         <entry key="..\:/Flutter Project/My_Application/app/src/main/res/layout/custome_spinner.xml" value="0.20260416666666667" />
         <entry key="..\:/Flutter Project/My_Application/app/src/main/res/layout/dashboard_activity_main_layout.xml" value="0.2" />

@@ -37,8 +37,10 @@ public interface Api {
     @FormUrlEncoded
     @POST("favourite")
     Call<JsonObject> insertfavourite(@Field("key") String Key,
-                                     @Field("postId") String PostId, @Field("userId") String UserId);@FormUrlEncoded
-    @POST("favourite")
+                                     @Field("postId") String PostId);
+
+    @FormUrlEncoded
+    @POST("favourite/get")
     Call<FavouriteContainer> favouritelist(@Field("key") String Key);
 
     @FormUrlEncoded
@@ -75,7 +77,6 @@ public interface Api {
     @POST("post")
     Call<InsertPostResponseContainer> InsertPost(@Body RequestBody params);
 
-//    @Part MultipartBody.Part image3
 
     @FormUrlEncoded
     @POST("user/get")
