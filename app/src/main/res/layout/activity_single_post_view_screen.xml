@@ -131,7 +131,8 @@
             <com.skydoves.expandablelayout.ExpandableLayout
                 android:id="@+id/expand"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                app:expandable_duration="500"
                 app:expandable_isExpanded="false"
                 app:expandable_parentLayout="@layout/expandable_parent"
                 app:expandable_secondLayout="@layout/expandable_child_layout"
@@ -139,44 +140,11 @@
                 app:expandable_spinner="@drawable/ic_arrow_down"
                 app:expandable_spinner_animate="true"
                 app:expandable_spinner_color="@color/black"
-                app:expandable_spinner_gravity="end"
-                app:expandable_spinner_margin="5dp"
-                app:expandable_spinner_size="32dp" />
+                />
 
 
         </LinearLayout>
 
-        <!--        <LinearLayout-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginTop="5dp"-->
-        <!--            android:padding="10dp">-->
-
-        <!--            <TextView-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:textColor="@color/text_color"-->
-        <!--                android:textSize="20sp"-->
-        <!--                android:textStyle="bold"-->
-        <!--                android:text="Related Product"/>-->
-
-
-        <!--        </LinearLayout>-->
-
-
-        <!--        <LinearLayout-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="match_parent"-->
-        <!--            android:layout_marginTop="5dp"-->
-        <!--            android:padding="5dp">-->
-
-        <!--            <androidx.recyclerview.widget.RecyclerView-->
-        <!--                android:id="@+id/dash_board_list"-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="match_parent"-->
-        <!--                android:dividerHeight="10dp" />-->
-
-        <!--        </LinearLayout>-->
 
     </LinearLayout>
 

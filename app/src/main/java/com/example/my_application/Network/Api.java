@@ -1,6 +1,7 @@
 package com.example.my_application.Network;
 
 import com.example.my_application.Data_Model.Category.CategoryContainer;
+import com.example.my_application.Data_Model.CommentList.CommentContainer;
 import com.example.my_application.Data_Model.Dashboard.DashboardContainer;
 import com.example.my_application.Data_Model.DistrictModel.DistrictContainer;
 import com.example.my_application.Data_Model.Division.DivisionContainer;
@@ -50,29 +51,6 @@ public interface Api {
                               @Field("password") String Password,
                               @Field("otp") String Otp);
 
-//    @FormUrlEncoded
-//    @POST("post")
-//    Call<JsonObject> insertPost(@Field("title") String Title,
-//                                @Field("description") String Description,
-//                                @Field("price") String Price,
-//                                @Field("address") String Address,
-//                                @Field("divisionId") String Division,
-//                                @Field("districtId") String District,
-//                                @Field("policeStationId") String Police,
-//                                @Field("key") String Token);
-
-    @Multipart
-    @POST("post")
-    Call<InsertPostResponseContainer> InsertPost(@Part("title") RequestBody Title,
-                                                 @Part("description") RequestBody Description,
-                                                 @Part("price") RequestBody Price,
-                                                 @Part("address") RequestBody Address,
-                                                 @Part("divisionId") RequestBody Division,
-                                                 @Part("districtId") RequestBody District,
-                                                 @Part("policeStationId") RequestBody Police,
-                                                 @Part("key") RequestBody Token,
-                                                 @Part MultipartBody.Part image1
-    );
 
     @POST("post")
     Call<InsertPostResponseContainer> InsertPost(@Body RequestBody params);
@@ -116,8 +94,11 @@ public interface Api {
     @GET("post/{id}")
     Call<SinglePostContainer> getsinglepost(@Path("id") String ID);
 
+    @GET("comment/{id}")
+    Call<CommentContainer> getallComments(@Path("id") String Postid);
+
     @FormUrlEncoded
     @POST("comment")
-    Call<JsonObject>insert_comments(@Field("postId")String PId,@Field("text")String Text,@Field("key")String Key);
+    Call<JsonObject> insert_comments(@Field("postId") String PId, @Field("text") String Text, @Field("key") String Key);
 
 }

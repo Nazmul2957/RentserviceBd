@@ -21,7 +21,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.my_application.Adaptar.CommentListAdaptar;
 import com.example.my_application.Adaptar.Dashboard_adaptar;
+import com.example.my_application.Data_Model.CommentList.CommentContainer;
 import com.example.my_application.Data_Model.Dashboard.DashboardContainer;
 import com.example.my_application.Data_Model.Profile.ProfileContainer;
 import com.example.my_application.Data_Model.SinglePost.SinglePostContainer;
@@ -47,7 +49,7 @@ public class SinglePostViewScreen extends AppCompatActivity {
     Boolean isExpended = false;
     String PhoneNumber;
     ExpandableLayout expandableLayout;
-    RecyclerView recyclerView;
+    RecyclerView recyclerView,CommentList_Show;
     EditText Write_comments;
     String PostId;
     String Token;
@@ -70,6 +72,9 @@ public class SinglePostViewScreen extends AppCompatActivity {
         expandableLayout.setExpandableAnimation(ExpandableAnimation.ACCELERATE);
         Write_comments = expandableLayout.secondLayout.findViewById(R.id.insert_comments);
         Send_Comments = expandableLayout.secondLayout.findViewById(R.id.send_comments);
+        CommentList_Show=expandableLayout.secondLayout.findViewById(R.id.comment_list);
+
+
         expandableLayout.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,6 +97,25 @@ public class SinglePostViewScreen extends AppCompatActivity {
         progressDialog.setCancelable(false);
         progressDialog.show();
 
+        api.getallComments(PostId).enqueue(new Callback<CommentContainer>() {
+            @Override
+            public void onResponse(Call<CommentContainer> call, Response<CommentContainer> response) {
+                progressDialog.dismiss();
+                if (response.isSuccessful()&&response.body()!=null){
+                    progressDialog.dismiss();
+                    CommentList_Show.setHasFixedSize(true);
+                    CommentList_Show.setLayoutManager(new LinearLayoutManager(getApplicationContext(),
+                            LinearLayoutManager.VERTICAL, false));
+                    CommentListAdaptar commentadaptar=new CommentListAdaptar(response.body().getComments(),getApplicationContext());
+                    CommentList_Show.setAdapter(commentadaptar);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CommentContainer> call, Throwable t) {
+
+            }
+        });
 
         api.getsinglepost(PostId).enqueue(new Callback<SinglePostContainer>() {
             @Override

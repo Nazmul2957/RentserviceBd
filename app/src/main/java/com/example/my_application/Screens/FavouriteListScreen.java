@@ -52,7 +52,8 @@ public class FavouriteListScreen extends AppCompatActivity {
                     recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(),
                             LinearLayoutManager.VERTICAL, false));
                    // MyPostListAdaptar adaptar = new MyPostListAdaptar(response.body().getPosts(), getApplicationContext());
-                    FavouriteListAdaptar adaptar=new FavouriteListAdaptar(response.body().getFavourites(),getApplicationContext());
+                    FavouriteListAdaptar adaptar=new FavouriteListAdaptar(response.body().getFavourites()
+                            ,getApplicationContext());
                     recyclerView.setAdapter(adaptar);
 
                 }

@@ -228,8 +228,9 @@ public class AddPostScreen extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == Constant.PICK_PHOTO_ONE && data != null) {
-            Log.d("tesst", "hiii thi s me");
+
             imageUri = data.getData();
+            Log.d("testone", String.valueOf(imageUri));
 
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
@@ -237,7 +238,7 @@ public class AddPostScreen extends AppCompatActivity {
                 bitmap = getResizedBitmap(bitmap, 800);
                 ByteArrayOutputStream bos = new ByteArrayOutputStream();
 
-                bitmap.compress(Bitmap.CompressFormat.PNG, 0, bos);
+               // bitmap.compress(Bitmap.CompressFormat.PNG, 0, bos);
                 // bitmap.compress(Bitmap.CompressFormat.JPEG, 0 /*ignored for PNG*/, bos);
                 byte[] bitmapdata = bos.toByteArray();
 
@@ -360,7 +361,7 @@ public class AddPostScreen extends AppCompatActivity {
         if (imageUri != null) {
             File nidfile = new File(imageUri.getLastPathSegment().toString());
             imageName = nidfile.getName();
-            Log.d("tesst", imageName);
+            Log.d("testwo", imageName);
             requestImage = RequestBody.create(MediaType.parse("multipart/form-data"), f1);
         }
 
@@ -377,21 +378,25 @@ public class AddPostScreen extends AppCompatActivity {
                 .addFormDataPart("image4", imageName, requestImage != null ? requestImage : attachmentEmpty)
                 .build();
 
-
+        progressDialog.show();
         api.InsertPost(requestBody).enqueue(new Callback<InsertPostResponseContainer>() {
             @Override
             public void onResponse(Call<InsertPostResponseContainer> call,
                                    Response<InsertPostResponseContainer> response) {
-                progressDialog.show();
+                //progressDialog.show();
                 if (response.isSuccessful() && response.body() != null) {
                     progressDialog.dismiss();
                     Toast.makeText(getApplicationContext(), "post added", Toast.LENGTH_SHORT).show();
+                }else{
+                    progressDialog.dismiss();
+                    Log.d("testthree",String.valueOf(response.errorBody().toString()));
                 }
             }
 
             @Override
             public void onFailure(Call<InsertPostResponseContainer> call, Throwable t) {
-
+                progressDialog.dismiss();
+                Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_SHORT).show();
             }
         });
 
