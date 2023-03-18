@@ -34,7 +34,7 @@
                 android:id="@+id/text_show"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="text"
+                android:hint="Title"
                 android:padding="10dp"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
@@ -59,7 +59,6 @@
                     android:id="@+id/price_post"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="30"
                     android:paddingLeft="10dp"
                     android:textColor="@color/call_button"
                     android:textSize="20sp"
@@ -69,8 +68,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:hint=" TK "
-                    android:textColor="@color/call_button"
+                    android:text=" TK "
+                    android:textColor="@color/text_color"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
@@ -100,7 +99,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Description"
-                android:textColor="@color/description"
+                android:textColor="@color/text_color"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -129,48 +128,55 @@
             android:layout_marginTop="5dp"
             android:padding="10dp">
 
-            <TextView
+            <com.skydoves.expandablelayout.ExpandableLayout
+                android:id="@+id/expand"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/text_color"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:text="Comments"/>
+                app:expandable_isExpanded="false"
+                app:expandable_parentLayout="@layout/expandable_parent"
+                app:expandable_secondLayout="@layout/expandable_child_layout"
+                app:expandable_showSpinner="true"
+                app:expandable_spinner="@drawable/ic_arrow_down"
+                app:expandable_spinner_animate="true"
+                app:expandable_spinner_color="@color/black"
+                app:expandable_spinner_gravity="end"
+                app:expandable_spinner_margin="5dp"
+                app:expandable_spinner_size="32dp" />
 
 
         </LinearLayout>
 
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="5dp"-->
-<!--            android:padding="10dp">-->
+        <!--        <LinearLayout-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginTop="5dp"-->
+        <!--            android:padding="10dp">-->
 
-<!--            <TextView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:textColor="@color/text_color"-->
-<!--                android:textSize="20sp"-->
-<!--                android:textStyle="bold"-->
-<!--                android:text="Related Product"/>-->
-
-
-<!--        </LinearLayout>-->
+        <!--            <TextView-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:textColor="@color/text_color"-->
+        <!--                android:textSize="20sp"-->
+        <!--                android:textStyle="bold"-->
+        <!--                android:text="Related Product"/>-->
 
 
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_marginTop="5dp"-->
-<!--            android:padding="5dp">-->
+        <!--        </LinearLayout>-->
 
-<!--            <androidx.recyclerview.widget.RecyclerView-->
-<!--                android:id="@+id/dash_board_list"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:dividerHeight="10dp" />-->
 
-<!--        </LinearLayout>-->
+        <!--        <LinearLayout-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            android:layout_marginTop="5dp"-->
+        <!--            android:padding="5dp">-->
+
+        <!--            <androidx.recyclerview.widget.RecyclerView-->
+        <!--                android:id="@+id/dash_board_list"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="match_parent"-->
+        <!--                android:dividerHeight="10dp" />-->
+
+        <!--        </LinearLayout>-->
 
     </LinearLayout>
 

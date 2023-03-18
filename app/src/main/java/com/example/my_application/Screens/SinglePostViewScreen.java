@@ -9,11 +9,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.media.session.MediaSession;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,6 +30,9 @@ import com.example.my_application.Network.RetrofitClient;
 import com.example.my_application.R;
 import com.example.my_application.Util.Constant;
 import com.example.my_application.Util.MySharedPreference;
+import com.google.gson.JsonObject;
+import com.skydoves.expandablelayout.ExpandableAnimation;
+import com.skydoves.expandablelayout.ExpandableLayout;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -37,11 +42,15 @@ public class SinglePostViewScreen extends AppCompatActivity {
     Api api;
     ProgressDialog progressDialog;
     TextView textView, Price, Post_Description;
-    ImageView imageView;
+    ImageView imageView, Send_Comments;
     Button CallButton;
+    Boolean isExpended = false;
     String PhoneNumber;
+    ExpandableLayout expandableLayout;
     RecyclerView recyclerView;
-    //String REQUEST_CODE = 0;
+    EditText Write_comments;
+    String PostId;
+    String Token;
 
 
     @Override
@@ -55,11 +64,28 @@ public class SinglePostViewScreen extends AppCompatActivity {
         Post_Description = findViewById(R.id.post_description);
         recyclerView = findViewById(R.id.dash_board_list);
         CallButton = findViewById(R.id.call_button);
-        String PostId = getIntent().getStringExtra(Intent.EXTRA_UID);
-        Log.e("pppp", PostId);
+        expandableLayout = findViewById(R.id.expand);
+        PostId = getIntent().getStringExtra(Intent.EXTRA_UID);
+
+        expandableLayout.setExpandableAnimation(ExpandableAnimation.ACCELERATE);
+        Write_comments = expandableLayout.secondLayout.findViewById(R.id.insert_comments);
+        Send_Comments = expandableLayout.secondLayout.findViewById(R.id.send_comments);
+        expandableLayout.parentLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isExpended) {
+                    expandableLayout.collapse();
+                    isExpended = false;
+                } else {
+                    expandableLayout.expand();
+                    isExpended = true;
+                }
+
+            }
+        });
 
         api = RetrofitClient.difBaseUrle().create(Api.class);
-        String Token = MySharedPreference.getInstance(getApplicationContext()).getString(Constant.TOKEN, "not found");
+        Token = MySharedPreference.getInstance(getApplicationContext()).getString(Constant.TOKEN, "not found");
 
         progressDialog = new ProgressDialog(SinglePostViewScreen.this);
         progressDialog.setMessage("Please Wait......");
@@ -111,30 +137,34 @@ public class SinglePostViewScreen extends AppCompatActivity {
 
             }
         });
+        Comments();
 
-//        api.getdashboarddata().enqueue(new Callback<DashboardContainer>() {
-//            @Override
-//            public void onResponse(Call<DashboardContainer> call, Response<DashboardContainer> response) {
-//                progressDialog.dismiss();
-//                if (response.isSuccessful() && response.body() != null) {
-//                    // Log.d("tesst", response.toString());
-//                    recyclerView.setHasFixedSize(true);
-//                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(),
-//                            LinearLayoutManager.VERTICAL, false));
-//                    // Log.d("respons", String.valueOf(response.toString()));
-//                    Dashboard_adaptar adaptar = new Dashboard_adaptar(response.body().getData(), getApplicationContext());
-//                    recyclerView.setAdapter(adaptar);
-//                    //Log.d("respons", String.valueOf(response.body().getData().toString()));
-//
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<DashboardContainer> call, Throwable t) {
-//                progressDialog.dismiss();
-//            }
-//        });
+    }
 
+    public void Comments() {
+        Send_Comments.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                api.insert_comments(PostId, Write_comments.getText().toString(), Token).enqueue(new Callback<JsonObject>() {
+                    @Override
+                    public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                        progressDialog.show();
+                        if (response.isSuccessful() && response.body() != null) {
+                            Write_comments.getText().clear();
+                            progressDialog.dismiss();
+                            String mes = String.valueOf(response.message().toString());
+                            Toast.makeText(getApplicationContext(), mes, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<JsonObject> call, Throwable t) {
+                        progressDialog.dismiss();
+                        Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
     }
 
     @Override

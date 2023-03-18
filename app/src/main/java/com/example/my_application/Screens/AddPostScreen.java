@@ -75,14 +75,9 @@ public class AddPostScreen extends AppCompatActivity {
     Button POSTDATA;
     ImageView ImageOne;
     TextView ImageSelect;
-    String path;
     String Token;
-    private static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
-    private static final int SELECT_REQUEST_CODE = 1;
-
     Uri imageUri = null, imageUriNid2 = null, imageUriTrade = null, imageUriTin = null;
     File f1, f2nid, f3trade, f4tin;
-   // boolean isNid1 = false, isNid2 = false, isTrade = false, isTin = false;
 
 
 
@@ -104,7 +99,7 @@ public class AddPostScreen extends AppCompatActivity {
 
 
         api = RetrofitClient.difBaseUrle().create(Api.class);
-       Token = MySharedPreference.getInstance(getApplicationContext()).getString(Constant.TOKEN, "not found");
+        Token = MySharedPreference.getInstance(getApplicationContext()).getString(Constant.TOKEN, "not found");
 
         progressDialog = new ProgressDialog(AddPostScreen.this);
         progressDialog.setMessage("Please Wait......");
@@ -233,7 +228,7 @@ public class AddPostScreen extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == Constant.PICK_PHOTO_ONE && data != null) {
-            Log.d("tesst","hiii thi s me");
+            Log.d("tesst", "hiii thi s me");
             imageUri = data.getData();
 
             try {
@@ -258,7 +253,7 @@ public class AddPostScreen extends AppCompatActivity {
                     fos.write(bitmapdata);
                     fos.flush();
                     fos.close();
-                   // isNid1 = true;
+                    // isNid1 = true;
                 } catch (IOException e) {
                     Log.e("REQ", e.toString());
                 }
@@ -273,76 +268,77 @@ public class AddPostScreen extends AppCompatActivity {
             }
 
 
-        } else if (resultCode == RESULT_OK && requestCode == Constant.PICK_PHOTO_THREE && data != null) {
-            imageUriTrade = data.getData();
-
-            try {
-                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUriTrade);
-                f3trade = new File(getCacheDir(), "Image3");
-                bitmap = getResizedBitmap(bitmap, 800);
-                ByteArrayOutputStream bos = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.PNG, 0, bos);
-                // bitmap.compress(Bitmap.CompressFormat.JPEG, 0 /*ignored for PNG*/, bos);
-                byte[] bitmapdata = bos.toByteArray();
-                FileOutputStream fos = null;
-                try {
-                    fos = new FileOutputStream(f3trade);
-
-                } catch (FileNotFoundException e) {
-                    Log.e("REQ", e.toString());
-                }
-                try {
-                    fos.write(bitmapdata);
-                    fos.flush();
-                    fos.close();
-                   // isTrade = true;
-                } catch (IOException e) {
-                    Log.e("REQ", e.toString());
-                }
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-//            if (bitmap != null) {
-//                binding.tradeLicensePic.setImageBitmap(bitmap);
-//                binding.tradePic.setVisibility(View.VISIBLE);
-//            } else {
-//                Log.e("REQ", "Bitmap null");
+        }
+//        else if (resultCode == RESULT_OK && requestCode == Constant.PICK_PHOTO_THREE && data != null) {
+//            imageUriTrade = data.getData();
+//
+//            try {
+//                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUriTrade);
+//                f3trade = new File(getCacheDir(), "Image3");
+//                bitmap = getResizedBitmap(bitmap, 800);
+//                ByteArrayOutputStream bos = new ByteArrayOutputStream();
+//                bitmap.compress(Bitmap.CompressFormat.PNG, 0, bos);
+//                // bitmap.compress(Bitmap.CompressFormat.JPEG, 0 /*ignored for PNG*/, bos);
+//                byte[] bitmapdata = bos.toByteArray();
+//                FileOutputStream fos = null;
+//                try {
+//                    fos = new FileOutputStream(f3trade);
+//
+//                } catch (FileNotFoundException e) {
+//                    Log.e("REQ", e.toString());
+//                }
+//                try {
+//                    fos.write(bitmapdata);
+//                    fos.flush();
+//                    fos.close();
+//                   // isTrade = true;
+//                } catch (IOException e) {
+//                    Log.e("REQ", e.toString());
+//                }
+//
+//            } catch (IOException e) {
+//                e.printStackTrace();
 //            }
+////            if (bitmap != null) {
+////                binding.tradeLicensePic.setImageBitmap(bitmap);
+////                binding.tradePic.setVisibility(View.VISIBLE);
+////            } else {
+////                Log.e("REQ", "Bitmap null");
+////            }
+//
+//        } else if (resultCode == RESULT_OK && requestCode == Constant.PICK_PHOTO_FOUR && data != null) {
+//            imageUriTin = data.getData();
 
-        } else if (resultCode == RESULT_OK && requestCode == Constant.PICK_PHOTO_FOUR && data != null) {
-            imageUriTin = data.getData();
-
-            try {
-                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUriTin);
-                f4tin = new File(getCacheDir(), "Image4");
-                bitmap = getResizedBitmap(bitmap, 800);
-                ByteArrayOutputStream bos = new ByteArrayOutputStream();
-
-                bitmap.compress(Bitmap.CompressFormat.PNG, 0, bos);
-                // bitmap.compress(Bitmap.CompressFormat.JPEG, 0 /*ignored for PNG*/, bos);
-                byte[] bitmapdata = bos.toByteArray();
-
-
-                FileOutputStream fos = null;
-                try {
-                    fos = new FileOutputStream(f4tin);
-
-                } catch (FileNotFoundException e) {
-                    Log.e("REQ", e.toString());
-                }
-                try {
-                    fos.write(bitmapdata);
-                    fos.flush();
-                    fos.close();
-                    //isTin = true;
-                } catch (IOException e) {
-                    Log.e("REQ", e.toString());
-                }
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUriTin);
+//                f4tin = new File(getCacheDir(), "Image4");
+//                bitmap = getResizedBitmap(bitmap, 800);
+//                ByteArrayOutputStream bos = new ByteArrayOutputStream();
+//
+//                bitmap.compress(Bitmap.CompressFormat.PNG, 0, bos);
+//                // bitmap.compress(Bitmap.CompressFormat.JPEG, 0 /*ignored for PNG*/, bos);
+//                byte[] bitmapdata = bos.toByteArray();
+//
+//
+//                FileOutputStream fos = null;
+//                try {
+//                    fos = new FileOutputStream(f4tin);
+//
+//                } catch (FileNotFoundException e) {
+//                    Log.e("REQ", e.toString());
+//                }
+//                try {
+//                    fos.write(bitmapdata);
+//                    fos.flush();
+//                    fos.close();
+//                    //isTin = true;
+//                } catch (IOException e) {
+//                    Log.e("REQ", e.toString());
+//                }
+//
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
 //            if (bitmap != null) {
 //                binding.tinLicensePic.setImageBitmap(bitmap);
 //                binding.tinPic.setVisibility(View.VISIBLE);
@@ -350,12 +346,12 @@ public class AddPostScreen extends AppCompatActivity {
 //                Log.e("REQ", "Bitmap null");
 //            }
 
-        }
     }
+    //   }
 
 
-    private void register() {
-        progressDialog.show();
+    public void register() {
+        // progressDialog.show();
         RequestBody requestBody;
         String imageName = "";
         RequestBody requestImage = null;
@@ -364,7 +360,7 @@ public class AddPostScreen extends AppCompatActivity {
         if (imageUri != null) {
             File nidfile = new File(imageUri.getLastPathSegment().toString());
             imageName = nidfile.getName();
-            Log.d("tesst",imageName);
+            Log.d("tesst", imageName);
             requestImage = RequestBody.create(MediaType.parse("multipart/form-data"), f1);
         }
 
@@ -378,16 +374,18 @@ public class AddPostScreen extends AppCompatActivity {
                 .addFormDataPart("districtId", String.valueOf(datas.get(DistrictList.getSelectedItemPosition()).getId().toString()))
                 .addFormDataPart("policeStationId", String.valueOf(datass.get(Police_Station.getSelectedItemPosition()).getId().toString()))
                 .addFormDataPart("key", Token)
-                .addFormDataPart("image1", imageName, requestImage != null ? requestImage : attachmentEmpty)
+                .addFormDataPart("image4", imageName, requestImage != null ? requestImage : attachmentEmpty)
                 .build();
 
 
         api.InsertPost(requestBody).enqueue(new Callback<InsertPostResponseContainer>() {
             @Override
-            public void onResponse(Call<InsertPostResponseContainer> call, Response<InsertPostResponseContainer> response) {
+            public void onResponse(Call<InsertPostResponseContainer> call,
+                                   Response<InsertPostResponseContainer> response) {
+                progressDialog.show();
                 if (response.isSuccessful() && response.body() != null) {
                     progressDialog.dismiss();
-                    Toast.makeText(getApplicationContext(), "", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "post added", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -397,84 +395,8 @@ public class AddPostScreen extends AppCompatActivity {
             }
         });
 
-//        api.registration(requestBody).enqueue(new Callback<RegisterResponse>() {
-//            @Override
-//            public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
-//                progressDialog.dismiss();
-//                // Log.e("toos", "from  register " + response.toString());
-//                if (response.isSuccessful() && response.body() != null) {
-//                    Toast.makeText(Registration_Page.this, "", Toast.LENGTH_LONG).show();
-//                    MySharedPreference.getInstance(Registration_Page.this).edit()
-//                            .putString(Constant.TOKEN, response.body().getToken())
-//                            .putString(Constant.NAME, binding.merchantName.getText().toString()).
-//                            putString(Constant.PHONE, binding.phnNumber.getText().toString()).apply();
-//                    Intent intent = new Intent(Registration_Page.this, OtpRegistrationConfirm.class);
-//                    intent.putExtra(Constant.PHONE, binding.phnNumber.getText().toString());
-//                    startActivity(new Intent(Registration_Page.this, OtpRegistrationConfirm.class));
-//                    startActivity(intent);
-//                    finish();
-//                } else {
-//                    try {
-//                        Log.d("tesst", response.errorBody().string());
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//                    Toast.makeText(Registration_Page.this, "Registration failed", Toast.LENGTH_LONG).show();
-//                }
-//            }
-//
-//            @Override
-//
-//            public void onFailure(Call<RegisterResponse> call, Throwable t) {
-//                progressDialog.dismiss();
-//                Log.d("tesst", t.toString());
-//                Toast.makeText(Registration_Page.this, "Registration failed" + t.toString(), Toast.LENGTH_LONG).show();
-//
-//            }
-//        });
     }
 
-//
-//    public void addCustomer(String Title, String Description, String Price, String Address, String DivisionId,
-//                            String DistrictId, String PolicId, String KEY) {
-//
-//        File file = new File(path);
-//        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
-//
-//        MultipartBody.Part body = MultipartBody.Part.createFormData("image1", file.getName(), requestFile);
-//
-//        RequestBody title_name = RequestBody.create(MediaType.parse("multipart/form-data"), Title);
-//        RequestBody Description_name = RequestBody.create(MediaType.parse("multipart/form-data"), Description);
-//        RequestBody Price_name = RequestBody.create(MediaType.parse("multipart/form-data"), Price);
-//        RequestBody Address_name = RequestBody.create(MediaType.parse("multipart/form-data"), Address);
-//        RequestBody Division_name = RequestBody.create(MediaType.parse("multipart/form-data"), DivisionId);
-//        RequestBody DistrictId_name = RequestBody.create(MediaType.parse("multipart/form-data"), DistrictId);
-//        RequestBody PolicId_name = RequestBody.create(MediaType.parse("multipart/form-data"), PolicId);
-//        RequestBody KEY_name = RequestBody.create(MediaType.parse("multipart/form-data"), KEY);
-//
-//
-//        api.InsertPost(title_name, Description_name, Price_name, Address_name, Division_name, DistrictId_name,
-//                PolicId_name, KEY_name, body).enqueue(new Callback<InsertPostResponseContainer>() {
-//            @Override
-//            public void onResponse(Call<InsertPostResponseContainer> call,
-//                                   Response<InsertPostResponseContainer> response) {
-//                progressDialog.show();
-//                if (response.isSuccessful() && response.body() != null) {
-//                    progressDialog.dismiss();
-//                    Toast.makeText(getApplicationContext(), "Post Upload Successfull", Toast.LENGTH_SHORT).show();
-//
-//                } else {
-//                    Toast.makeText(getApplicationContext(), "not Added", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<InsertPostResponseContainer> call, Throwable t) {
-//                Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//
-//    }
 
     public Bitmap getResizedBitmap(Bitmap image, int maxSize) {
         int width = image.getWidth();

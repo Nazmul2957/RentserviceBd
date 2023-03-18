@@ -116,4 +116,8 @@ public interface Api {
     @GET("post/{id}")
     Call<SinglePostContainer> getsinglepost(@Path("id") String ID);
 
+    @FormUrlEncoded
+    @POST("comment")
+    Call<JsonObject>insert_comments(@Field("postId")String PId,@Field("text")String Text,@Field("key")String Key);
+
 }
