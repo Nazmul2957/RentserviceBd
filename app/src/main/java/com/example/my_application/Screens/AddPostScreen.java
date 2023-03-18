@@ -80,10 +80,10 @@ public class AddPostScreen extends AppCompatActivity {
     private static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     private static final int SELECT_REQUEST_CODE = 1;
 
-    Uri imageUriNid = null, imageUriNid2 = null, imageUriTrade = null, imageUriTin = null;
-    File f1nid, f2nid, f3trade, f4tin;
-    boolean isNid1 = false, isNid2 = false, isTrade = false, isTin = false;
-    Uri uri = null;
+    Uri imageUri = null, imageUriNid2 = null, imageUriTrade = null, imageUriTin = null;
+    File f1, f2nid, f3trade, f4tin;
+   // boolean isNid1 = false, isNid2 = false, isTrade = false, isTin = false;
+
 
 
     @Override
@@ -233,11 +233,12 @@ public class AddPostScreen extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == Constant.PICK_PHOTO_ONE && data != null) {
-            imageUriNid = data.getData();
+            Log.d("tesst","hiii thi s me");
+            imageUri = data.getData();
 
             try {
-                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUriNid);
-                f1nid = new File(getCacheDir(), "Image1");
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
+                f1 = new File(getCacheDir(), "Image1");
                 bitmap = getResizedBitmap(bitmap, 800);
                 ByteArrayOutputStream bos = new ByteArrayOutputStream();
 
@@ -248,7 +249,7 @@ public class AddPostScreen extends AppCompatActivity {
 
                 FileOutputStream fos = null;
                 try {
-                    fos = new FileOutputStream(f1nid);
+                    fos = new FileOutputStream(f1);
 
                 } catch (FileNotFoundException e) {
                     Log.e("REQ", e.toString());
@@ -257,7 +258,7 @@ public class AddPostScreen extends AppCompatActivity {
                     fos.write(bitmapdata);
                     fos.flush();
                     fos.close();
-                    isNid1 = true;
+                   // isNid1 = true;
                 } catch (IOException e) {
                     Log.e("REQ", e.toString());
                 }
@@ -294,7 +295,7 @@ public class AddPostScreen extends AppCompatActivity {
                     fos.write(bitmapdata);
                     fos.flush();
                     fos.close();
-                    isTrade = true;
+                   // isTrade = true;
                 } catch (IOException e) {
                     Log.e("REQ", e.toString());
                 }
@@ -334,7 +335,7 @@ public class AddPostScreen extends AppCompatActivity {
                     fos.write(bitmapdata);
                     fos.flush();
                     fos.close();
-                    isTin = true;
+                    //isTin = true;
                 } catch (IOException e) {
                     Log.e("REQ", e.toString());
                 }
@@ -356,14 +357,15 @@ public class AddPostScreen extends AppCompatActivity {
     private void register() {
         progressDialog.show();
         RequestBody requestBody;
-        String nidpicName = "";
-        RequestBody requestNid1 = null;
+        String imageName = "";
+        RequestBody requestImage = null;
         RequestBody attachmentEmpty = RequestBody.create(MediaType.parse("text/plain"), "");
 
-        if (uri != null) {
-            File nidfile = new File(uri.getLastPathSegment().toString());
-            nidpicName = nidfile.getName();
-            requestNid1 = RequestBody.create(MediaType.parse("multipart/form-data"), f1nid);
+        if (imageUri != null) {
+            File nidfile = new File(imageUri.getLastPathSegment().toString());
+            imageName = nidfile.getName();
+            Log.d("tesst",imageName);
+            requestImage = RequestBody.create(MediaType.parse("multipart/form-data"), f1);
         }
 
         requestBody = new MultipartBody.Builder()
@@ -376,7 +378,7 @@ public class AddPostScreen extends AppCompatActivity {
                 .addFormDataPart("districtId", String.valueOf(datas.get(DistrictList.getSelectedItemPosition()).getId().toString()))
                 .addFormDataPart("policeStationId", String.valueOf(datass.get(Police_Station.getSelectedItemPosition()).getId().toString()))
                 .addFormDataPart("key", Token)
-                .addFormDataPart("image1", nidpicName, requestNid1 != null ? requestNid1 : attachmentEmpty)
+                .addFormDataPart("image1", imageName, requestImage != null ? requestImage : attachmentEmpty)
                 .build();
 
 

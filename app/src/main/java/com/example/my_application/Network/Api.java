@@ -59,18 +59,18 @@ public interface Api {
 //                                @Field("policeStationId") String Police,
 //                                @Field("key") String Token);
 
-//    @Multipart
-//    @POST("post")
-//    Call<InsertPostResponseContainer> InsertPost(@Part("title") RequestBody Title,
-//                                                 @Part("description") RequestBody Description,
-//                                                 @Part("price") RequestBody Price,
-//                                                 @Part("address") RequestBody Address,
-//                                                 @Part("divisionId") RequestBody Division,
-//                                                 @Part("districtId") RequestBody District,
-//                                                 @Part("policeStationId") RequestBody Police,
-//                                                 @Part("key") RequestBody Token,
-//                                                 @Part MultipartBody.Part image1
-//    );
+    @Multipart
+    @POST("post")
+    Call<InsertPostResponseContainer> InsertPost(@Part("title") RequestBody Title,
+                                                 @Part("description") RequestBody Description,
+                                                 @Part("price") RequestBody Price,
+                                                 @Part("address") RequestBody Address,
+                                                 @Part("divisionId") RequestBody Division,
+                                                 @Part("districtId") RequestBody District,
+                                                 @Part("policeStationId") RequestBody Police,
+                                                 @Part("key") RequestBody Token,
+                                                 @Part MultipartBody.Part image1
+    );
 
     @POST("post")
     Call<InsertPostResponseContainer> InsertPost(@Body RequestBody params);
