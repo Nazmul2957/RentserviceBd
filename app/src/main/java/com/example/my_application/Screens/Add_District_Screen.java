@@ -1,12 +1,12 @@
 package com.example.my_application.Screens;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,8 +14,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.my_application.Adaptar.DistrictListAdaptar;
+import com.example.my_application.Adaptar.DistrictListShowAdaptar;
 import com.example.my_application.Adaptar.DivisionSpinnerAdaptar;
-import com.example.my_application.Data_Model.DistrictModel.District;
 import com.example.my_application.Data_Model.DistrictModel.DistrictContainer;
 import com.example.my_application.Data_Model.Division.Division;
 import com.example.my_application.Data_Model.Division.DivisionContainer;
@@ -38,6 +38,7 @@ public class Add_District_Screen extends AppCompatActivity {
     Spinner DivisionList;
     EditText District;
     Button Save_District;
+    RecyclerView recyclerView;
 
 
     @Override
@@ -46,41 +47,46 @@ public class Add_District_Screen extends AppCompatActivity {
         setContentView(R.layout.activity_add_district_screen);
         DivisionList = findViewById(R.id.division);
         District = findViewById(R.id.enter_district);
+        recyclerView = findViewById(R.id.dis_list);
         api = RetrofitClient.difBaseUrle().create(Api.class);
         Save_District = findViewById(R.id.insert_dis);
         progressDialog = new ProgressDialog(Add_District_Screen.this);
         progressDialog.setMessage("Please Wait......");
         progressDialog.setCancelable(false);
+        progressDialog.show();
 
         getdivision();
+        getalldistrict();
 
         Save_District.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e("div_id", String.valueOf(DivisionList.getId()));
-                Log.d("div_idp", "csssfsfsf");
-                if (!TextUtils.isEmpty(District.getText().toString())) {
-                    api.insertDistrict(District.getText().toString(),
-                            String.valueOf(data.get(DivisionList.getSelectedItemPosition()).getId().toString()))
-                            .enqueue(new Callback<JsonObject>() {
-                        @Override
-                        public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                            if (response.isSuccessful() && response.body() != null) {
-                                District.getText().clear();
-                                String meddage = response.body().get("message").getAsString();
-                                Toast.makeText(getApplicationContext(), meddage, Toast.LENGTH_SHORT).show();
-                               // getdivision();
-                            }
-                        }
+                if (DivisionList.getSelectedItemPosition() > 0) {
+                    if (!TextUtils.isEmpty(District.getText().toString())) {
+                        api.insertDistrict(District.getText().toString(),
+                                String.valueOf(data.get(DivisionList.getSelectedItemPosition()).getId().toString()))
+                                .enqueue(new Callback<JsonObject>() {
+                                    @Override
+                                    public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                                        if (response.isSuccessful() && response.body() != null) {
+                                            District.getText().clear();
+                                            getalldistrict();
+                                            String meddage = response.body().get("message").getAsString();
+                                            Toast.makeText(getApplicationContext(), meddage, Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
 
-                        @Override
-                        public void onFailure(Call<JsonObject> call, Throwable t) {
+                                    @Override
+                                    public void onFailure(Call<JsonObject> call, Throwable t) {
 
-                        }
-                    });
+                                    }
+                                });
+                    } else {
+                        District.setError("Please Input District Name");
+                        District.requestFocus();
+                    }
                 } else {
-                    District.setError("Please Input District Name");
-                    District.requestFocus();
+                    Toast.makeText(getApplicationContext(), "Please Select a Division", Toast.LENGTH_SHORT).show();
                 }
 
 
@@ -101,7 +107,7 @@ public class Add_District_Screen extends AppCompatActivity {
                     data.add(0, new Division(0, "Select Division"));
                     DivisionSpinnerAdaptar customeadaptar = new DivisionSpinnerAdaptar(data, getApplicationContext());
                     DivisionList.setAdapter(customeadaptar);
-                    Log.d("division", data.toString());
+                    //Log.d("division", data.toString());
 
                 }
 
@@ -111,6 +117,27 @@ public class Add_District_Screen extends AppCompatActivity {
             public void onFailure(Call<DivisionContainer> call, Throwable t) {
                 progressDialog.dismiss();
                 Toast.makeText(getApplicationContext(), "Something wrong", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void getalldistrict() {
+        api.getDistrict().enqueue(new Callback<DistrictContainer>() {
+            @Override
+            public void onResponse(Call<DistrictContainer> call, Response<DistrictContainer> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    progressDialog.dismiss();
+                    recyclerView.setHasFixedSize(true);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(),
+                            LinearLayoutManager.VERTICAL, false));
+                    DistrictListShowAdaptar adaptar = new DistrictListShowAdaptar(response.body().getData(), getApplicationContext());
+                    recyclerView.setAdapter(adaptar);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<DistrictContainer> call, Throwable t) {
+
             }
         });
     }

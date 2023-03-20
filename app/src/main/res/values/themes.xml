@@ -15,5 +15,10 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="ToolbarStyle">
+        <item name="android:textColorSecondary">@color/toolbarcolor</item>
+        <item name="colorControlNormal">@color/text_color</item>
+    </style>
+
 
 </resources>

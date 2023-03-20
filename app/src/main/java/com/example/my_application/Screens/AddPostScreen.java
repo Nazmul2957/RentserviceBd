@@ -235,7 +235,7 @@ public class AddPostScreen extends AppCompatActivity {
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
                 f1 = new File(getCacheDir(), "Image1");
-                bitmap = getResizedBitmap(bitmap, 800);
+               // bitmap = getResizedBitmap(bitmap, 800);
                 ByteArrayOutputStream bos = new ByteArrayOutputStream();
 
                // bitmap.compress(Bitmap.CompressFormat.PNG, 0, bos);
@@ -356,13 +356,15 @@ public class AddPostScreen extends AppCompatActivity {
         RequestBody requestBody;
         String imageName = "";
         RequestBody requestImage = null;
-        RequestBody attachmentEmpty = RequestBody.create(MediaType.parse("text/plain"), "");
+        RequestBody attachmentEmpty = RequestBody.create(MediaType.parse("text/plain"), "image");
 
         if (imageUri != null) {
-            File nidfile = new File(imageUri.getLastPathSegment().toString());
+            File nidfile = new File(String.valueOf(imageUri));
             imageName = nidfile.getName();
             Log.d("testwo", imageName);
-            requestImage = RequestBody.create(MediaType.parse("multipart/form-data"), f1);
+            requestImage = RequestBody.create(MediaType.parse("image/*"), imageName);
+            Log.d("testthrees", String.valueOf(requestImage));
+
         }
 
         requestBody = new MultipartBody.Builder()
@@ -389,6 +391,7 @@ public class AddPostScreen extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "post added", Toast.LENGTH_SHORT).show();
                 }else{
                     progressDialog.dismiss();
+                    Toast.makeText(getApplicationContext(), "post not added", Toast.LENGTH_SHORT).show();
                     Log.d("testthree",String.valueOf(response.errorBody().toString()));
                 }
             }

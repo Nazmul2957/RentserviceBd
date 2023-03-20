@@ -48,27 +48,7 @@ public class InsertDivisionScreen extends AppCompatActivity {
         progressDialog.setCancelable(false);
         progressDialog.show();
 
-        api.getDivision().enqueue(new Callback<DivisionContainer>() {
-            @Override
-            public void onResponse(Call<DivisionContainer> call, Response<DivisionContainer> response) {
-                progressDialog.dismiss();
-                if (response.isSuccessful() && response.body() != null) {
-                    recyclerView.setHasFixedSize(true);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(),
-                            LinearLayoutManager.VERTICAL, false));
-                    Log.d("respons", String.valueOf(response.body()));
-                    DivisionListShow_Adaptar adaptar = new DivisionListShow_Adaptar(response.body().getData(), getApplicationContext());
-                    // DivisionListShow_Adaptar adaptar = new Category_list_Adaptar(response.body().getData(), getApplicationContext());
-                    recyclerView.setAdapter(adaptar);
-
-                }
-            }
-
-            @Override
-            public void onFailure(Call<DivisionContainer> call, Throwable t) {
-
-            }
-        });
+        getalldivision();
 
         Save_Division.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,6 +60,7 @@ public class InsertDivisionScreen extends AppCompatActivity {
                             if (response.isSuccessful() && response.body() != null) {
                                 Division_add.getText().clear();
                                 progressDialog.dismiss();
+                                getalldivision();
                                 String messa = response.body().get("message").getAsString();
                                 Toast.makeText(getApplicationContext(), messa, Toast.LENGTH_SHORT).show();
 
@@ -101,5 +82,28 @@ public class InsertDivisionScreen extends AppCompatActivity {
         });
 
 
+    }
+
+    public void getalldivision(){
+        api.getDivision().enqueue(new Callback<DivisionContainer>() {
+            @Override
+            public void onResponse(Call<DivisionContainer> call, Response<DivisionContainer> response) {
+                progressDialog.dismiss();
+                if (response.isSuccessful() && response.body() != null) {
+                    recyclerView.setHasFixedSize(true);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(),
+                            LinearLayoutManager.VERTICAL, false));
+                    DivisionListShow_Adaptar adaptar = new DivisionListShow_Adaptar(response.body().getData(), getApplicationContext());
+                    // DivisionListShow_Adaptar adaptar = new Category_list_Adaptar(response.body().getData(), getApplicationContext());
+                    recyclerView.setAdapter(adaptar);
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<DivisionContainer> call, Throwable t) {
+
+            }
+        });
     }
 }

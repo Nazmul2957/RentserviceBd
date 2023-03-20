@@ -40,8 +40,9 @@ public class DistrictListAdaptar extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         convertView = inflter.inflate(R.layout.custome_spinner, null);
         TextView name=convertView.findViewById(R.id.textView);
-
         name.setText(districtList.get(position).getName());
         return convertView;
     }
+
+
 }

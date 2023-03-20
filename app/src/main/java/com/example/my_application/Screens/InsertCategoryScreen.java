@@ -48,27 +48,7 @@ public class InsertCategoryScreen extends AppCompatActivity {
         progressDialog.setCancelable(false);
         progressDialog.show();
 
-        api.getcat().enqueue(new Callback<CategoryContainer>() {
-            @Override
-            public void onResponse(Call<CategoryContainer> call, Response<CategoryContainer> response) {
-                progressDialog.dismiss();
-                if (response.isSuccessful() && response.body() != null) {
-                    recyclerView.setHasFixedSize(true);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(),
-                            LinearLayoutManager.VERTICAL, false));
-                    Log.d("respons", String.valueOf(response.body()));
-                    // Dashboard_adaptar adaptar = new Dashboard_adaptar(response.body().getData(), getApplicationContext());
-                    Category_list_Adaptar adaptar = new Category_list_Adaptar(response.body().getData(), getApplicationContext());
-                    recyclerView.setAdapter(adaptar);
-
-                }
-            }
-
-            @Override
-            public void onFailure(Call<CategoryContainer> call, Throwable t) {
-
-            }
-        });
+        getallcategory();
 
         Save_Category.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,6 +60,7 @@ public class InsertCategoryScreen extends AppCompatActivity {
                             if (response.isSuccessful() && response.body() != null) {
                                 Category_add.getText().clear();
                                 progressDialog.dismiss();
+                                getallcategory();
                                 String messa = response.body().get("message").getAsString();
                                 Toast.makeText(getApplicationContext(), messa, Toast.LENGTH_SHORT).show();
 
@@ -101,5 +82,29 @@ public class InsertCategoryScreen extends AppCompatActivity {
         });
 
 
+    }
+
+    public void getallcategory(){
+        api.getcat().enqueue(new Callback<CategoryContainer>() {
+            @Override
+            public void onResponse(Call<CategoryContainer> call, Response<CategoryContainer> response) {
+                progressDialog.dismiss();
+                if (response.isSuccessful() && response.body() != null) {
+                    recyclerView.setHasFixedSize(true);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(),
+                            LinearLayoutManager.VERTICAL, false));
+                    Log.d("respons", String.valueOf(response.body()));
+                    // Dashboard_adaptar adaptar = new Dashboard_adaptar(response.body().getData(), getApplicationContext());
+                    Category_list_Adaptar adaptar = new Category_list_Adaptar(response.body().getData(), getApplicationContext());
+                    recyclerView.setAdapter(adaptar);
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CategoryContainer> call, Throwable t) {
+
+            }
+        });
     }
 }

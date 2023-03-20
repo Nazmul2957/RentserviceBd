@@ -72,7 +72,7 @@ public class SinglePostViewScreen extends AppCompatActivity {
         expandableLayout.setExpandableAnimation(ExpandableAnimation.ACCELERATE);
         Write_comments = expandableLayout.secondLayout.findViewById(R.id.insert_comments);
         Send_Comments = expandableLayout.secondLayout.findViewById(R.id.send_comments);
-        CommentList_Show=expandableLayout.secondLayout.findViewById(R.id.comment_list);
+        CommentList_Show=findViewById(R.id.comment_list);
 
 
         expandableLayout.parentLayout.setOnClickListener(new View.OnClickListener() {

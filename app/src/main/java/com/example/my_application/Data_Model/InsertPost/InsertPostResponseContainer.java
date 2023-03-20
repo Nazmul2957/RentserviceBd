@@ -12,9 +12,7 @@ public class InsertPostResponseContainer{
     @SerializedName("message")
     @Expose
     private String message;
-    @SerializedName("post")
-    @Expose
-    private Post post;
+
 
     public String getStatus() {
         return status;
@@ -32,12 +30,6 @@ public class InsertPostResponseContainer{
         this.message = message;
     }
 
-    public Post getPost() {
-        return post;
-    }
 
-    public void setPost(Post post) {
-        this.post = post;
-    }
 
 }

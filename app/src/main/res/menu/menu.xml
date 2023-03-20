@@ -6,7 +6,8 @@
 
         <item
             android:id="@+id/add_post"
-            android:title="Add Post" />
+            android:title="Add Post"
+            android:icon="@drawable/ic_mdicategoryplus"/>
 
         <item
             android:id="@+id/favourite_list"
