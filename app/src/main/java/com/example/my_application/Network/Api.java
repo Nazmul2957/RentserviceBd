@@ -91,6 +91,11 @@ public interface Api {
     @POST("district")
     Call<JsonObject> insertDistrict(@Field("name") String Name, @Field("divisionId") String DivisionId);
 
+    @FormUrlEncoded
+    @POST("policeStation")
+    Call<JsonObject> insertpolicestation(@Field("name") String Name, @Field("divisionId") String DivisionId,
+                                         @Field("districtId") String DistrictId);
+
     @GET("post/{id}")
     Call<SinglePostContainer> getsinglepost(@Path("id") String ID);
 

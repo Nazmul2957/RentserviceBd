@@ -1,25 +1,14 @@
 package com.example.my_application.Screens;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import android.Manifest;
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.media.session.MediaSession;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -28,6 +17,11 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.example.my_application.Adaptar.DistrictListAdaptar;
 import com.example.my_application.Adaptar.DivisionSpinnerAdaptar;
@@ -44,8 +38,6 @@ import com.example.my_application.Network.RetrofitClient;
 import com.example.my_application.R;
 import com.example.my_application.Util.Constant;
 import com.example.my_application.Util.MySharedPreference;
-import com.example.my_application.Util.RealPathUtil;
-import com.google.gson.JsonObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -60,8 +52,7 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+
 
 public class AddPostScreen extends AppCompatActivity {
     Api api;
@@ -78,7 +69,7 @@ public class AddPostScreen extends AppCompatActivity {
     String Token;
     Uri imageUri = null, imageUriNid2 = null, imageUriTrade = null, imageUriTin = null;
     File f1, f2nid, f3trade, f4tin;
-
+    String imgString;
 
 
     @Override
@@ -235,12 +226,12 @@ public class AddPostScreen extends AppCompatActivity {
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
                 f1 = new File(getCacheDir(), "Image1");
-               // bitmap = getResizedBitmap(bitmap, 800);
+                bitmap = getResizedBitmap(bitmap, 800);
                 ByteArrayOutputStream bos = new ByteArrayOutputStream();
 
-               // bitmap.compress(Bitmap.CompressFormat.PNG, 0, bos);
-                // bitmap.compress(Bitmap.CompressFormat.JPEG, 0 /*ignored for PNG*/, bos);
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100 /*ignored for PNG*/, bos);
                 byte[] bitmapdata = bos.toByteArray();
+                imgString = Base64.encodeToString(bitmapdata, Base64.NO_WRAP);
 
 
                 FileOutputStream fos = null;
@@ -352,16 +343,17 @@ public class AddPostScreen extends AppCompatActivity {
 
 
     public void register() {
-        // progressDialog.show();
         RequestBody requestBody;
         String imageName = "";
         RequestBody requestImage = null;
-        RequestBody attachmentEmpty = RequestBody.create(MediaType.parse("text/plain"), "image");
+        RequestBody attachmentEmpty = RequestBody.create(MediaType.parse("image/*"), "");
+        // RequestBody attachmentEmpty = RequestBody.Companion.create(MediaType.parse("image/*"), "");
 
         if (imageUri != null) {
             File nidfile = new File(String.valueOf(imageUri));
             imageName = nidfile.getName();
             Log.d("testwo", imageName);
+            //  requestImage = RequestBody.create(MediaType.parse("image/*"), imageName);
             requestImage = RequestBody.create(MediaType.parse("image/*"), imageName);
             Log.d("testthrees", String.valueOf(requestImage));
 
@@ -377,7 +369,8 @@ public class AddPostScreen extends AppCompatActivity {
                 .addFormDataPart("districtId", String.valueOf(datas.get(DistrictList.getSelectedItemPosition()).getId().toString()))
                 .addFormDataPart("policeStationId", String.valueOf(datass.get(Police_Station.getSelectedItemPosition()).getId().toString()))
                 .addFormDataPart("key", Token)
-                .addFormDataPart("image4", imageName, requestImage != null ? requestImage : attachmentEmpty)
+                // .addFormDataPart("image", imageName, requestImage != null ? requestImage : attachmentEmpty)
+                .addFormDataPart("image1","data:image/jpeg;base64,"+ String.valueOf(imgString))
                 .build();
 
         progressDialog.show();
@@ -389,16 +382,21 @@ public class AddPostScreen extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     progressDialog.dismiss();
                     Toast.makeText(getApplicationContext(), "post added", Toast.LENGTH_SHORT).show();
-                }else{
+                    Intent intent=new Intent(getApplicationContext(),DashBoardScreen.class);
+                    startActivity(intent);
+                    finish();
+                } else {
                     progressDialog.dismiss();
                     Toast.makeText(getApplicationContext(), "post not added", Toast.LENGTH_SHORT).show();
-                    Log.d("testthree",String.valueOf(response.errorBody().toString()));
+                    //   Log.d("testthree",String.valueOf(response.errorBody().toString()));
+                    Log.d("testthree", response.message().toString());
                 }
             }
 
             @Override
             public void onFailure(Call<InsertPostResponseContainer> call, Throwable t) {
                 progressDialog.dismiss();
+                finish();
                 Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_SHORT).show();
             }
         });

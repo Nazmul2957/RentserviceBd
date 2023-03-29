@@ -40,9 +40,9 @@ public class DivisionSpinnerAdaptar extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
+
         view = inflter.inflate(R.layout.custome_spinner, null);
         TextView name=view.findViewById(R.id.textView);
-
         name.setText(divisionlist.get(i).getName());
         return view;
     }

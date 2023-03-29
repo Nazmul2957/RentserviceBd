@@ -3,110 +3,110 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardElevation="2dp"
     app:cardCornerRadius="5dp"
-    app:cardUseCompatPadding="true"
-    >
+    app:cardElevation="2dp"
+    app:cardUseCompatPadding="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="5dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:id="@+id/post_img"
+                android:layout_width="150dp"
+                android:layout_height="130dp"
+
+                android:scaleType="fitCenter"
+                android:src="@drawable/otppage" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:padding="10dp">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:padding="2dp">
 
                 <ImageView
-                    android:id="@+id/post_img"
-                    android:layout_width="150dp"
-                    android:layout_height="130dp"
-                    android:background="@drawable/round_edittext"
-                    android:src="@drawable/otppage" />
+                    android:id="@+id/add_favourite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/ic_baseline_favorite_border_24" />
 
-            </LinearLayout>
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="10dp">
+                android:orientation="vertical">
 
-                <RelativeLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:padding="2dp">
+                <TextView
+                    android:id="@+id/post_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Georg jensen milimal"
+                    android:maxLines="1"
+                    android:padding="5dp"
+                    android:textColor="@color/text_color"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
-                    <ImageView
-                        android:id="@+id/add_favourite"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:src="@drawable/ic_baseline_favorite_border_24" />
-
-                </RelativeLayout>
+                <TextView
+                    android:id="@+id/post_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:padding="5dp"
+                    android:text="Georg jensen milimal"
+                    android:textColor="@color/text_color"
+                    android:textSize="15sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/post_title"
-                        android:layout_width="match_parent"
+                        android:id="@+id/post_price"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:hint="300.00 BDT"
                         android:maxLines="1"
                         android:padding="5dp"
-                        android:hint="Georg jensen milimal"
-                        android:textColor="@color/text_color"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/post_description"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:maxLines="1"
-                        android:padding="5dp"
-                        android:text="Georg jensen milimal"
                         android:textColor="@color/text_color"
                         android:textSize="15sp" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/post_price"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:hint="300.00 BDT"
-                            android:maxLines="1"
-                            android:padding="5dp"
-                            android:textColor="@color/text_color"
-                            android:textSize="15sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:maxLines="1"
-                            android:padding="5dp"
-                            android:text=" BDT"
-                            android:textColor="@color/text_color"
-                            android:textSize="15sp" />
-
-                    </LinearLayout>
-
+                        android:maxLines="1"
+                        android:padding="5dp"
+                        android:text=" BDT"
+                        android:textColor="@color/text_color"
+                        android:textSize="15sp" />
 
                 </LinearLayout>
 
-            </LinearLayout>
 
+            </LinearLayout>
 
         </LinearLayout>
 
+
+    </LinearLayout>
 
 
 </androidx.cardview.widget.CardView>

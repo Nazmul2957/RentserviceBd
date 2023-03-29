@@ -71,7 +71,6 @@ public class SignUpScreen extends AppCompatActivity {
                                 intent.putExtra("mbl", mobile);
                                 // startActivity(new Intent(SignUpScreen.this, OtpScreen.class));
                                 startActivity(intent);
-
                                 finish();
 
                             } else {

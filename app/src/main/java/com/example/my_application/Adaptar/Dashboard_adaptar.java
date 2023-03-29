@@ -33,8 +33,10 @@ public class Dashboard_adaptar extends RecyclerView.Adapter<Dashboard_adaptar.Vi
     public interface OnItemClickListener {
         void onItemClick(int position);
     }
+
     List<Datum> postlist = new ArrayList<>();
     Context context;
+
     public Dashboard_adaptar(List<Datum> postlist, Context context, Dashboard_adaptar.OnItemClickListener listener) {
         this.postlist = postlist;
         this.context = context;
@@ -58,7 +60,7 @@ public class Dashboard_adaptar extends RecyclerView.Adapter<Dashboard_adaptar.Vi
         holder.Post_Pp.setText(String.valueOf(postlist.get(position).getPrice()));
         Glide.with(context).load("https://rentservicebd.com/public/api/image/" +
                 postlist.get(position).getImage1()).into(holder.Post_image);
-        holder.Add_Favourite.setOnClickListener(new DashboardItemClickMenu(this, (OnItemClickListener) listener,holder,postlist.get(position)));
+        holder.Add_Favourite.setOnClickListener(new DashboardItemClickMenu(this, (OnItemClickListener) listener, holder, postlist.get(position)));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

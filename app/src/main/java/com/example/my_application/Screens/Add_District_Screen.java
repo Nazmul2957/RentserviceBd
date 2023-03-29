@@ -116,7 +116,7 @@ public class Add_District_Screen extends AppCompatActivity {
             @Override
             public void onFailure(Call<DivisionContainer> call, Throwable t) {
                 progressDialog.dismiss();
-                Toast.makeText(getApplicationContext(), "Something wrong", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_SHORT).show();
             }
         });
     }

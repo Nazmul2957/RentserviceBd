@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.exifinterface.media.ExifInterface;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,6 +18,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,8 +46,12 @@ public class DashBoardScreen extends AppCompatActivity {
     DrawerLayout drawerLayout;
     TextView Username, HeadName, UserMobile, Add_Post,
             Favourite, Add_Category, Add_Division,
-            Add_District, My_Post, About, LogOut;
+            Add_District, My_Post, About, LogOut, ADD_Police;
     ProgressDialog progressDialog;
+    LinearLayout Category;
+    boolean visibility = false;
+    String Token;
+    String UserType = "user";
 
 
     @Override
@@ -64,14 +70,16 @@ public class DashBoardScreen extends AppCompatActivity {
         Favourite = findViewById(R.id.favourite_list);
         Add_Category = findViewById(R.id.Add_Category);
         Add_Division = findViewById(R.id.Add_Division);
+        ADD_Police = findViewById(R.id.Add_Police);
         Add_District = findViewById(R.id.Add_Dstrict);
         My_Post = findViewById(R.id.my_post_list);
         About = findViewById(R.id.about_page);
         LogOut = findViewById(R.id.log_out);
+        Category = findViewById(R.id.admin_category);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         api = RetrofitClient.get(getApplicationContext()).create(Api.class);
-        String Token = MySharedPreference.getInstance(getApplicationContext()).getString(Constant.TOKEN, "not found");
+        Token = MySharedPreference.getInstance(getApplicationContext()).getString(Constant.TOKEN, "not found");
 
         progressDialog = new ProgressDialog(DashBoardScreen.this);
         progressDialog.setMessage("Please Wait......");
@@ -79,7 +87,7 @@ public class DashBoardScreen extends AppCompatActivity {
         progressDialog.show();
 
 
-        toggle = new ActionBarDrawerToggle(this, drawerLayout,toolbar, R.string.open, R.string.close);
+        toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         toolbar.setTitle("Homepage");
@@ -137,6 +145,24 @@ public class DashBoardScreen extends AppCompatActivity {
 
     public void customenavbar() {
 
+        api.getprofile(Token).enqueue(new Callback<ProfileContainer>() {
+            @Override
+            public void onResponse(Call<ProfileContainer> call, Response<ProfileContainer> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    if (String.valueOf(response.body().getUserInfo().getType()) == UserType) {
+                        Category.setVisibility(View.GONE);
+                    } else {
+                        Category.setVisibility(View.VISIBLE);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ProfileContainer> call, Throwable t) {
+
+            }
+        });
+
         Add_Post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -171,6 +197,14 @@ public class DashBoardScreen extends AppCompatActivity {
             }
         });
 
+        ADD_Police.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent P_intent = new Intent(getApplicationContext(), Add_PoliceStation_Screen.class);
+                startActivity(P_intent);
+            }
+        });
+
         Add_District.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -195,54 +229,5 @@ public class DashBoardScreen extends AppCompatActivity {
         });
 
     }
-
-//    public void navbar() {
-//        nav.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                switch (item.getItemId()) {
-//                    case R.id.add_post:
-//                        Intent intent = new Intent(getApplicationContext(), AddPostScreen.class);
-//                        startActivity(intent);
-//                        drawerLayout.closeDrawer(GravityCompat.START);
-//                        break;
-//                    case R.id.log_out:
-//                        MySharedPreference.editor(getApplicationContext()).clear().commit();
-//                        startActivity(new Intent(DashBoardScreen.this, LoginScreen.class));
-//                        finish();
-//                        drawerLayout.closeDrawer(GravityCompat.START);
-//                        break;
-//                    case R.id.Add_Category:
-//                        Intent intentcategory = new Intent(getApplicationContext(), InsertCategoryScreen.class);
-//                        startActivity(intentcategory);
-//                        //  finish();
-//                        break;
-//                    case R.id.Add_Division:
-//                        Intent intentdivision = new Intent(getApplicationContext(), InsertDivisionScreen.class);
-//                        startActivity(intentdivision);
-//                        // finish();
-//                        break;
-//                    case R.id.Add_Dstrict:
-//                        Intent intentdistrict = new Intent(getApplicationContext(), Add_District_Screen.class);
-//                        startActivity(intentdistrict);
-//                        // finish();
-//                        break;
-//                    case R.id.favourite_list:
-//                        Intent intentfavouritelist = new Intent(getApplicationContext(), FavouriteListScreen.class);
-//                        startActivity(intentfavouritelist);
-//                        // finish();
-//                        break;
-//                    case R.id.my_post_list:
-//                        Intent mypost = new Intent(getApplicationContext(), MyPostScreen.class);
-//                        startActivity(mypost);
-//                        // finish();
-//                        break;
-//                }
-//
-//                return true;
-//            }
-//        });
-//    }
-
 
 }
