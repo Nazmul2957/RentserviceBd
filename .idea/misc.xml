@@ -3,15 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Flutter Project/My_Application/app/src/main/res/drawable/buttonshap.xml" value="0.2153846153846154" />
         <entry key="..\:/Flutter Project/My_Application/app/src/main/res/drawable/call_button_design.xml" value="0.21875" />
         <entry key="..\:/Flutter Project/My_Application/app/src/main/res/drawable/custome_spineer.xml" value="0.21875" />
         <entry key="..\:/Flutter Project/My_Application/app/src/main/res/drawable/ic_final_logo.xml" value="0.2153846153846154" />
+        <entry key="..\:/Flutter Project/My_Application/app/src/main/res/drawable/ic_menu.xml" value="0.2153846153846154" />
+        <entry key="..\:/Flutter Project/My_Application/app/src/main/res/drawable/image_background.xml" value="0.2153846153846154" />
         <entry key="..\:/Flutter Project/My_Application/app/src/main/res/drawable/layout_shadow.xml" value="0.21875" />
         <entry key="..\:/Flutter Project/My_Application/app/src/main/res/drawable/round_button.xml" value="0.21875" />
         <entry key="..\:/Flutter Project/My_Application/app/src/main/res/drawable/round_edittext.xml" value="0.21875" />
         <entry key="..\:/Flutter Project/My_Application/app/src/main/res/layout/activity_add_district_screen.xml" value="0.20260416666666667" />
         <entry key="..\:/Flutter Project/My_Application/app/src/main/res/layout/activity_add_police_station_screen.xml" value="0.20260416666666667" />
         <entry key="..\:/Flutter Project/My_Application/app/src/main/res/layout/activity_add_post_screen.xml" value="0.2" />
+        <entry key="..\:/Flutter Project/My_Application/app/src/main/res/layout/activity_check_terms_condition_screen.xml" value="0.20260416666666667" />
         <entry key="..\:/Flutter Project/My_Application/app/src/main/res/layout/activity_dash_board_screen.xml" value="0.20260416666666667" />
         <entry key="..\:/Flutter Project/My_Application/app/src/main/res/layout/activity_favourite_list_screen.xml" value="0.20260416666666667" />
         <entry key="..\:/Flutter Project/My_Application/app/src/main/res/layout/activity_insert_category_screen.xml" value="0.20260416666666667" />
@@ -28,11 +32,15 @@
         <entry key="..\:/Flutter Project/My_Application/app/src/main/res/layout/custome_navbar.xml" value="0.20260416666666667" />
         <entry key="..\:/Flutter Project/My_Application/app/src/main/res/layout/custome_spinner.xml" value="0.20260416666666667" />
         <entry key="..\:/Flutter Project/My_Application/app/src/main/res/layout/dashboard_activity_main_layout.xml" value="0.2" />
-        <entry key="..\:/Flutter Project/My_Application/app/src/main/res/layout/dashboard_list_model.xml" value="0.25" />
+        <entry key="..\:/Flutter Project/My_Application/app/src/main/res/layout/dashboard_list_model.xml" value="0.2" />
         <entry key="..\:/Flutter Project/My_Application/app/src/main/res/layout/expandable_child_layout.xml" value="0.20260416666666667" />
         <entry key="..\:/Flutter Project/My_Application/app/src/main/res/layout/expandable_header.xml" value="0.20260416666666667" />
+        <entry key="..\:/Flutter Project/My_Application/app/src/main/res/layout/favourite_list_model.xml" value="0.20260416666666667" />
         <entry key="..\:/Flutter Project/My_Application/app/src/main/res/layout/header.xml" value="0.22" />
+        <entry key="..\:/Flutter Project/My_Application/app/src/main/res/layout/image_show_list_model.xml" value="0.18" />
         <entry key="..\:/Flutter Project/My_Application/app/src/main/res/layout/mypostlist_model.xml" value="0.20260416666666667" />
+        <entry key="..\:/Flutter Project/My_Application/app/src/main/res/layout/slider_image_model.xml" value="0.20260416666666667" />
+        <entry key="..\:/Flutter Project/My_Application/app/src/main/res/menu/dashboard_menu.xml" value="0.17222222222222222" />
         <entry key="..\:/Flutter Project/My_Application/app/src/main/res/menu/menu.xml" value="0.20260416666666667" />
       </map>
     </option>

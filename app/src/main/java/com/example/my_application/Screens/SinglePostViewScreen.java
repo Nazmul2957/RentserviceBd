@@ -1,15 +1,11 @@
 package com.example.my_application.Screens;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.media.session.MediaSession;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,11 +17,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.denzcoskun.imageslider.ImageSlider;
+import com.denzcoskun.imageslider.constants.ScaleTypes;
+import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.my_application.Adaptar.CommentListAdaptar;
-import com.example.my_application.Adaptar.Dashboard_adaptar;
 import com.example.my_application.Data_Model.CommentList.CommentContainer;
-import com.example.my_application.Data_Model.Dashboard.DashboardContainer;
-import com.example.my_application.Data_Model.Profile.ProfileContainer;
 import com.example.my_application.Data_Model.SinglePost.SinglePostContainer;
 import com.example.my_application.Network.Api;
 import com.example.my_application.Network.RetrofitClient;
@@ -36,6 +32,8 @@ import com.google.gson.JsonObject;
 import com.skydoves.expandablelayout.ExpandableAnimation;
 import com.skydoves.expandablelayout.ExpandableLayout;
 
+import java.util.ArrayList;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -43,16 +41,19 @@ import retrofit2.Response;
 public class SinglePostViewScreen extends AppCompatActivity {
     Api api;
     ProgressDialog progressDialog;
-    TextView textView, Price, Post_Description;
-    ImageView imageView, Send_Comments;
+    TextView textView, Price, Post_Description,Post_Address;
+    ImageView Send_Comments;
     Button CallButton;
     Boolean isExpended = false;
     String PhoneNumber;
     ExpandableLayout expandableLayout;
-    RecyclerView recyclerView,CommentList_Show;
+    RecyclerView recyclerView, CommentList_Show;
     EditText Write_comments;
     String PostId;
     String Token;
+    ImageSlider imageSlider;
+
+    ArrayList<SlideModel> slideImage = new ArrayList<>();
 
 
     @Override
@@ -61,18 +62,21 @@ public class SinglePostViewScreen extends AppCompatActivity {
         setContentView(R.layout.activity_single_post_view_screen);
 
         textView = findViewById(R.id.text_show);
-        imageView = findViewById(R.id.post_image);
+
         Price = findViewById(R.id.price_post);
         Post_Description = findViewById(R.id.post_description);
         recyclerView = findViewById(R.id.dash_board_list);
         CallButton = findViewById(R.id.call_button);
         expandableLayout = findViewById(R.id.expand);
         PostId = getIntent().getStringExtra(Intent.EXTRA_UID);
+        imageSlider = findViewById(R.id.image_slide);
+        Post_Address=findViewById(R.id.post_address);
+
 
         expandableLayout.setExpandableAnimation(ExpandableAnimation.ACCELERATE);
         Write_comments = expandableLayout.secondLayout.findViewById(R.id.insert_comments);
         Send_Comments = expandableLayout.secondLayout.findViewById(R.id.send_comments);
-        CommentList_Show=findViewById(R.id.comment_list);
+        CommentList_Show = findViewById(R.id.comment_list);
 
 
         expandableLayout.parentLayout.setOnClickListener(new View.OnClickListener() {
@@ -101,12 +105,12 @@ public class SinglePostViewScreen extends AppCompatActivity {
             @Override
             public void onResponse(Call<CommentContainer> call, Response<CommentContainer> response) {
                 progressDialog.dismiss();
-                if (response.isSuccessful()&&response.body()!=null){
+                if (response.isSuccessful() && response.body() != null) {
                     progressDialog.dismiss();
                     CommentList_Show.setHasFixedSize(true);
                     CommentList_Show.setLayoutManager(new LinearLayoutManager(getApplicationContext(),
                             LinearLayoutManager.VERTICAL, false));
-                    CommentListAdaptar commentadaptar=new CommentListAdaptar(response.body().getComments(),getApplicationContext());
+                    CommentListAdaptar commentadaptar = new CommentListAdaptar(response.body().getComments(), getApplicationContext());
                     CommentList_Show.setAdapter(commentadaptar);
                 }
             }
@@ -122,11 +126,43 @@ public class SinglePostViewScreen extends AppCompatActivity {
             public void onResponse(Call<SinglePostContainer> call, Response<SinglePostContainer> response) {
                 progressDialog.dismiss();
                 if (response.isSuccessful() && response.body() != null) {
-                    Glide.with(getApplicationContext()).load("https://rentservicebd.com/public/api/image/" +
-                            response.body().getPost().getImage1()).into(imageView);
+
+                    if (String.valueOf(response.body().getPost().getImage1()) != null) {
+                        slideImage.add(new SlideModel("https://rentservicebd.com/public/api/image/" + String.valueOf(response.body().getPost().getImage1()), ScaleTypes.FIT));
+                    }
+                    if (String.valueOf(response.body().getPost().getImage2()) != null) {
+                        slideImage.add(new SlideModel("https://rentservicebd.com/public/api/image/" + String.valueOf(response.body().getPost().getImage2()), ScaleTypes.FIT));
+
+                    }
+                    if (String.valueOf(response.body().getPost().getImage3()) != null) {
+                        slideImage.add(new SlideModel("https://rentservicebd.com/public/api/image/" + String.valueOf(response.body().getPost().getImage3()), ScaleTypes.FIT));
+
+                    }
+                    if (String.valueOf(response.body().getPost().getImage4()) != null) {
+                        slideImage.add(new SlideModel("https://rentservicebd.com/public/api/image/" + String.valueOf(response.body().getPost().getImage4()), ScaleTypes.FIT));
+                    }
+                    if (String.valueOf(response.body().getPost().getImage5()) != null) {
+                        slideImage.add(new SlideModel("https://rentservicebd.com/public/api/image/" + String.valueOf(response.body().getPost().getImage5()), ScaleTypes.FIT));
+
+                    }
+
+                    imageSlider.setImageList(slideImage);
+                    Log.d("slider", String.valueOf(slideImage));
+
                     textView.setText(response.body().getPost().getTitle());
                     Price.setText(response.body().getPost().getPrice());
                     Post_Description.setText(response.body().getPost().getDescription());
+                    PhoneNumber = String.valueOf(response.body().getPost().getMobile());
+                    Post_Address.setText(String.valueOf(response.body().getPost().getAddress()));
+                    CallButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Log.d("phone_number", PhoneNumber);
+                            Intent intent = new Intent(Intent.ACTION_DIAL);
+                            intent.setData(Uri.parse("tel:" + PhoneNumber));
+                            startActivity(intent);
+                        }
+                    });
                     // Toast.makeText(getApplicationContext(), "Post Successfull", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -137,30 +173,7 @@ public class SinglePostViewScreen extends AppCompatActivity {
             }
         });
 
-        api.getprofile(Token).enqueue(new Callback<ProfileContainer>() {
-            @Override
-            public void onResponse(Call<ProfileContainer> call, Response<ProfileContainer> response) {
-                PhoneNumber = String.valueOf(response.body().getUserInfo().getMobile());
-                // CallButton.setText(PhoneNumber);
 
-                CallButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Log.d("phone_number", PhoneNumber);
-                        Intent intent = new Intent(Intent.ACTION_DIAL);
-                        intent.setData(Uri.parse("tel:" + PhoneNumber));
-                        startActivity(intent);
-                    }
-                });
-                // Log.d("phone_number",PhoneNumber);
-
-            }
-
-            @Override
-            public void onFailure(Call<ProfileContainer> call, Throwable t) {
-
-            }
-        });
         Comments();
 
     }

@@ -4,11 +4,13 @@ import com.example.my_application.Data_Model.Category.CategoryContainer;
 import com.example.my_application.Data_Model.CommentList.CommentContainer;
 import com.example.my_application.Data_Model.Dashboard.DashboardContainer;
 import com.example.my_application.Data_Model.DistrictModel.DistrictContainer;
+import com.example.my_application.Data_Model.DistrictshowbyDivision.DistrictshowContainer;
 import com.example.my_application.Data_Model.Division.DivisionContainer;
 import com.example.my_application.Data_Model.Favourite.FavouriteContainer;
 import com.example.my_application.Data_Model.InsertPost.InsertPostResponseContainer;
 import com.example.my_application.Data_Model.Mypost.MypostListContainer;
 import com.example.my_application.Data_Model.PoliceStation.PoliceStationContainer;
+import com.example.my_application.Data_Model.PoliceStationByDistrict.PolicestationByDistrictContainer;
 import com.example.my_application.Data_Model.Profile.ProfileContainer;
 import com.example.my_application.Data_Model.SinglePost.SinglePostContainer;
 import com.google.gson.JsonObject;
@@ -38,6 +40,11 @@ public interface Api {
     @FormUrlEncoded
     @POST("favourite")
     Call<JsonObject> insertfavourite(@Field("key") String Key,
+                                     @Field("postId") String PostId);
+
+    @FormUrlEncoded
+    @POST("favourite/delete")
+    Call<JsonObject> deletefavourite(@Field("key") String Key,
                                      @Field("postId") String PostId);
 
     @FormUrlEncoded
@@ -73,8 +80,14 @@ public interface Api {
     @GET("district")
     Call<DistrictContainer> getDistrict();
 
+    @GET("district/{id}")
+    Call<DistrictshowContainer> getDistrictbydivision(@Path("id") String id);
+
     @GET("policeStation")
     Call<PoliceStationContainer> getpolice();
+
+    @GET("policeStation/{id}")
+    Call<PolicestationByDistrictContainer> getpolicebydistrict(@Path("id") String id);
 
     @GET("category/get_all")
     Call<CategoryContainer> getcat();

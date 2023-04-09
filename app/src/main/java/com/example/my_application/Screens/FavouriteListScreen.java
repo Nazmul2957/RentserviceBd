@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.my_application.Adaptar.FavouriteListAdaptar;
@@ -25,6 +26,7 @@ public class FavouriteListScreen extends AppCompatActivity {
     Api api;
     ProgressDialog progressDialog;
     RecyclerView recyclerView;
+    String Token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,17 +34,25 @@ public class FavouriteListScreen extends AppCompatActivity {
         setContentView(R.layout.activity_favourite_list_screen);
 
         recyclerView = findViewById(R.id.favouritepost_list);
-
-        api = RetrofitClient.get(getApplicationContext()).create(Api.class);
-        String Token = MySharedPreference.getInstance(getApplicationContext()).getString(Constant.TOKEN, "not found");
-
-
         progressDialog = new ProgressDialog(FavouriteListScreen.this);
         progressDialog.setMessage("Please Wait......");
         progressDialog.setCancelable(false);
+
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getdata();
+
+
+    }
+
+    public void getdata() {
+        api = RetrofitClient.get(getApplicationContext()).create(Api.class);
+        Token = MySharedPreference.getInstance(getApplicationContext()).getString(Constant.TOKEN, "not found");
         progressDialog.show();
-
-
         api.favouritelist(Token).enqueue(new Callback<FavouriteContainer>() {
             @Override
             public void onResponse(Call<FavouriteContainer> call, Response<FavouriteContainer> response) {
@@ -51,10 +61,17 @@ public class FavouriteListScreen extends AppCompatActivity {
                     recyclerView.setHasFixedSize(true);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(),
                             LinearLayoutManager.VERTICAL, false));
-                   // MyPostListAdaptar adaptar = new MyPostListAdaptar(response.body().getPosts(), getApplicationContext());
-                    FavouriteListAdaptar adaptar=new FavouriteListAdaptar(response.body().getFavourites()
-                            ,getApplicationContext());
+                    FavouriteListAdaptar adaptar = new FavouriteListAdaptar(response.body().getFavourites()
+                            , getApplicationContext(), new FavouriteListAdaptar.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(int position) {
+                            // finish();
+                            // startActivity(new Intent(FavouriteListScreen.this, DashBoardScreen.class));
+                            getdata();
+                        }
+                    });
                     recyclerView.setAdapter(adaptar);
+
 
                 }
             }

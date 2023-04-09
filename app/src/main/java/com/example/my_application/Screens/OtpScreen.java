@@ -43,10 +43,7 @@ public class OtpScreen extends AppCompatActivity {
         String ReceiveName = getIntent().getStringExtra("fullname");
         String ReceivePassword = getIntent().getStringExtra("pasPassword");
         String ReceiveMobile = getIntent().getStringExtra("mbl");
-        //String SendOtp = MatchOtp.getText().toString();
-        Log.e("test", ReceiveName);
-        Log.e("test1", ReceivePassword);
-        Log.e("test2", ReceiveMobile);
+
         progressDialog = new ProgressDialog(OtpScreen.this);
         progressDialog.setMessage("Please Wait......");
         progressDialog.setCancelable(false);

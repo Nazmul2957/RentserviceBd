@@ -52,9 +52,11 @@
             android:weightSum="2">
 
             <LinearLayout
+                android:id="@+id/District_hide"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:visibility="gone">
 
                 <androidx.appcompat.widget.AppCompatSpinner
                     android:id="@+id/districts"
@@ -67,10 +69,12 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/Police_hide"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:visibility="gone">
 
 
                 <androidx.appcompat.widget.AppCompatSpinner
@@ -112,8 +116,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/round_edittext"
-
                 android:hint="300.00 BDT"
+                android:inputType="number"
                 android:padding="15dp" />
 
 
@@ -138,65 +142,339 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/round_edittext"
-            android:padding="10dp"
-            android:weightSum="2">
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:weightSum="3">
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_gravity="center"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:gravity="center">
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/select_image"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="Select or drop images"
-                    android:padding="15dp" />
+                    android:layout_height="30dp"
+                    android:background="@drawable/buttonshap"
+                    android:padding="2dp"
+                    android:text="Upload images"
+                    android:textColor="@color/text_color"
+                    android:textSize="10sp" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:gravity="center"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/select_image_two"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:background="@drawable/buttonshap"
+                    android:padding="2dp"
+                    android:text="Upload images"
+                    android:textColor="@color/text_color"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/select_image_three"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:background="@drawable/buttonshap"
+                    android:padding="2dp"
+                    android:text="Upload images"
+                    android:textColor="@color/text_color"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:visibility="gone"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/select_image_four"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:background="@drawable/buttonshap"
+                    android:padding="2dp"
+                    android:text="Upload images"
+                    android:textColor="@color/text_color"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/select_image_five"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:background="@drawable/buttonshap"
+                    android:padding="2dp"
+                    android:text="Upload images"
+                    android:textColor="@color/text_color"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
+            android:weightSum="3">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/image_background"
+                android:padding="5dp">
 
                 <ImageView
                     android:id="@+id/imageshow"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:src="@drawable/post_image" />
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_baseline_add_24" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/image_background"
+                android:padding="5dp">
+
+                <ImageView
+                    android:id="@+id/imageshow_two"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_baseline_add_24"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/image_background"
+                android:padding="5dp">
+
+                <ImageView
+                    android:id="@+id/imageshow_three"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_baseline_add_24" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!--        <LinearLayout-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:background="@drawable/round_edittext"-->
+        <!--            android:padding="10dp"-->
+        <!--            android:weightSum="2">-->
+
+
+        <!--            <LinearLayout-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_gravity="center"-->
+        <!--                android:layout_weight="1"-->
+        <!--                android:gravity="center">-->
+
+
+        <!--            </LinearLayout>-->
+
+
+        <!--        </LinearLayout>-->
+
+
+        <!--        <LinearLayout-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginTop="5dp"-->
+        <!--            android:background="@drawable/round_edittext"-->
+        <!--            android:padding="10dp"-->
+        <!--            android:weightSum="2">-->
+
+
+        <!--            <LinearLayout-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_gravity="center"-->
+        <!--                android:layout_weight="1"-->
+        <!--                android:gravity="center">-->
+
+
+        <!--            </LinearLayout>-->
+
+
+        <!--        </LinearLayout>-->
+
+        <!--        <LinearLayout-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginTop="5dp"-->
+        <!--            android:background="@drawable/round_edittext"-->
+        <!--            android:padding="10dp"-->
+        <!--            android:weightSum="2">-->
+
+
+        <!--            <LinearLayout-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_gravity="center"-->
+        <!--                android:layout_weight="1"-->
+        <!--                android:gravity="center">-->
+
+
+        <!--            </LinearLayout>-->
+
+
+        <!--        </LinearLayout>-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
+            android:weightSum="3">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/image_background"
+                android:padding="5dp">
+
+                <ImageView
+                    android:id="@+id/imageshow_four"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_baseline_add_24"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/image_background"
+                android:padding="5dp">
+
+                <ImageView
+                    android:id="@+id/imageshow_five"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_baseline_add_24" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
             </LinearLayout>
 
 
         </LinearLayout>
 
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content">-->
-
-<!--            <ImageView-->
-<!--                android:id="@+id/image_show"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="50dp" />-->
-
-
-<!--        </LinearLayout>-->
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="20dp" />
+        <!--        <LinearLayout-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginTop="5dp"-->
+        <!--            android:background="@drawable/round_edittext"-->
+        <!--            android:padding="10dp"-->
+        <!--            android:weightSum="2">-->
 
 
-        </LinearLayout>
+        <!--            <LinearLayout-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_gravity="center"-->
+        <!--                android:layout_weight="1"-->
+        <!--                android:gravity="center">-->
+
+        <!--              -->
+        <!--            </LinearLayout>-->
+
+
+        <!--        </LinearLayout>-->
+
+        <!--        <LinearLayout-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginTop="5dp"-->
+        <!--            android:background="@drawable/round_edittext"-->
+        <!--            android:padding="10dp"-->
+        <!--            android:weightSum="2">-->
+
+
+        <!--            <LinearLayout-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_gravity="center"-->
+        <!--                android:layout_weight="1"-->
+        <!--                android:gravity="center">-->
+
+        <!--                -->
+        <!--            </LinearLayout>-->
+
+
+        <!--        </LinearLayout>-->
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -206,7 +484,7 @@
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/Post"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/round_button"
                 android:text="Post"

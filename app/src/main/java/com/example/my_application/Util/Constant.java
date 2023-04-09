@@ -14,4 +14,5 @@ public interface Constant {
     int PICK_PHOTO_TWO=102;
     int PICK_PHOTO_THREE=103;
     int PICK_PHOTO_FOUR=104;
+    int PICK_PHOTO_FIVE=105;
 }

@@ -20,6 +20,9 @@
         android:theme="@style/Theme.My_Application"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Screens.Check_Terms_Condition_Screen"
+            android:exported="false" />
+        <activity
             android:name=".Screens.Add_PoliceStation_Screen"
             android:exported="false" />
         <activity

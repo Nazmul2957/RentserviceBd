@@ -28,8 +28,8 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'com.google.android.material:material:1.6.0'
+    implementation 'androidx.appcompat:appcompat:1.4.2'
+    implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
@@ -52,7 +52,8 @@ dependencies {
 
     implementation "com.github.skydoves:expandablelayout:1.0.7"
 
-    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'////swiperefreesh dependency
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+////swiperefreesh dependency
 
 
     implementation(platform("com.squareup.okhttp3:okhttp-bom:4.10.0"))
@@ -60,4 +61,9 @@ dependencies {
     // define any required OkHttp artifacts without version
 //    implementation("com.squareup.okhttp3:okhttp")
 //    implementation("com.squareup.okhttp3:logging-interceptor")
+
+///image slider for details page
+    implementation 'com.github.denzcoskun:ImageSlideshow:0.1.2'
+
+  //  implementation 'com.github.smarteist:autoimageslider:1.4.0-appcompat'
 }

@@ -5,15 +5,18 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,17 +25,24 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.my_application.Adaptar.DistrictListAdaptar;
+import com.example.my_application.Adaptar.DistrictShowByDivision;
 import com.example.my_application.Adaptar.DivisionSpinnerAdaptar;
 import com.example.my_application.Adaptar.PoliceStationAdaptar;
+import com.example.my_application.Adaptar.PoliceStationShowByDisAdaptar;
 import com.example.my_application.Data_Model.DistrictModel.District;
 import com.example.my_application.Data_Model.DistrictModel.DistrictContainer;
+import com.example.my_application.Data_Model.DistrictshowbyDivision.DistrictShow;
+import com.example.my_application.Data_Model.DistrictshowbyDivision.DistrictshowContainer;
 import com.example.my_application.Data_Model.Division.Division;
 import com.example.my_application.Data_Model.Division.DivisionContainer;
 import com.example.my_application.Data_Model.InsertPost.InsertPostResponseContainer;
 import com.example.my_application.Data_Model.PoliceStation.Police;
 import com.example.my_application.Data_Model.PoliceStation.PoliceStationContainer;
+import com.example.my_application.Data_Model.PoliceStationByDistrict.PolicestationByDistrictContainer;
+import com.example.my_application.Data_Model.PoliceStationByDistrict.PolicestationShowByDistrict;
 import com.example.my_application.Network.Api;
 import com.example.my_application.Network.RetrofitClient;
 import com.example.my_application.R;
@@ -44,6 +54,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.MediaType;
@@ -60,16 +71,22 @@ public class AddPostScreen extends AppCompatActivity {
     Spinner DivisionList, DistrictList, Police_Station;
     Bitmap bitmap;
     List<Division> data;
-    List<District> datas;
-    List<Police> datass;
+    List<DistrictShow> datas;
+    List<PolicestationShowByDistrict> datass;
     EditText Title, Description, Price, Address;
     Button POSTDATA;
-    ImageView ImageOne;
-    TextView ImageSelect;
+    ImageView ImageOne, Imagetwo, Imagethree, Imagefour, Imagefive;
+    Button ImageSelect, ImageSelectTwo, ImageSelectThree, ImageSelectFour, ImageSelectFive;
     String Token;
-    Uri imageUri = null, imageUriNid2 = null, imageUriTrade = null, imageUriTin = null;
-    File f1, f2nid, f3trade, f4tin;
-    String imgString;
+    Uri imageUri = null, imageUritwo = null, imageUrithree = null, imageUrifour = null, imageUrifive = null;
+    File f1, f2, f3, f4, f5;
+    String imgString, iamStringtwo, iamStringthree, iamStringfour, iamStringfive;
+  //  ArrayList<String> image = new ArrayList<String>();
+
+    RecyclerView ImageShowList;
+    LinearLayout DisHide, PoliceHide;
+
+  //  String imageone = null, imagetwo = null, imagethree = null, imagefour = null, imagefive = null;
 
 
     @Override
@@ -85,8 +102,22 @@ public class AddPostScreen extends AppCompatActivity {
         Price = findViewById(R.id.insert_price);
         Address = findViewById(R.id.insert_address);
         POSTDATA = findViewById(R.id.Post);
+       // ImageShowList = findViewById(R.id.image_show_multipul);
+        DisHide = findViewById(R.id.District_hide);
+        PoliceHide = findViewById(R.id.Police_hide);
+
         ImageOne = findViewById(R.id.imageshow);
+        Imagetwo = findViewById(R.id.imageshow_two);
+        Imagethree = findViewById(R.id.imageshow_three);
+        Imagefour = findViewById(R.id.imageshow_four);
+        Imagefive = findViewById(R.id.imageshow_five);
+
+
         ImageSelect = findViewById(R.id.select_image);
+        ImageSelectTwo = findViewById(R.id.select_image_two);
+        ImageSelectThree = findViewById(R.id.select_image_three);
+        ImageSelectFour = findViewById(R.id.select_image_four);
+        ImageSelectFive = findViewById(R.id.select_image_five);
 
 
         api = RetrofitClient.difBaseUrle().create(Api.class);
@@ -96,29 +127,55 @@ public class AddPostScreen extends AppCompatActivity {
         progressDialog.setMessage("Please Wait......");
         progressDialog.setCancelable(false);
         getdivision();
-        zilla();
-        police();
+        // zilla();
+        // police();
 
 
         POSTDATA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 register();
-//                addCustomer(Title.getText().toString(),
-//                        Description.getText().toString(),
-//                        Price.getText().toString(),
-//                        Address.getText().toString(),
-//                        String.valueOf(data.get(DivisionList.getSelectedItemPosition()).getId().toString()),
-//                        String.valueOf(datas.get(DistrictList.getSelectedItemPosition()).getId().toString()),
-//                        String.valueOf(datass.get(Police_Station.getSelectedItemPosition()).getId().toString()), Token);
+                //  imagearray();
+
             }
         });
 
-        ImageSelect.setOnClickListener(v -> {
+        DivisionList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (DivisionList.getSelectedItemId() != 0) {
+                    DisHide.setVisibility(View.VISIBLE);
+                    zilla(String.valueOf(data.get(position).getId()));
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        DistrictList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (DistrictList.getSelectedItemId() != 0) {
+                    PoliceHide.setVisibility(View.VISIBLE);
+                    police(String.valueOf(datas.get(position).getId()));
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        ImageOne.setOnClickListener(v -> {
             if (ContextCompat.checkSelfPermission(getApplicationContext(),
                     Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                 Intent intent = new Intent();
                 intent.setType("image/*");
+                // intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(intent, Constant.PICK_PHOTO_ONE);
             } else {
@@ -126,8 +183,57 @@ public class AddPostScreen extends AppCompatActivity {
                         new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
             }
         });
+        Imagetwo.setOnClickListener(v -> {
+            if (ContextCompat.checkSelfPermission(getApplicationContext(),
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(intent, Constant.PICK_PHOTO_TWO);
+            } else {
+                ActivityCompat.requestPermissions(AddPostScreen.this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+            }
+        });
 
+        Imagethree.setOnClickListener(v -> {
+            if (ContextCompat.checkSelfPermission(getApplicationContext(),
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(intent, Constant.PICK_PHOTO_THREE);
+            } else {
+                ActivityCompat.requestPermissions(AddPostScreen.this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+            }
+        });
 
+        Imagefour.setOnClickListener(v -> {
+            if (ContextCompat.checkSelfPermission(getApplicationContext(),
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(intent, Constant.PICK_PHOTO_FOUR);
+            } else {
+                ActivityCompat.requestPermissions(AddPostScreen.this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+            }
+        });
+
+        Imagefive.setOnClickListener(v -> {
+            if (ContextCompat.checkSelfPermission(getApplicationContext(),
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(intent, Constant.PICK_PHOTO_FIVE);
+            } else {
+                ActivityCompat.requestPermissions(AddPostScreen.this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+            }
+        });
     }
 
     public void getdivision() {
@@ -155,65 +261,53 @@ public class AddPostScreen extends AppCompatActivity {
         });
     }
 
-    public void zilla() {
+
+    public void zilla(String id) {
         progressDialog.show();
-        api.getDistrict().enqueue(new Callback<DistrictContainer>() {
+        api.getDistrictbydivision(id).enqueue(new Callback<DistrictshowContainer>() {
             @Override
-            public void onResponse(Call<DistrictContainer> call, Response<DistrictContainer> response) {
+            public void onResponse(Call<DistrictshowContainer> call, Response<DistrictshowContainer> response) {
                 progressDialog.dismiss();
                 if (response.isSuccessful() && response.body() != null) {
                     datas = response.body().getData();
-                    datas.add(0, new District(0, "Select District"));
-                    DistrictListAdaptar customeadaptar = new DistrictListAdaptar(datas, getApplicationContext());
-                    DistrictList.setAdapter(customeadaptar);
+                    datas.add(0, new DistrictShow(0, "Select District"));
+                    DistrictShowByDivision cusadaptar = new DistrictShowByDivision(datas, getApplicationContext());
+                    DistrictList.setAdapter(cusadaptar);
                     Log.d("District", datas.toString());
 
                 }
-
             }
 
             @Override
-            public void onFailure(Call<DistrictContainer> call, Throwable t) {
+            public void onFailure(Call<DistrictshowContainer> call, Throwable t) {
                 progressDialog.dismiss();
-                Toast.makeText(getApplicationContext(), "Something wrong", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    public void police() {
+    public void police(String id) {
         progressDialog.show();
-        api.getpolice().enqueue(new Callback<PoliceStationContainer>() {
+        api.getpolicebydistrict(id).enqueue(new Callback<PolicestationByDistrictContainer>() {
             @Override
-            public void onResponse(Call<PoliceStationContainer> call, Response<PoliceStationContainer> response) {
+            public void onResponse(Call<PolicestationByDistrictContainer> call, Response<PolicestationByDistrictContainer> response) {
                 progressDialog.dismiss();
                 if (response.isSuccessful() && response.body() != null) {
                     datass = response.body().getData();
-                    datass.add(0, new Police(0, "Select Police Station"));
-                    PoliceStationAdaptar adaptar = new PoliceStationAdaptar(datass, getApplicationContext());
-                    Police_Station.setAdapter(adaptar);
-
+                    datass.add(0, new PolicestationShowByDistrict(0, "Select Police Station"));
+                    PoliceStationShowByDisAdaptar policeadaptar = new PoliceStationShowByDisAdaptar(datass, getApplicationContext());
+                    Police_Station.setAdapter(policeadaptar);
                 }
             }
 
             @Override
-            public void onFailure(Call<PoliceStationContainer> call, Throwable t) {
+            public void onFailure(Call<PolicestationByDistrictContainer> call, Throwable t) {
 
             }
         });
-    }
 
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (requestCode == 10 && resultCode == Activity.RESULT_OK) {
-//             uri = data.getData();
-//            Context context = AddPostScreen.this;
-//            path = RealPathUtil.getRealPath(context, uri);
-//            Bitmap bitmap = BitmapFactory.decodeFile(path);
-//            ImageOne.setImageBitmap(bitmap);
-//
-//        }
-//    }
+
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -233,6 +327,9 @@ public class AddPostScreen extends AppCompatActivity {
                 byte[] bitmapdata = bos.toByteArray();
                 imgString = Base64.encodeToString(bitmapdata, Base64.NO_WRAP);
 
+//                byte[] decodedString = Base64.decode(imgString, Base64.DEFAULT);
+//                Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0,decodedString.length);
+//                ImageOne.setImageBitmap(decodedByte);
 
                 FileOutputStream fos = null;
                 try {
@@ -260,94 +357,201 @@ public class AddPostScreen extends AppCompatActivity {
             }
 
 
-        }
-//        else if (resultCode == RESULT_OK && requestCode == Constant.PICK_PHOTO_THREE && data != null) {
-//            imageUriTrade = data.getData();
-//
-//            try {
-//                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUriTrade);
-//                f3trade = new File(getCacheDir(), "Image3");
-//                bitmap = getResizedBitmap(bitmap, 800);
-//                ByteArrayOutputStream bos = new ByteArrayOutputStream();
-//                bitmap.compress(Bitmap.CompressFormat.PNG, 0, bos);
-//                // bitmap.compress(Bitmap.CompressFormat.JPEG, 0 /*ignored for PNG*/, bos);
-//                byte[] bitmapdata = bos.toByteArray();
-//                FileOutputStream fos = null;
-//                try {
-//                    fos = new FileOutputStream(f3trade);
-//
-//                } catch (FileNotFoundException e) {
-//                    Log.e("REQ", e.toString());
-//                }
-//                try {
-//                    fos.write(bitmapdata);
-//                    fos.flush();
-//                    fos.close();
-//                   // isTrade = true;
-//                } catch (IOException e) {
-//                    Log.e("REQ", e.toString());
-//                }
-//
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-////            if (bitmap != null) {
-////                binding.tradeLicensePic.setImageBitmap(bitmap);
-////                binding.tradePic.setVisibility(View.VISIBLE);
-////            } else {
-////                Log.e("REQ", "Bitmap null");
-////            }
-//
-//        } else if (resultCode == RESULT_OK && requestCode == Constant.PICK_PHOTO_FOUR && data != null) {
-//            imageUriTin = data.getData();
+        } else if (resultCode == RESULT_OK && requestCode == Constant.PICK_PHOTO_TWO && data != null) {
+            imageUritwo = data.getData();
 
-//            try {
-//                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUriTin);
-//                f4tin = new File(getCacheDir(), "Image4");
-//                bitmap = getResizedBitmap(bitmap, 800);
-//                ByteArrayOutputStream bos = new ByteArrayOutputStream();
-//
-//                bitmap.compress(Bitmap.CompressFormat.PNG, 0, bos);
-//                // bitmap.compress(Bitmap.CompressFormat.JPEG, 0 /*ignored for PNG*/, bos);
-//                byte[] bitmapdata = bos.toByteArray();
-//
-//
-//                FileOutputStream fos = null;
-//                try {
-//                    fos = new FileOutputStream(f4tin);
-//
-//                } catch (FileNotFoundException e) {
-//                    Log.e("REQ", e.toString());
-//                }
-//                try {
-//                    fos.write(bitmapdata);
-//                    fos.flush();
-//                    fos.close();
-//                    //isTin = true;
-//                } catch (IOException e) {
-//                    Log.e("REQ", e.toString());
-//                }
-//
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//            if (bitmap != null) {
-//                binding.tinLicensePic.setImageBitmap(bitmap);
-//                binding.tinPic.setVisibility(View.VISIBLE);
-//            } else {
-//                Log.e("REQ", "Bitmap null");
-//            }
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUritwo);
+                f2 = new File(getCacheDir(), "Image2");
+                bitmap = getResizedBitmap(bitmap, 800);
+
+                ByteArrayOutputStream bos = new ByteArrayOutputStream();
+
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100 /*ignored for PNG*/, bos);
+                byte[] bitmapdata = bos.toByteArray();
+                iamStringtwo = Base64.encodeToString(bitmapdata, Base64.NO_WRAP);
+
+                FileOutputStream foss = null;
+                try {
+                    foss = new FileOutputStream(f2);
+
+                } catch (FileNotFoundException e) {
+                    Log.e("REQ", e.toString());
+                }
+                try {
+                    foss.write(bitmapdata);
+                    foss.flush();
+                    foss.close();
+                    // isTrade = true;
+                } catch (IOException e) {
+                    Log.e("REQ", e.toString());
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if (bitmap != null) {
+                Imagetwo.setImageBitmap(bitmap);
+            } else {
+                Log.e("REQ", "Bitmap null");
+            }
+
+        } else if (resultCode == RESULT_OK && requestCode == Constant.PICK_PHOTO_THREE && data != null) {
+            imageUrithree = data.getData();
+
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUrithree);
+                f3 = new File(getCacheDir(), "Image3");
+                bitmap = getResizedBitmap(bitmap, 800);
+                ByteArrayOutputStream bos = new ByteArrayOutputStream();
+
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100 /*ignored for PNG*/, bos);
+                byte[] bitmapdata = bos.toByteArray();
+                iamStringthree = Base64.encodeToString(bitmapdata, Base64.NO_WRAP);
+
+
+                FileOutputStream fos = null;
+                try {
+                    fos = new FileOutputStream(f3);
+
+                } catch (FileNotFoundException e) {
+                    Log.e("REQ", e.toString());
+                }
+                try {
+                    fos.write(bitmapdata);
+                    fos.flush();
+                    fos.close();
+                    //isTin = true;
+                } catch (IOException e) {
+                    Log.e("REQ", e.toString());
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if (bitmap != null) {
+                Imagethree.setImageBitmap(bitmap);
+            } else {
+                Log.e("REQ", "Bitmap null");
+            }
+
+        } else if (resultCode == RESULT_OK && requestCode == Constant.PICK_PHOTO_FOUR && data != null) {
+            imageUrifour = data.getData();
+
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUrifour);
+                f4 = new File(getCacheDir(), "Image4");
+                bitmap = getResizedBitmap(bitmap, 800);
+                ByteArrayOutputStream bos = new ByteArrayOutputStream();
+
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100 /*ignored for PNG*/, bos);
+                byte[] bitmapdata = bos.toByteArray();
+                iamStringfour = Base64.encodeToString(bitmapdata, Base64.NO_WRAP);
+
+
+                FileOutputStream fos = null;
+                try {
+                    fos = new FileOutputStream(f4);
+
+                } catch (FileNotFoundException e) {
+                    Log.e("REQ", e.toString());
+                }
+                try {
+                    fos.write(bitmapdata);
+                    fos.flush();
+                    fos.close();
+                    //isTin = true;
+                } catch (IOException e) {
+                    Log.e("REQ", e.toString());
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if (bitmap != null) {
+                Imagefour.setImageBitmap(bitmap);
+            } else {
+                Log.e("REQ", "Bitmap null");
+            }
+
+        } else if (resultCode == RESULT_OK && requestCode == Constant.PICK_PHOTO_FIVE && data != null) {
+            imageUrifive = data.getData();
+
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUrifive);
+                f5 = new File(getCacheDir(), "Image5");
+                bitmap = getResizedBitmap(bitmap, 800);
+                ByteArrayOutputStream bos = new ByteArrayOutputStream();
+
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100 /*ignored for PNG*/, bos);
+                byte[] bitmapdata = bos.toByteArray();
+                iamStringfive = Base64.encodeToString(bitmapdata, Base64.NO_WRAP);
+
+
+                FileOutputStream fos = null;
+                try {
+                    fos = new FileOutputStream(f5);
+
+                } catch (FileNotFoundException e) {
+                    Log.e("REQ", e.toString());
+                }
+                try {
+                    fos.write(bitmapdata);
+                    fos.flush();
+                    fos.close();
+                    //isTin = true;
+                } catch (IOException e) {
+                    Log.e("REQ", e.toString());
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if (bitmap != null) {
+                Imagefive.setImageBitmap(bitmap);
+            } else {
+                Log.e("REQ", "Bitmap null");
+            }
+
+        }
 
     }
-    //   }
+
+//    public void imagearray() {
+//
+//        if (image != null) {
+//            image.add(imgString);
+//            image.add(iamStringtwo);
+//            image.add(iamStringthree);
+//            image.add(iamStringfour);
+//            image.add(iamStringfive);
+//            Log.d("setimagearray", image.get(0));
+//
+//            for (int i = 1; i <= image.size(); i++) {
+//                if (i == 1) imageone = image.get(i - 1);
+//                if (i == 2) imagetwo = image.get(i - 1);
+//                if (i == 3) imagethree = image.get(i - 1);
+//                if (i == 4) imagefour = image.get(i - 1);
+//                if (i == 5) imagefive = image.get(i - 1);
+//            }
+//
+//            //   Log.d("print1",imageone);
+//            //    Log.d("print2",imagetwo);
+//            //   Log.d("print3",imagethree);
+//            // Log.d("print4",imagefour);
+//            //   Log.d("print5",imagefive);
+//            //   Log.d("setimagearray1", String.valueOf(imgString));
+//        }
+//
+//
+//    }
 
 
     public void register() {
         RequestBody requestBody;
         String imageName = "";
         RequestBody requestImage = null;
-        RequestBody attachmentEmpty = RequestBody.create(MediaType.parse("image/*"), "");
-        // RequestBody attachmentEmpty = RequestBody.Companion.create(MediaType.parse("image/*"), "");
+        //   RequestBody attachmentEmpty = RequestBody.create(MediaType.parse("image/*"), "");
 
         if (imageUri != null) {
             File nidfile = new File(String.valueOf(imageUri));
@@ -358,6 +562,9 @@ public class AddPostScreen extends AppCompatActivity {
             Log.d("testthrees", String.valueOf(requestImage));
 
         }
+
+
+        //  imagearray();
 
         requestBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
@@ -370,7 +577,11 @@ public class AddPostScreen extends AppCompatActivity {
                 .addFormDataPart("policeStationId", String.valueOf(datass.get(Police_Station.getSelectedItemPosition()).getId().toString()))
                 .addFormDataPart("key", Token)
                 // .addFormDataPart("image", imageName, requestImage != null ? requestImage : attachmentEmpty)
-                .addFormDataPart("image1","data:image/jpeg;base64,"+ String.valueOf(imgString))
+                .addFormDataPart("image1", "data:image/jpeg;base64," + imgString)
+                .addFormDataPart("image2", "data:image/jpeg;base64," + iamStringtwo)
+                .addFormDataPart("image3", "data:image/jpeg;base64," + iamStringthree)
+                .addFormDataPart("image4", "data:image/jpeg;base64," + iamStringfour)
+                .addFormDataPart("image5", "data:image/jpeg;base64," + iamStringfive)
                 .build();
 
         progressDialog.show();
@@ -378,18 +589,17 @@ public class AddPostScreen extends AppCompatActivity {
             @Override
             public void onResponse(Call<InsertPostResponseContainer> call,
                                    Response<InsertPostResponseContainer> response) {
-                //progressDialog.show();
                 if (response.isSuccessful() && response.body() != null) {
                     progressDialog.dismiss();
-                    Toast.makeText(getApplicationContext(), "post added", Toast.LENGTH_SHORT).show();
-                    Intent intent=new Intent(getApplicationContext(),DashBoardScreen.class);
+                    Toast.makeText(getApplicationContext(), "Post added", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getApplicationContext(), DashBoardScreen.class);
                     startActivity(intent);
                     finish();
                 } else {
                     progressDialog.dismiss();
-                    Toast.makeText(getApplicationContext(), "post not added", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Post not added", Toast.LENGTH_SHORT).show();
                     //   Log.d("testthree",String.valueOf(response.errorBody().toString()));
-                    Log.d("testthree", response.message().toString());
+                    // Log.d("testthree", response.message().toString());
                 }
             }
 

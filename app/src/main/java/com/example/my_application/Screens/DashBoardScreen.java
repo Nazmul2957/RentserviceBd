@@ -2,6 +2,7 @@ package com.example.my_application.Screens;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -11,8 +12,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -52,6 +55,7 @@ public class DashBoardScreen extends AppCompatActivity {
     boolean visibility = false;
     String Token;
     String UserType = "user";
+    AlertDialog.Builder builder;
 
 
     @Override
@@ -76,6 +80,7 @@ public class DashBoardScreen extends AppCompatActivity {
         About = findViewById(R.id.about_page);
         LogOut = findViewById(R.id.log_out);
         Category = findViewById(R.id.admin_category);
+        builder = new AlertDialog.Builder(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         api = RetrofitClient.get(getApplicationContext()).create(Api.class);
@@ -86,15 +91,13 @@ public class DashBoardScreen extends AppCompatActivity {
         progressDialog.setCancelable(false);
         progressDialog.show();
 
-
         toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         toolbar.setTitle("Homepage");
 
-        //  navbar();
         customenavbar();
-        // Log.d("token_print", Token);
+
 
         api.getprofile(Token).enqueue(new Callback<ProfileContainer>() {
             @Override
@@ -123,6 +126,7 @@ public class DashBoardScreen extends AppCompatActivity {
                             new Dashboard_adaptar.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(int position) {
+
                                 }
                             });
 
@@ -144,7 +148,6 @@ public class DashBoardScreen extends AppCompatActivity {
     }
 
     public void customenavbar() {
-
         api.getprofile(Token).enqueue(new Callback<ProfileContainer>() {
             @Override
             public void onResponse(Call<ProfileContainer> call, Response<ProfileContainer> response) {
@@ -174,10 +177,36 @@ public class DashBoardScreen extends AppCompatActivity {
         LogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MySharedPreference.editor(getApplicationContext()).clear().commit();
-                startActivity(new Intent(DashBoardScreen.this, LoginScreen.class));
-                finish();
-                drawerLayout.closeDrawer(GravityCompat.START);
+
+                builder.setMessage("Do you want to Log out").setCancelable(false).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        MySharedPreference.editor(getApplicationContext()).clear().commit();
+                        startActivity(new Intent(DashBoardScreen.this, LoginScreen.class));
+                        finish();
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                    }
+                }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+
+                AlertDialog alert = builder.create();
+
+                alert.setOnShowListener(new DialogInterface.OnShowListener() {
+                    @Override
+                    public void onShow(DialogInterface dialog) {
+                        alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.RED);
+                        alert.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.RED);
+                    }
+                });
+                alert.setTitle("Log Out");
+                alert.show();
+
+
             }
         });
 

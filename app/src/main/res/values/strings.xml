@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">RentserviceBD</string>
     <string name="splashscreen_text">I’m from JFJ</string>
-    <string name="signin_text">Sign In</string>
+    <string name="signin_text">Login</string>
     <string name="welcome_page">Welcome To RentService</string>
     <string name="welcome_page_two">Rent online and get awesome delivered from stores
         to your home in as fast as 1 hour .</string>
@@ -13,6 +13,7 @@ password to access your account</string>
     <string name="otp_page_text_one">We have sent SMS to your number</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="registr_here"><u>Register Here</u></string>
 
 
 </resources>

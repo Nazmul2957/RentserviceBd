@@ -2,8 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/delete_favourite"
-        android:title="Remove Favourite"
+        android:id="@+id/added_favourite"
+        android:title="Add Favourite"
         app:showAsAction="never"/>
 
 

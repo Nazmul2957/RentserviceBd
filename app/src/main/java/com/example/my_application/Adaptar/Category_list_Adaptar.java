@@ -30,7 +30,6 @@ public class Category_list_Adaptar extends RecyclerView.Adapter<Category_list_Ad
     public ViewHolders onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.category_list_model, parent, false);
-
         return new ViewHolders(view);
     }
 

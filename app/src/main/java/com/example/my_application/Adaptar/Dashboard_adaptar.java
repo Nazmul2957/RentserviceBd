@@ -28,7 +28,7 @@ import java.util.List;
 
 public class Dashboard_adaptar extends RecyclerView.Adapter<Dashboard_adaptar.ViewHolders> {
 
-    public Dashboard_adaptar.OnItemClickListener listener;
+    public OnItemClickListener listener;
 
     public interface OnItemClickListener {
         void onItemClick(int position);
@@ -60,12 +60,12 @@ public class Dashboard_adaptar extends RecyclerView.Adapter<Dashboard_adaptar.Vi
         holder.Post_Pp.setText(String.valueOf(postlist.get(position).getPrice()));
         Glide.with(context).load("https://rentservicebd.com/public/api/image/" +
                 postlist.get(position).getImage1()).into(holder.Post_image);
+
         holder.Add_Favourite.setOnClickListener(new DashboardItemClickMenu(this, (OnItemClickListener) listener, holder, postlist.get(position)));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String Postid = String.valueOf(postlist.get(position).getId());
-                Log.e("Product id", String.valueOf(Postid));
                 Intent intent = new Intent(context, SinglePostViewScreen.class);
                 intent.putExtra(Intent.EXTRA_UID, Postid);
                 v.getContext().startActivity(intent);
@@ -95,6 +95,10 @@ public class Dashboard_adaptar extends RecyclerView.Adapter<Dashboard_adaptar.Vi
             Post_Pp = itemView.findViewById(R.id.post_price);
             Post_image = itemView.findViewById(R.id.post_img);
             Add_Favourite = itemView.findViewById(R.id.add_favourite);
+        }
+
+        public ImageView getoption() {
+            return this.Add_Favourite;
         }
     }
 }
