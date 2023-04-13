@@ -20,6 +20,11 @@ public class CategoryList {
     @Expose
     private String updatedAt;
 
+    public CategoryList(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public Integer getId() {
         return id;
     }

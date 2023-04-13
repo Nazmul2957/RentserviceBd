@@ -10,6 +10,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.exifinterface.media.ExifInterface;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -21,10 +22,12 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.my_application.Adaptar.Dashboard_adaptar;
 import com.example.my_application.Data_Model.Dashboard.DashboardContainer;
 import com.example.my_application.Data_Model.Profile.ProfileContainer;
@@ -49,13 +52,15 @@ public class DashBoardScreen extends AppCompatActivity {
     DrawerLayout drawerLayout;
     TextView Username, HeadName, UserMobile, Add_Post,
             Favourite, Add_Category, Add_Division,
-            Add_District, My_Post, About, LogOut, ADD_Police;
+            Add_District, My_Post, About, LogOut, ADD_Police, Profile;
     ProgressDialog progressDialog;
     LinearLayout Category;
     boolean visibility = false;
     String Token;
+    ImageView imageView;
     String UserType = "user";
     AlertDialog.Builder builder;
+    SwipeRefreshLayout swipeRefreshLayout;
 
 
     @Override
@@ -63,6 +68,7 @@ public class DashBoardScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dash_board_screen);
 
+        swipeRefreshLayout = findViewById(R.id.swip_refresh);
 
         recyclerView = findViewById(R.id.dash_board_list);
         nav = (NavigationView) findViewById(R.id.navbar);
@@ -80,6 +86,8 @@ public class DashBoardScreen extends AppCompatActivity {
         About = findViewById(R.id.about_page);
         LogOut = findViewById(R.id.log_out);
         Category = findViewById(R.id.admin_category);
+        Profile = findViewById(R.id.profile_page);
+        imageView = findViewById(R.id.profile_images);
         builder = new AlertDialog.Builder(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
@@ -105,6 +113,8 @@ public class DashBoardScreen extends AppCompatActivity {
                 Username.setText(response.body().getUserInfo().getName());
                 HeadName.setText(response.body().getUserInfo().getName());
                 UserMobile.setText(response.body().getUserInfo().getMobile());
+                Glide.with(getApplicationContext()).load("https://rentservicebd.com/public/api/image/" +
+                        response.body().getUserInfo().getAvatar()).into(imageView);
 
             }
 
@@ -114,6 +124,20 @@ public class DashBoardScreen extends AppCompatActivity {
             }
         });
 
+       data();
+
+       swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+           @Override
+           public void onRefresh() {
+               data();
+               swipeRefreshLayout.setRefreshing(false);
+           }
+       });
+
+    }
+
+
+    public void data(){
         api.getdashboarddata().enqueue(new Callback<DashboardContainer>() {
             @Override
             public void onResponse(Call<DashboardContainer> call, Response<DashboardContainer> response) {
@@ -144,7 +168,6 @@ public class DashBoardScreen extends AppCompatActivity {
 
             }
         });
-
     }
 
     public void customenavbar() {
@@ -223,6 +246,14 @@ public class DashBoardScreen extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intentdivision = new Intent(getApplicationContext(), InsertDivisionScreen.class);
                 startActivity(intentdivision);
+            }
+        });
+
+        Profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent Pintent = new Intent(getApplicationContext(), Profile_Screen.class);
+                startActivity(Pintent);
             }
         });
 

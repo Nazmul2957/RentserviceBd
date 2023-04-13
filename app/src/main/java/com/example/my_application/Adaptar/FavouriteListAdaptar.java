@@ -55,7 +55,8 @@ public class FavouriteListAdaptar extends RecyclerView.Adapter<FavouriteListAdap
         holder.Post_Pp.setText(String.valueOf(favouriteList.get(position).getPrice()));
         Glide.with(context).load("https://rentservicebd.com/public/api/image/" +
                 favouriteList.get(position).getImage1()).into(holder.Post_image);
-        holder.optionMenu.setOnClickListener(new FavouriteMenu_ClickListner(this, listener, holder, favouriteList.get(position)));
+        holder.optionMenu.setOnClickListener(new FavouriteMenu_ClickListner(this,
+                listener, holder, favouriteList.get(position)));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

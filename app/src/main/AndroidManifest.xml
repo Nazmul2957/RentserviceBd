@@ -20,6 +20,18 @@
         android:theme="@style/Theme.My_Application"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Screens.Edit_Profile_Screen"
+            android:exported="false" />
+        <activity
+            android:name=".Screens.Profile_Pic_Show_Screen"
+            android:exported="false" />
+        <activity
+            android:name=".Screens.Profile_Screen"
+            android:exported="false" />
+        <activity
+            android:name=".Screens.Image_Preview"
+            android:exported="false" />
+        <activity
             android:name=".Screens.Check_Terms_Condition_Screen"
             android:exported="false" />
         <activity

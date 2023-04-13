@@ -12,6 +12,7 @@ import com.example.my_application.Data_Model.Mypost.MypostListContainer;
 import com.example.my_application.Data_Model.PoliceStation.PoliceStationContainer;
 import com.example.my_application.Data_Model.PoliceStationByDistrict.PolicestationByDistrictContainer;
 import com.example.my_application.Data_Model.Profile.ProfileContainer;
+import com.example.my_application.Data_Model.Profile.ProfilePicContainer;
 import com.example.my_application.Data_Model.SinglePost.SinglePostContainer;
 import com.google.gson.JsonObject;
 
@@ -56,11 +57,18 @@ public interface Api {
     Call<JsonObject> register(@Field("name") String name,
                               @Field("mobile") String mobile,
                               @Field("password") String Password,
-                              @Field("otp") String Otp);
+                              @Field("otp") String Otp,
+                              @Field("address") String Address);
 
 
     @POST("post")
     Call<InsertPostResponseContainer> InsertPost(@Body RequestBody params);
+
+    @POST("user/image")
+    Call<ProfilePicContainer> ProfilePicUpload(@Body RequestBody params);
+
+    @POST("profile/update")
+    Call<ProfilePicContainer> ProfileEdit(@Body RequestBody params);
 
 
     @FormUrlEncoded
@@ -100,6 +108,8 @@ public interface Api {
     @POST("division")
     Call<JsonObject> insertdivision(@Field("name") String Name);
 
+
+
     @FormUrlEncoded
     @POST("district")
     Call<JsonObject> insertDistrict(@Field("name") String Name, @Field("divisionId") String DivisionId);
@@ -114,6 +124,9 @@ public interface Api {
 
     @GET("comment/{id}")
     Call<CommentContainer> getallComments(@Path("id") String Postid);
+
+    @GET("post/delete/{id}")
+    Call<JsonObject> deletemypost(@Path("id") String Postid);
 
     @FormUrlEncoded
     @POST("comment")

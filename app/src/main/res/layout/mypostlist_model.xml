@@ -45,11 +45,11 @@
                     android:padding="2dp">
 
                     <ImageView
+                        android:id="@+id/deletemenu"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:src="@drawable/ic_baseline_favorite_border_24"
-                        android:visibility="gone" />
+                        android:src="@drawable/ic_menu" />
 
                 </RelativeLayout>
 
@@ -62,9 +62,9 @@
                         android:id="@+id/post_title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:hint="Georg jensen milimal"
                         android:maxLines="1"
                         android:padding="5dp"
-                        android:hint="Georg jensen milimal"
                         android:textColor="@color/text_color"
                         android:textSize="20sp"
                         android:textStyle="bold" />
@@ -86,6 +86,31 @@
 
                         <TextView
                             android:id="@+id/post_price"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:hint="300.00 BDT"
+                            android:maxLines="1"
+                            android:padding="5dp"
+                            android:textColor="@color/text_color"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxLines="1"
+                            android:padding="5dp"
+                            android:text=" BDT"
+                            android:textColor="@color/text_color"
+                            android:textSize="15sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:hint="300.00 BDT"

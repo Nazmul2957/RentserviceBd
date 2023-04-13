@@ -18,7 +18,9 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.denzcoskun.imageslider.ImageSlider;
+import com.denzcoskun.imageslider.constants.AnimationTypes;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
+import com.denzcoskun.imageslider.interfaces.ItemClickListener;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.my_application.Adaptar.CommentListAdaptar;
 import com.example.my_application.Data_Model.CommentList.CommentContainer;
@@ -41,7 +43,7 @@ import retrofit2.Response;
 public class SinglePostViewScreen extends AppCompatActivity {
     Api api;
     ProgressDialog progressDialog;
-    TextView textView, Price, Post_Description,Post_Address;
+    TextView textView, Price, Post_Description, Post_Address;
     ImageView Send_Comments;
     Button CallButton;
     Boolean isExpended = false;
@@ -53,8 +55,8 @@ public class SinglePostViewScreen extends AppCompatActivity {
     String Token;
     ImageSlider imageSlider;
 
-    ArrayList<SlideModel> slideImage = new ArrayList<>();
 
+    ArrayList<SlideModel> slideImage = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +72,7 @@ public class SinglePostViewScreen extends AppCompatActivity {
         expandableLayout = findViewById(R.id.expand);
         PostId = getIntent().getStringExtra(Intent.EXTRA_UID);
         imageSlider = findViewById(R.id.image_slide);
-        Post_Address=findViewById(R.id.post_address);
+        Post_Address = findViewById(R.id.post_address);
 
 
         expandableLayout.setExpandableAnimation(ExpandableAnimation.ACCELERATE);
@@ -128,26 +130,42 @@ public class SinglePostViewScreen extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
 
                     if (String.valueOf(response.body().getPost().getImage1()) != null) {
-                        slideImage.add(new SlideModel("https://rentservicebd.com/public/api/image/" + String.valueOf(response.body().getPost().getImage1()), ScaleTypes.FIT));
+                        slideImage.add(new SlideModel("https://rentservicebd.com/public/api/image/" + String.valueOf(response.body().getPost().getImage1()), ScaleTypes.CENTER_CROP));
                     }
                     if (String.valueOf(response.body().getPost().getImage2()) != null) {
-                        slideImage.add(new SlideModel("https://rentservicebd.com/public/api/image/" + String.valueOf(response.body().getPost().getImage2()), ScaleTypes.FIT));
+                        slideImage.add(new SlideModel("https://rentservicebd.com/public/api/image/" + String.valueOf(response.body().getPost().getImage2()), ScaleTypes.CENTER_CROP));
 
                     }
                     if (String.valueOf(response.body().getPost().getImage3()) != null) {
-                        slideImage.add(new SlideModel("https://rentservicebd.com/public/api/image/" + String.valueOf(response.body().getPost().getImage3()), ScaleTypes.FIT));
+                        slideImage.add(new SlideModel("https://rentservicebd.com/public/api/image/" + String.valueOf(response.body().getPost().getImage3()), ScaleTypes.CENTER_CROP));
 
                     }
                     if (String.valueOf(response.body().getPost().getImage4()) != null) {
-                        slideImage.add(new SlideModel("https://rentservicebd.com/public/api/image/" + String.valueOf(response.body().getPost().getImage4()), ScaleTypes.FIT));
+                        slideImage.add(new SlideModel("https://rentservicebd.com/public/api/image/" + String.valueOf(response.body().getPost().getImage4()), ScaleTypes.CENTER_CROP));
                     }
                     if (String.valueOf(response.body().getPost().getImage5()) != null) {
-                        slideImage.add(new SlideModel("https://rentservicebd.com/public/api/image/" + String.valueOf(response.body().getPost().getImage5()), ScaleTypes.FIT));
+                        slideImage.add(new SlideModel("https://rentservicebd.com/public/api/image/" + String.valueOf(response.body().getPost().getImage5()), ScaleTypes.CENTER_CROP));
 
                     }
 
                     imageSlider.setImageList(slideImage);
+                    imageSlider.setSlideAnimation(AnimationTypes.ZOOM_OUT);
                     Log.d("slider", String.valueOf(slideImage));
+
+                    imageSlider.setItemClickListener(new ItemClickListener() {
+                        @Override
+                        public void onItemSelected(int i) {
+                            String Postid = String.valueOf(response.body().getPost().getId());
+                            Intent intent = new Intent(getApplicationContext(), Image_Preview.class);
+                            intent.putExtra(Intent.EXTRA_UID, Postid);
+                            startActivity(intent);
+                        }
+
+                        @Override
+                        public void doubleClick(int i) {
+
+                        }
+                    });
 
                     textView.setText(response.body().getPost().getTitle());
                     Price.setText(response.body().getPost().getPrice());

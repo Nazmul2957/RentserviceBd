@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.my_application.Adaptar.Dashboard_adaptar;
 import com.example.my_application.Adaptar.MyPostListAdaptar;
@@ -27,6 +28,7 @@ public class MyPostScreen extends AppCompatActivity {
     Api api;
     ProgressDialog progressDialog;
     RecyclerView recyclerView;
+    String Token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,13 +38,19 @@ public class MyPostScreen extends AppCompatActivity {
         recyclerView = findViewById(R.id.mypost_list);
 
         api = RetrofitClient.get(getApplicationContext()).create(Api.class);
-        String Token = MySharedPreference.getInstance(getApplicationContext()).getString(Constant.TOKEN, "not found");
+        Token = MySharedPreference.getInstance(getApplicationContext()).getString(Constant.TOKEN, "not found");
 
         progressDialog = new ProgressDialog(MyPostScreen.this);
         progressDialog.setMessage("Please Wait......");
         progressDialog.setCancelable(false);
         progressDialog.show();
 
+        mypost();
+
+    }
+
+
+    public void mypost() {
         api.getuserpost(Token).enqueue(new Callback<MypostListContainer>() {
             @Override
             public void onResponse(Call<MypostListContainer> call, Response<MypostListContainer> response) {
@@ -51,7 +59,13 @@ public class MyPostScreen extends AppCompatActivity {
                     recyclerView.setHasFixedSize(true);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(),
                             LinearLayoutManager.VERTICAL, false));
-                    MyPostListAdaptar adaptar = new MyPostListAdaptar(response.body().getPosts(), getApplicationContext());
+                    MyPostListAdaptar adaptar = new MyPostListAdaptar(response.body().getPosts(),
+                            getApplicationContext(), new MyPostListAdaptar.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(int position) {
+                            mypost();
+                        }
+                    });
                     recyclerView.setAdapter(adaptar);
 
                 }
@@ -59,9 +73,9 @@ public class MyPostScreen extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<MypostListContainer> call, Throwable t) {
-
+                progressDialog.dismiss();
+                Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 }

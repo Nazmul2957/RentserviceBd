@@ -43,6 +43,7 @@ public class OtpScreen extends AppCompatActivity {
         String ReceiveName = getIntent().getStringExtra("fullname");
         String ReceivePassword = getIntent().getStringExtra("pasPassword");
         String ReceiveMobile = getIntent().getStringExtra("mbl");
+        String ReceiveAddress=getIntent().getStringExtra("addres");
 
         progressDialog = new ProgressDialog(OtpScreen.this);
         progressDialog.setMessage("Please Wait......");
@@ -52,9 +53,11 @@ public class OtpScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!TextUtils.isEmpty(pinView.getText().toString())) {
+
+
                     progressDialog.show();
                     api = RetrofitClient.noInterceptor().create(Api.class);
-                    Call<JsonObject> call = api.register(ReceiveName, ReceiveMobile, ReceivePassword, pinView.getText().toString());
+                    Call<JsonObject> call = api.register(ReceiveName, ReceiveMobile, ReceivePassword, pinView.getText().toString(),ReceiveAddress);
                     call.enqueue(new Callback<JsonObject>() {
                         @Override
                         public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {

@@ -15,5 +15,6 @@
     <color name="description">#3C4040</color>
     <color name="toolbarcolor">#9FC73B</color>
     <color name="colorA">#727C8E</color>
+    <color name="colorred">#F10909</color>
 
 </resources>

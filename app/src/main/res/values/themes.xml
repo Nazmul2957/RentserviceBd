@@ -19,6 +19,9 @@
         <item name="android:textColorSecondary">@color/toolbarcolor</item>
         <item name="colorControlNormal">@color/text_color</item>
     </style>
+    <style name="ImageView.Circle" parent="">
+        <item name="cornerSize">50%</item>
+    </style>
 
 
 </resources>

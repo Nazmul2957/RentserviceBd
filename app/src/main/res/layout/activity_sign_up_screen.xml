@@ -14,9 +14,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center"
             android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical"
             android:padding="10dp">
 
             <LinearLayout
@@ -63,6 +63,7 @@
                     android:padding="5dp" />
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -77,7 +78,26 @@
                     android:background="@drawable/round_edittext"
                     android:drawableLeft="@drawable/bd_flag"
                     android:drawablePadding="5dp"
+                    android:inputType="phone"
                     android:hint="Phone Number"
+                    android:padding="5dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <EditText
+                    android:id="@+id/reg_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/round_edittext"
+                    android:drawablePadding="5dp"
+                    android:hint="Address"
                     android:padding="5dp" />
 
             </LinearLayout>
@@ -95,9 +115,9 @@
                     android:layout_height="50dp"
                     android:background="@drawable/round_edittext"
                     android:drawableLeft="@drawable/union"
+                    android:drawableRight="@drawable/ic_baseline_remove_red_eye_24"
                     android:drawablePadding="5dp"
                     android:hint="Password"
-                    android:drawableRight="@drawable/ic_baseline_remove_red_eye_24"
                     android:padding="5dp" />
 
             </LinearLayout>
@@ -115,9 +135,9 @@
                     android:layout_height="50dp"
                     android:background="@drawable/round_edittext"
                     android:drawableLeft="@drawable/union"
+                    android:drawableRight="@drawable/ic_baseline_remove_red_eye_24"
                     android:drawablePadding="5dp"
                     android:hint="Confirm Password"
-                    android:drawableRight="@drawable/ic_baseline_remove_red_eye_24"
                     android:padding="5dp" />
 
             </LinearLayout>
@@ -147,8 +167,6 @@
 
 
     </ScrollView>
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

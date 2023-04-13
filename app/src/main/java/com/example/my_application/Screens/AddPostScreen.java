@@ -27,11 +27,14 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.my_application.Adaptar.Category_Spinner_Adaptar;
 import com.example.my_application.Adaptar.DistrictListAdaptar;
 import com.example.my_application.Adaptar.DistrictShowByDivision;
 import com.example.my_application.Adaptar.DivisionSpinnerAdaptar;
 import com.example.my_application.Adaptar.PoliceStationAdaptar;
 import com.example.my_application.Adaptar.PoliceStationShowByDisAdaptar;
+import com.example.my_application.Data_Model.Category.CategoryContainer;
+import com.example.my_application.Data_Model.Category.CategoryList;
 import com.example.my_application.Data_Model.DistrictModel.District;
 import com.example.my_application.Data_Model.DistrictModel.DistrictContainer;
 import com.example.my_application.Data_Model.DistrictshowbyDivision.DistrictShow;
@@ -68,9 +71,10 @@ import retrofit2.Response;
 public class AddPostScreen extends AppCompatActivity {
     Api api;
     ProgressDialog progressDialog;
-    Spinner DivisionList, DistrictList, Police_Station;
+    Spinner DivisionList, DistrictList, Police_Station,Category;
     Bitmap bitmap;
     List<Division> data;
+    List<CategoryList> catgoryList;
     List<DistrictShow> datas;
     List<PolicestationShowByDistrict> datass;
     EditText Title, Description, Price, Address;
@@ -105,6 +109,7 @@ public class AddPostScreen extends AppCompatActivity {
        // ImageShowList = findViewById(R.id.image_show_multipul);
         DisHide = findViewById(R.id.District_hide);
         PoliceHide = findViewById(R.id.Police_hide);
+        Category=findViewById(R.id.category);
 
         ImageOne = findViewById(R.id.imageshow);
         Imagetwo = findViewById(R.id.imageshow_two);
@@ -127,6 +132,8 @@ public class AddPostScreen extends AppCompatActivity {
         progressDialog.setMessage("Please Wait......");
         progressDialog.setCancelable(false);
         getdivision();
+        categorys();
+
         // zilla();
         // police();
 
@@ -236,6 +243,28 @@ public class AddPostScreen extends AppCompatActivity {
         });
     }
 
+    public void categorys(){
+        progressDialog.show();
+        api.getcat().enqueue(new Callback<CategoryContainer>() {
+            @Override
+            public void onResponse(Call<CategoryContainer> call, Response<CategoryContainer> response) {
+                progressDialog.dismiss();
+                if (response.isSuccessful()&& response.body()!=null){
+                    catgoryList=response.body().getData();
+                    catgoryList.add(0,new CategoryList(0,"Select Category"));
+                    Category_Spinner_Adaptar adaptar=new Category_Spinner_Adaptar(catgoryList,getApplicationContext());
+                    Category.setAdapter(adaptar);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CategoryContainer> call, Throwable t) {
+                progressDialog.dismiss();
+                Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     public void getdivision() {
         progressDialog.show();
         api.getDivision().enqueue(new Callback<DivisionContainer>() {
@@ -247,7 +276,7 @@ public class AddPostScreen extends AppCompatActivity {
                     data.add(0, new Division(0, "Select Division"));
                     DivisionSpinnerAdaptar customeadaptar = new DivisionSpinnerAdaptar(data, getApplicationContext());
                     DivisionList.setAdapter(customeadaptar);
-                    Log.d("division", data.toString());
+
 
                 }
 
@@ -357,7 +386,9 @@ public class AddPostScreen extends AppCompatActivity {
             }
 
 
-        } else if (resultCode == RESULT_OK && requestCode == Constant.PICK_PHOTO_TWO && data != null) {
+        }
+
+        else if (resultCode == RESULT_OK && requestCode == Constant.PICK_PHOTO_TWO && data != null) {
             imageUritwo = data.getData();
 
             try {
@@ -576,7 +607,7 @@ public class AddPostScreen extends AppCompatActivity {
                 .addFormDataPart("districtId", String.valueOf(datas.get(DistrictList.getSelectedItemPosition()).getId().toString()))
                 .addFormDataPart("policeStationId", String.valueOf(datass.get(Police_Station.getSelectedItemPosition()).getId().toString()))
                 .addFormDataPart("key", Token)
-                // .addFormDataPart("image", imageName, requestImage != null ? requestImage : attachmentEmpty)
+                .addFormDataPart("categoryId",String.valueOf(catgoryList.get(Category.getSelectedItemPosition()).getId().toString()))
                 .addFormDataPart("image1", "data:image/jpeg;base64," + imgString)
                 .addFormDataPart("image2", "data:image/jpeg;base64," + iamStringtwo)
                 .addFormDataPart("image3", "data:image/jpeg;base64," + iamStringthree)
@@ -591,15 +622,15 @@ public class AddPostScreen extends AppCompatActivity {
                                    Response<InsertPostResponseContainer> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     progressDialog.dismiss();
-                    Toast.makeText(getApplicationContext(), "Post added", Toast.LENGTH_SHORT).show();
+                    String message=response.body().getMessage();
+                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getApplicationContext(), DashBoardScreen.class);
                     startActivity(intent);
                     finish();
                 } else {
                     progressDialog.dismiss();
                     Toast.makeText(getApplicationContext(), "Post not added", Toast.LENGTH_SHORT).show();
-                    //   Log.d("testthree",String.valueOf(response.errorBody().toString()));
-                    // Log.d("testthree", response.message().toString());
+
                 }
             }
 

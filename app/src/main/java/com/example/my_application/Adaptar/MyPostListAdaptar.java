@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.my_application.Data_Model.Mypost.MypostL;
+import com.example.my_application.Listner.MyPostMenu_ClickListner;
 import com.example.my_application.R;
 import com.example.my_application.Screens.SinglePostViewScreen;
 
@@ -22,12 +23,19 @@ import java.util.List;
 
 public class MyPostListAdaptar extends RecyclerView.Adapter<MyPostListAdaptar.ViewHolders> {
 
+    public OnItemClickListener listener;
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
     List<MypostL> postlist = new ArrayList<>();
     Context context;
 
-    public MyPostListAdaptar(List<MypostL> postlist, Context context) {
+    public MyPostListAdaptar(List<MypostL> postlist, Context context, OnItemClickListener listener) {
         this.postlist = postlist;
         this.context = context;
+        this.listener=listener;
     }
 
     @NonNull
@@ -45,6 +53,9 @@ public class MyPostListAdaptar extends RecyclerView.Adapter<MyPostListAdaptar.Vi
         holder.Post_Pp.setText(String.valueOf(postlist.get(position).getPrice()));
         Glide.with(context).load("https://rentservicebd.com/public/api/image/" +
                 postlist.get(position).getImage1()).into(holder.Post_image);
+
+        holder.optionMenu.setOnClickListener(new MyPostMenu_ClickListner(this,
+                listener,holder,postlist.get(position)));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,7 +78,7 @@ public class MyPostListAdaptar extends RecyclerView.Adapter<MyPostListAdaptar.Vi
     public class ViewHolders extends RecyclerView.ViewHolder {
 
         TextView Post_title, Post_Descrip, Post_Pp;
-        ImageView Post_image;
+        ImageView Post_image,optionMenu;
 
         public ViewHolders(@NonNull View itemView) {
             super(itemView);
@@ -76,6 +87,11 @@ public class MyPostListAdaptar extends RecyclerView.Adapter<MyPostListAdaptar.Vi
             Post_Descrip = itemView.findViewById(R.id.post_description);
             Post_Pp = itemView.findViewById(R.id.post_price);
             Post_image = itemView.findViewById(R.id.post_img);
+            optionMenu=itemView.findViewById(R.id.deletemenu);
+        }
+
+        public ImageView getoption() {
+            return this.optionMenu;
         }
     }
 }
