@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:layout_gravity="center"
     android:gravity="center"
-    tools:context=".Screens.Profile_Pic_Show_Screen">
+    tools:context="com.rentservice.my_application.Screens.Profile_Pic_Show_Screen">
 
     <LinearLayout
         android:layout_width="match_parent"

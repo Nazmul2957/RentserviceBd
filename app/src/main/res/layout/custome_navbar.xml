@@ -166,6 +166,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:visibility="gone"
             android:layout_weight="0.2">
 
             <ImageView
@@ -180,6 +181,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:visibility="gone"
             android:layout_weight="1.8">
 
             <TextView
@@ -200,6 +202,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:visibility="gone"
         android:weightSum="2">
 
         <LinearLayout
@@ -240,6 +243,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:visibility="gone"
         android:weightSum="2">
 
         <LinearLayout
@@ -280,6 +284,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:visibility="gone"
         android:weightSum="2">
 
         <LinearLayout
@@ -372,7 +377,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:src="@drawable/ic_about" />
+                android:src="@drawable/ic_baseline_account_circle_24" />
 
         </LinearLayout>
 

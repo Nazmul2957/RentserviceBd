@@ -7,7 +7,7 @@
     android:background="@drawable/background_image"
     android:orientation="vertical"
     android:padding="10dp"
-    tools:context=".Screens.Profile_Screen">
+    tools:context="com.rentservice.my_application.Screens.Profile_Screen">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -80,7 +80,7 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:padding="10dp">
+                android:padding="5dp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -118,7 +118,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:padding="10dp">
+                android:padding="5dp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -157,7 +157,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:padding="10dp">
+                android:padding="5dp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -195,7 +195,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:padding="10dp">
+                android:padding="5dp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -232,7 +232,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:padding="10dp">
+                android:padding="5dp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -269,7 +269,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:padding="10dp">
+                android:padding="5dp">
 
                 <TextView
                     android:layout_width="match_parent"

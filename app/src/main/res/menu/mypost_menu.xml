@@ -5,4 +5,8 @@
         android:id="@+id/delete_mypost"
         android:title="Remove Post"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/Edit_mypost"
+        android:title="Edit Post"
+        app:showAsAction="never" />
 </menu>

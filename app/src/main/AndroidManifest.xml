@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.screen.portrait" />
 
     <application
         android:allowBackup="true"
@@ -20,62 +21,82 @@
         android:theme="@style/Theme.My_Application"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".Screens.Edit_Profile_Screen"
+            android:name="com.rentservice.my_application.Screens.About_Screen"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.rentservice.my_application.Screens.Edit_Post"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.rentservice.my_application.Screens.Edit_Profile_Screen"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.rentservice.my_application.Screens.Profile_Pic_Show_Screen"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.rentservice.my_application.Screens.Profile_Screen"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.rentservice.my_application.Screens.Image_Preview"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.rentservice.my_application.Screens.Check_Terms_Condition_Screen"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.rentservice.my_application.Screens.Add_PoliceStation_Screen"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.rentservice.my_application.Screens.FavouriteListScreen"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.rentservice.my_application.Screens.MyPostScreen"
             android:exported="false" />
         <activity
-            android:name=".Screens.Profile_Pic_Show_Screen"
-            android:exported="false" />
+            android:name="com.rentservice.my_application.Screens.SinglePostViewScreen"
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".Screens.Profile_Screen"
-            android:exported="false" />
+            android:name="com.rentservice.my_application.Screens.Add_District_Screen"
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".Screens.Image_Preview"
-            android:exported="false" />
+            android:name="com.rentservice.my_application.Screens.InsertDivisionScreen"
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".Screens.Check_Terms_Condition_Screen"
-            android:exported="false" />
+            android:name="com.rentservice.my_application.Screens.InsertCategoryScreen"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
-            android:name=".Screens.Add_PoliceStation_Screen"
-            android:exported="false" />
+            android:name="com.rentservice.my_application.Screens.AddPostScreen"
+            android:exported="false" android:screenOrientation="portrait"/>
         <activity
-            android:name=".Screens.FavouriteListScreen"
-            android:exported="false" />
+            android:name="com.rentservice.my_application.Screens.OtpScreen"
+            android:exported="false" android:screenOrientation="portrait"/>
         <activity
-            android:name=".Screens.MyPostScreen"
-            android:exported="false" />
+            android:name="com.rentservice.my_application.Screens.DashBoardScreen"
+            android:exported="false" android:screenOrientation="portrait"/>
         <activity
-            android:name=".Screens.SinglePostViewScreen"
-            android:exported="false" />
+            android:name="com.rentservice.my_application.Screens.SignInScreen"
+            android:exported="false" android:screenOrientation="portrait"/>
         <activity
-            android:name=".Screens.Add_District_Screen"
-            android:exported="false" />
+            android:name="com.rentservice.my_application.Screens.SignUpScreen"
+            android:exported="false" android:screenOrientation="portrait"/>
         <activity
-            android:name=".Screens.InsertDivisionScreen"
-            android:exported="false" />
+            android:name="com.rentservice.my_application.Screens.LoginScreen"
+            android:exported="false" android:screenOrientation="portrait"/>
         <activity
-            android:name=".Screens.InsertCategoryScreen"
-            android:exported="false" />
-        <activity
-            android:name=".Screens.AddPostScreen"
-            android:exported="false" />
-        <activity
-            android:name=".Screens.OtpScreen"
-            android:exported="false" />
-        <activity
-            android:name=".Screens.DashBoardScreen"
-            android:exported="false" />
-        <activity
-            android:name=".Screens.SignInScreen"
-            android:exported="false" />
-        <activity
-            android:name=".Screens.SignUpScreen"
-            android:exported="false" />
-        <activity
-            android:name=".Screens.LoginScreen"
-            android:exported="false" />
-        <activity
-            android:name=".Screens.MainActivity"
+            android:name="com.rentservice.my_application.Screens.MainActivity"
             android:exported="true"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.My_Application">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

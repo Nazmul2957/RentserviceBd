@@ -18,6 +18,65 @@ password to access your account</string>
     <string name="Profile_Division">Division<font color='#F10909'>*</font></string>
     <string name="Profile_DiStrict">District<font color='#F10909'>*</font></string>
     <string name="Profile_Police">Police Station<font color='#F10909'>*</font></string>
+    <string name="Terms_and_con">Advertisers And Users Are Responsible For Complying
+        With All Applicable Laws And Regulations While Uploading Content, Text,
+        And Images For Advertising On The Rent Service. Rental Service Is Not
+        Responsible If All Content Is Illegal And Contains False Information.
+        Advertisers And Users Warrant That Advertising Content Does Not Infringe Any Copyright,
+        Proprietary Rights Or Other Rights Of Any Person Or Entity. Advertisers And Users Further Agree That The Rent Service Is Included From All Obligations, Liabilities And Claims Arising Out Of The Use Of The Services. Advertisers Agree That Their Submitted
+        Content May Be Displayed On Rentservice Partner Sites In Accordance With Rentservice Terms.
+        </string>
+
+    <string name="About_one">
+        	Advertisers And Users Are Responsible For Complying With All Applicable Laws And
+        Regulations While Uploading Content, Text, And Images For Advertising On The Rent Service.
+        Rental Service Is Not Responsible If All Content Is Illegal And Contains False Information.
+        Advertisers And Users Warrant That Advertising Content Does Not Infringe Any Copyright,
+        Proprietary Rights Or Other Rights Of Any Person Or Entity. Advertisers And Users Further
+        Agree That The Rent Service Is Included From All Obligations, Liabilities And Claims Arising
+        Out Of The Use Of The Services. Advertisers Agree That Their Submitted Content May Be Displayed On
+        Rentservice Partner Sites In Accordance With Rentservice Terms.
+    </string>
+    <string name="About_two">
+       	Rental Service reserves the right to cooperate with the appropriate authorities
+        if any content violates applicable laws. For example,
+        an ISP may identify advertisers or user identities. Also,
+        IP addresses may be logged to ensure compliance.
+    </string>
+    <string name="About_three">
+        	Rental Services will collect information from users and advertisers.
+        It is a condition of using the Rent Service that each User and Advertiser
+        grant and authorizes the Rent Service to collect and use information. Rental
+        Service may use the information collected with its affiliate companies and any
+        other persons for purposes of assisting and managing Rent Service and for purposes
+        of Rent Service development, such as research,
+        marketing, product development and planning.
+    </string>
+    <string name="About_four">
+       	Rental Services may require payment for certain items and services such as membership packages,
+        rental postings, rental searches, third-party advertising, posting ads in selected categories, etc.
+        Advertisers can purchase vouchers to promote their ads from the Rent Service. Advertisers and users
+        who voluntarily wish to post content (Paid Content) in exchange for rent services may be required to
+        transfer information to a third party service provider, which may be governed by that party own rules.
+        CONNECTION WITH ANY THIRD PARTY PROVIDERS IS DONE BY THE ADVERTISER AND USER AT ITS OWN RISK AND RENT SERVICES
+        IS FREE FROM ANY RESPONSIBILITY IN CONNECTION THEREWITH.
+        Rent Service shall not be obligated to provide any refund against any matter related to paid content.
+    </string>
+    <string name="About_five">
+    	Rental Service reserves the right to change these terms and conditions. Such changes may
+        be effective upon publication of the Rent Service. You are responsible for reviewing such changes.
+        Your continued access to or
+        use of the Rent Service will result in your acceptance of the following Terms.
+    </string>
+    <string name="Contact_Info">
+    E-mail : rentservicebd@gmail.com
+    </string>
+    <string name="Contact_Info_one">
+    Phone : +8801974206106
+    </string>
+    <string name="Contact_Info_Address">
+    Address : 13,R N Road, Jessore Sadar, Jessore.
+    </string>
 
 
 </resources>

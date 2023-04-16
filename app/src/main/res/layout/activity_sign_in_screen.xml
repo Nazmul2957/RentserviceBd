@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    tools:context=".Screens.SignInScreen">
+    tools:context="com.rentservice.my_application.Screens.SignInScreen">
 
     <ScrollView
         android:layout_width="match_parent"
