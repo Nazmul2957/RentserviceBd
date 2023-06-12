@@ -117,8 +117,14 @@ public class Edit_Profile_Screen extends AppCompatActivity {
             }
         });
 
-
-        Upload();
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DataValication();
+            }
+        });
+        //Upload();
+        //
 
     }
 
@@ -190,72 +196,52 @@ public class Edit_Profile_Screen extends AppCompatActivity {
     }
 
 
+    public void DataValication() {
+        if (Profile_Division.getSelectedItemPosition() > 0) {
+            if (Profile_District.getSelectedItemPosition() > 0) {
+                if (Profile_Police.getSelectedItemPosition() > 0) {
+                    Upload();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Please Select Police Station", Toast.LENGTH_SHORT).show();
+
+                }
+
+            } else {
+                Toast.makeText(getApplicationContext(), "Please Select District", Toast.LENGTH_SHORT).show();
+            }
+
+        } else {
+            Toast.makeText(getApplicationContext(), "Please Select Division", Toast.LENGTH_SHORT).show();
+        }
+    }
+
     public void Upload() {
-        // RequestBody requestBody;
 
-        button.setOnClickListener(new View.OnClickListener() {
+
+        api.ProfileEdit(String.valueOf(data.get(Profile_Division.getSelectedItemPosition()).getId().toString()),
+                String.valueOf(datas.get(Profile_District.getSelectedItemPosition()).getId().toString()),
+                String.valueOf(datass.get(Profile_Police.getSelectedItemPosition()).getId().toString()),
+                Token, ReceiveId, ReceiveAddress).enqueue(new Callback<JsonObject>() {
             @Override
-            public void onClick(View v) {
-                api.ProfileEdit(String.valueOf(data.get(Profile_Division.getSelectedItemPosition()).getId().toString()),
-                        String.valueOf(datas.get(Profile_District.getSelectedItemPosition()).getId().toString()),
-                        String.valueOf(datass.get(Profile_Police.getSelectedItemPosition()).getId().toString()),
-                        Token, ReceiveId, ReceiveAddress).enqueue(new Callback<JsonObject>() {
-                    @Override
-                    public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                        if (response.isSuccessful() && response.body() != null) {
-                            progressDialog.dismiss();
-                            String message = response.body().get("message").toString();
-                           // Log.d("error message", message);
-                            Intent intent = new Intent(getApplicationContext(), Profile_Screen.class);
-                            startActivity(intent);
-                            finish();
-                            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                        }
-                    }
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    progressDialog.dismiss();
+                    String message = response.body().get("message").toString();
+                    // Log.d("error message", message);
+                    Intent intent = new Intent(getApplicationContext(), Profile_Screen.class);
+                    startActivity(intent);
+                    finish();
+                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                }
+            }
 
-                    @Override
-                    public void onFailure(Call<JsonObject> call, Throwable t) {
-                        progressDialog.dismiss();
-                        Toast.makeText(getApplicationContext(), "No Update Profile", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-
-                // finish();
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                progressDialog.dismiss();
+                Toast.makeText(getApplicationContext(), "No Update Profile", Toast.LENGTH_SHORT).show();
             }
         });
 
-//        requestBody = new MultipartBody.Builder()
-//                .setType(MultipartBody.FORM)
-//                .addFormDataPart("address", Address.getText().toString())
-//                .addFormDataPart("divisionId", String.valueOf(data.get(Profile_Division.getSelectedItemPosition()).getId().toString()))
-//                .addFormDataPart("districtId", String.valueOf(datas.get(Profile_District.getSelectedItemPosition()).getId().toString()))
-//                .addFormDataPart("policeStationId", String.valueOf(datass.get(Profile_Police.getSelectedItemPosition()).getId().toString()))
-//                .addFormDataPart("key", Token)
-//                .addFormDataPart("id", ReceiveId)
-//                .build();
-
-        // progressDialog.show();
-
-
-//        api.ProfileEdit(requestBody).enqueue(new Callback<ProfilePicContainer>() {
-//            @Override
-//            public void onResponse(Call<ProfilePicContainer> call, Response<ProfilePicContainer> response) {
-//
-//                if (response.isSuccessful() && response.body() != null) {
-//                    progressDialog.dismiss();
-//                    String message = response.body().getMessage();
-//                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-//
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<ProfilePicContainer> call, Throwable t) {
-//                progressDialog.dismiss();
-//                Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_SHORT).show();
-//            }
-//        });
 
     }
 }

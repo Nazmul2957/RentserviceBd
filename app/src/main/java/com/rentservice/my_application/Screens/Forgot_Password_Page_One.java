@@ -6,65 +6,62 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
-import com.chaos.view.PinView;
-import com.rentservice.my_application.Network.Api;
-import com.rentservice.my_application.Network.RetrofitClient;
 import com.example.my_application.R;
 import com.google.gson.JsonObject;
+import com.rentservice.my_application.Network.Api;
+import com.rentservice.my_application.Network.RetrofitClient;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class OtpScreen extends AppCompatActivity {
+public class Forgot_Password_Page_One extends AppCompatActivity {
 
-    Button Verification;
-    Api api;
+    EditText  Phone_Number;
+    Button GetOtp;
     ProgressDialog progressDialog;
-
+    Api api;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_otp_screen);
+        setContentView(R.layout.activity_forgot_password_page_one);
 
-        PinView pinView = findViewById(R.id.pin_view);
-        Verification = findViewById(R.id.verify_otp);
+        Phone_Number=findViewById(R.id.Phn_no);
+        GetOtp=findViewById(R.id.get_otp);
 
-        String ReceiveName = getIntent().getStringExtra("fullname");
-        String ReceivePassword = getIntent().getStringExtra("pasPassword");
-        String ReceiveMobile = getIntent().getStringExtra("mbl");
-        String ReceiveAddress=getIntent().getStringExtra("addres");
-
-        progressDialog = new ProgressDialog(OtpScreen.this);
+        progressDialog = new ProgressDialog(Forgot_Password_Page_One.this);
         progressDialog.setMessage("Please Wait......");
         progressDialog.setCancelable(false);
 
-        Verification.setOnClickListener(new View.OnClickListener() {
+        GetOtp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!TextUtils.isEmpty(pinView.getText().toString())) {
+                if (!TextUtils.isEmpty(Phone_Number.getText().toString())){
                     progressDialog.show();
                     api = RetrofitClient.noInterceptor().create(Api.class);
-                    Call<JsonObject> call = api.register(ReceiveName, ReceiveMobile, ReceivePassword, pinView.getText().toString(),ReceiveAddress);
+                    Call<JsonObject> call = api.Otp(("88" + Phone_Number.getText().toString())
+                    );
                     call.enqueue(new Callback<JsonObject>() {
                         @Override
                         public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                             progressDialog.dismiss();
                             if (response.isSuccessful() && response.body() != null) {
-                                Log.e("test4", response.body().getAsString());
-                                startActivity(new Intent(OtpScreen.this, SignInScreen.class));
-                                Toast.makeText(OtpScreen.this, "Registration Successfull", Toast.LENGTH_SHORT).show();
+                                String mobile = "88" + Phone_Number.getText().toString();
+                                Intent intent = new Intent(Forgot_Password_Page_One.this, Forgot_Password_Otp_Page.class);
+                                intent.putExtra("mbl", mobile);
+                                // startActivity(new Intent(SignUpScreen.this, OtpScreen.class));
+                                startActivity(intent);
                                 finish();
 
                             } else {
                                 progressDialog.dismiss();
-                                Toast.makeText(OtpScreen.this, "Something Wrong", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Forgot_Password_Page_One.this, "Something Wrong", Toast.LENGTH_SHORT).show();
                             }
                         }
 
@@ -75,13 +72,20 @@ public class OtpScreen extends AppCompatActivity {
                         }
                     });
 
-                } else {
-                    pinView.setError("Input Valid OTP Number");
-                    pinView.requestFocus();
+                }else{
+                    Phone_Number.setError("Enter Your Mobile Number");
+                    Phone_Number.requestFocus();
                 }
             }
         });
 
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(getApplicationContext(),SignInScreen.class));
+        finish();
     }
 }

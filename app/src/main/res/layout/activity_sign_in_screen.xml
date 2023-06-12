@@ -129,6 +129,23 @@
                         android:textColor="@color/text_color"
                         android:textSize="15dp" />
 
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/forget_password"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:text="@string/forgot"
+                            android:textStyle="bold"
+                            android:layout_alignParentRight="true"
+                            android:textColor="@color/text_color"
+                            android:textSize="19sp" />
+
+                    </RelativeLayout>
+
 
                 </LinearLayout>
 
@@ -154,8 +171,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:padding="5dp"
                         android:gravity="center"
+                        android:padding="5dp"
                         android:text="@string/registr_here"
                         android:textColor="@color/text_color"
                         android:textSize="19sp"

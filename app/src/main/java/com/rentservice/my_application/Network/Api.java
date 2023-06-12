@@ -42,6 +42,11 @@ public interface Api {
     Call<JsonObject> insertfavourite(@Field("key") String Key,
                                      @Field("postId") String PostId);
 
+
+    @FormUrlEncoded
+    @POST("reset")
+    Call<JsonObject> forgotpassword(@Field("mobile") String email, @Field("password") String password,@Field("otp")String Otp);
+
     @FormUrlEncoded
     @POST("favourite/delete")
     Call<JsonObject> deletefavourite(@Field("key") String Key,

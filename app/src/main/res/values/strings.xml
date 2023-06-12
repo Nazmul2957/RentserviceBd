@@ -14,6 +14,7 @@ password to access your account</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
     <string name="registr_here"><u>Register Here</u></string>
+    <string name="forgot"><u>Forgot Password ?</u></string>
     <string name="Profile_address">Address<font color='#F10909'>*</font></string>
     <string name="Profile_Division">Division<font color='#F10909'>*</font></string>
     <string name="Profile_DiStrict">District<font color='#F10909'>*</font></string>

@@ -21,6 +21,27 @@
         android:theme="@style/Theme.My_Application"
         android:usesCleartextTraffic="true">
         <activity
+            android:name="com.rentservice.my_application.Screens.Filter_Page"
+            android:exported="false" />
+        <activity
+            android:name="com.rentservice.my_application.Screens.Change_Password"
+            android:exported="false"
+            android:screenOrientation="portrait">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity
+            android:name="com.rentservice.my_application.Screens.Forgot_Password_Otp_Page"
+            android:exported="false" />
+        <activity
+            android:name="com.rentservice.my_application.Screens.Forgot_Password_Page_One"
+            android:exported="false" />
+        <activity
             android:name="com.rentservice.my_application.Screens.About_Screen"
             android:exported="false"
             android:screenOrientation="portrait" />
@@ -74,25 +95,31 @@
         <activity
             android:name="com.rentservice.my_application.Screens.InsertCategoryScreen"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.rentservice.my_application.Screens.AddPostScreen"
-            android:exported="false" android:screenOrientation="portrait"/>
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.rentservice.my_application.Screens.OtpScreen"
-            android:exported="false" android:screenOrientation="portrait"/>
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.rentservice.my_application.Screens.DashBoardScreen"
-            android:exported="false" android:screenOrientation="portrait"/>
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.rentservice.my_application.Screens.SignInScreen"
-            android:exported="false" android:screenOrientation="portrait"/>
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.rentservice.my_application.Screens.SignUpScreen"
-            android:exported="false" android:screenOrientation="portrait"/>
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.rentservice.my_application.Screens.LoginScreen"
-            android:exported="false" android:screenOrientation="portrait"/>
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.rentservice.my_application.Screens.MainActivity"
             android:exported="true"
