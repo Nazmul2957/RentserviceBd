@@ -46,7 +46,7 @@ public class SignInScreen extends AppCompatActivity {
 
         String Token = MySharedPreference.getInstance(getApplicationContext()).getString(Constant.TOKEN, "not found");
         if (!Token.equals(new String("not found"))) {
-            startActivity(new Intent(SignInScreen.this, DashBoardScreen.class));
+            startActivity(new Intent(SignInScreen.this, Category_List_Page.class));
             finish();
         }
         progressDialog = new ProgressDialog(SignInScreen.this);
@@ -89,7 +89,7 @@ public class SignInScreen extends AppCompatActivity {
                                             .putString(Constant.TOKEN, token).apply();
                                     String message = response.body().get("message").toString();
                                     Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                                    startActivity(new Intent(SignInScreen.this, DashBoardScreen.class));
+                                    startActivity(new Intent(SignInScreen.this, Category_List_Page.class));
                                     finish();
 
                                 } else {

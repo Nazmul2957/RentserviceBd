@@ -1,6 +1,7 @@
 package com.rentservice.my_application.Network;
 
 import com.rentservice.my_application.Data_Model.Category.CategoryContainer;
+import com.rentservice.my_application.Data_Model.Category_Search.CategorySearch;
 import com.rentservice.my_application.Data_Model.CommentList.CommentContainer;
 import com.rentservice.my_application.Data_Model.Dashboard.DashboardContainer;
 import com.rentservice.my_application.Data_Model.DistrictModel.DistrictContainer;
@@ -14,6 +15,7 @@ import com.rentservice.my_application.Data_Model.PoliceStation.PoliceStationCont
 import com.rentservice.my_application.Data_Model.PoliceStationByDistrict.PolicestationByDistrictContainer;
 import com.rentservice.my_application.Data_Model.Profile.ProfileContainer;
 import com.rentservice.my_application.Data_Model.Profile.ProfilePicContainer;
+import com.rentservice.my_application.Data_Model.Search.SearchContainer;
 import com.rentservice.my_application.Data_Model.SinglePost.SinglePostContainer;
 import com.google.gson.JsonObject;
 
@@ -142,6 +144,13 @@ public interface Api {
 
     @GET("post/delete/{id}")
     Call<JsonObject> deletemypost(@Path("id") String Postid);
+
+    @GET("post/category/{id}")
+    Call<CategorySearch> categorysearch(@Path("id") String Postid);
+
+
+    @GET("post/search/{keyword}")
+    Call<SearchContainer> getsearch(@Path("keyword") String keyword);
 
     @FormUrlEncoded
     @POST("comment")

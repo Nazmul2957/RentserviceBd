@@ -23,6 +23,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.rentservice.my_application.Adaptar.Dashboard_adaptar;
+import com.rentservice.my_application.Data_Model.Category_Search.CategorySearch;
 import com.rentservice.my_application.Data_Model.Dashboard.DashboardContainer;
 import com.rentservice.my_application.Data_Model.Profile.ProfileContainer;
 import com.rentservice.my_application.Network.Api;
@@ -50,9 +51,10 @@ public class DashBoardScreen extends AppCompatActivity {
     LinearLayout Category;
     boolean visibility = false;
     String Token;
-    ImageView imageView;
+    ImageView imageView, Search;
     String UserType = "user";
     AlertDialog.Builder builder;
+    String PostId;
     SwipeRefreshLayout swipeRefreshLayout;
 
 
@@ -81,12 +83,14 @@ public class DashBoardScreen extends AppCompatActivity {
         Category = findViewById(R.id.admin_category);
         Profile = findViewById(R.id.profile_page);
         imageView = findViewById(R.id.profile_images);
+        Search = findViewById(R.id.searchs);
         builder = new AlertDialog.Builder(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         api = RetrofitClient.get(getApplicationContext()).create(Api.class);
         Token = MySharedPreference.getInstance(getApplicationContext()).getString(Constant.TOKEN, "not found");
-
+        PostId = getIntent().getStringExtra(Intent.EXTRA_UID);
+        Log.d("receive_categoryid", PostId);
         progressDialog = new ProgressDialog(DashBoardScreen.this);
         progressDialog.setMessage("Please Wait......");
         progressDialog.setCancelable(false);
@@ -99,6 +103,13 @@ public class DashBoardScreen extends AppCompatActivity {
 
         customenavbar();
 
+        Search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), Filter_Page.class));
+
+            }
+        });
 
         api.getprofile(Token).enqueue(new Callback<ProfileContainer>() {
             @Override
@@ -117,50 +128,76 @@ public class DashBoardScreen extends AppCompatActivity {
             }
         });
 
-       data();
+        data();
 
-       swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-           @Override
-           public void onRefresh() {
-               data();
-               swipeRefreshLayout.setRefreshing(false);
-           }
-       });
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                data();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
 
     }
 
 
-    public void data(){
-        api.getdashboarddata().enqueue(new Callback<DashboardContainer>() {
+    public void data() {
+
+        api.categorysearch(PostId).enqueue(new Callback<CategorySearch>() {
             @Override
-            public void onResponse(Call<DashboardContainer> call, Response<DashboardContainer> response) {
+            public void onResponse(Call<CategorySearch> call, Response<CategorySearch> response) {
                 progressDialog.dismiss();
                 if (response.isSuccessful() && response.body() != null) {
                     recyclerView.setHasFixedSize(true);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(),
-                            LinearLayoutManager.VERTICAL, false));
-                    Dashboard_adaptar adaptar = new Dashboard_adaptar(response.body().getData(), getApplicationContext(),
-                            new Dashboard_adaptar.OnItemClickListener() {
-                                @Override
-                                public void onItemClick(int position) {
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL,
+                            false));
+                    Dashboard_adaptar adaptar = new Dashboard_adaptar(response.body().getPosts(), getApplicationContext(), new Dashboard_adaptar.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(int position) {
 
-                                }
-                            });
-
+                        }
+                    });
                     recyclerView.setAdapter(adaptar);
-
-                    Log.d("respons", String.valueOf(response.body().getData().toString()));
-
                 }
             }
 
             @Override
-            public void onFailure(Call<DashboardContainer> call, Throwable t) {
+            public void onFailure(Call<CategorySearch> call, Throwable t) {
                 progressDialog.dismiss();
-
-
             }
         });
+
+
+//        api.getdashboarddata().enqueue(new Callback<DashboardContainer>() {
+//            @Override
+//            public void onResponse(Call<DashboardContainer> call, Response<DashboardContainer> response) {
+//                progressDialog.dismiss();
+//                if (response.isSuccessful() && response.body() != null) {
+//                    recyclerView.setHasFixedSize(true);
+//                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(),
+//                            LinearLayoutManager.VERTICAL, false));
+//                    Dashboard_adaptar adaptar = new Dashboard_adaptar(response.body().getPosts(), getApplicationContext(),
+//                            new Dashboard_adaptar.OnItemClickListener() {
+//                                @Override
+//                                public void onItemClick(int position) {
+//
+//                                }
+//                            });
+//
+//                    recyclerView.setAdapter(adaptar);
+//
+//                    Log.d("respons", String.valueOf(response.body().getData().toString()));
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<DashboardContainer> call, Throwable t) {
+//                progressDialog.dismiss();
+//
+//
+//            }
+//        });
     }
 
     public void customenavbar() {
@@ -229,7 +266,7 @@ public class DashBoardScreen extends AppCompatActivity {
         About.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent Aintent=new Intent(getApplicationContext(),About_Screen.class);
+                Intent Aintent = new Intent(getApplicationContext(), About_Screen.class);
                 startActivity(Aintent);
             }
         });
