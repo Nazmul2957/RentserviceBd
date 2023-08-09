@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.rentservice.my_application.Screens.SinglePostViewScreen">
+    tools:context="com.rentservice.rentserVice.Screens.SinglePostViewScreen">
 
 
     <LinearLayout
@@ -23,11 +23,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="250dp" />
 
-<!--            <ImageView-->
-<!--                android:id="@+id/post_image"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="150dp"-->
-<!--                android:layout_marginTop="10dp" />-->
 
 
         </LinearLayout>
@@ -180,7 +175,8 @@
                 app:expandable_showSpinner="true"
                 app:expandable_spinner="@drawable/ic_arrow_down"
                 app:expandable_spinner_animate="true"
-                app:expandable_spinner_color="@color/black" />
+                app:expandable_spinner_color="@color/black"
+                tools:ignore="MissingClass" />
 
 
         </LinearLayout>

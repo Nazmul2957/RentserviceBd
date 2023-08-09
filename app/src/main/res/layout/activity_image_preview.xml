@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.rentservice.my_application.Screens.Image_Preview">
+    tools:context="com.rentservice.rentserVice.Screens.Image_Preview">
 
     <com.denzcoskun.imageslider.ImageSlider
         android:id="@+id/big_image"

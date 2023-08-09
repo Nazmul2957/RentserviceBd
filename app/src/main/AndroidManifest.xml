@@ -21,14 +21,14 @@
         android:theme="@style/Theme.My_Application"
         android:usesCleartextTraffic="true">
         <activity
-            android:name="com.rentservice.my_application.Screens.Category_List_Page"
+            android:name="com.rentservice.rentserVice.Screens.Category_List_Page"
             android:exported="false" />
         <activity
-            android:name="com.rentservice.my_application.Screens.Filter_Page"
+            android:name="com.rentservice.rentserVice.Screens.Filter_Page"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.rentservice.my_application.Screens.Change_Password"
+            android:name="com.rentservice.rentserVice.Screens.Change_Password"
             android:exported="false"
             android:screenOrientation="portrait">
 
@@ -40,95 +40,95 @@
             <!-- </intent-filter> -->
         </activity>
         <activity
-            android:name="com.rentservice.my_application.Screens.Forgot_Password_Otp_Page"
+            android:name="com.rentservice.rentserVice.Screens.Forgot_Password_Otp_Page"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.rentservice.my_application.Screens.Forgot_Password_Page_One"
+            android:name="com.rentservice.rentserVice.Screens.Forgot_Password_Page_One"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.rentservice.my_application.Screens.About_Screen"
+            android:name="com.rentservice.rentserVice.Screens.About_Screen"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.rentservice.my_application.Screens.Edit_Post"
+            android:name="com.rentservice.rentserVice.Screens.Edit_Post"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.rentservice.my_application.Screens.Edit_Profile_Screen"
+            android:name="com.rentservice.rentserVice.Screens.Edit_Profile_Screen"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.rentservice.my_application.Screens.Profile_Pic_Show_Screen"
+            android:name="com.rentservice.rentserVice.Screens.Profile_Pic_Show_Screen"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.rentservice.my_application.Screens.Profile_Screen"
+            android:name="com.rentservice.rentserVice.Screens.Profile_Screen"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.rentservice.my_application.Screens.Image_Preview"
+            android:name="com.rentservice.rentserVice.Screens.Image_Preview"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.rentservice.my_application.Screens.Check_Terms_Condition_Screen"
+            android:name="com.rentservice.rentserVice.Screens.Check_Terms_Condition_Screen"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.rentservice.my_application.Screens.Add_PoliceStation_Screen"
+            android:name="com.rentservice.rentserVice.Screens.Add_PoliceStation_Screen"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.rentservice.my_application.Screens.FavouriteListScreen"
+            android:name="com.rentservice.rentserVice.Screens.FavouriteListScreen"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.rentservice.my_application.Screens.MyPostScreen"
+            android:name="com.rentservice.rentserVice.Screens.MyPostScreen"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.rentservice.my_application.Screens.SinglePostViewScreen"
+            android:name="com.rentservice.rentserVice.Screens.SinglePostViewScreen"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.rentservice.my_application.Screens.Add_District_Screen"
+            android:name="com.rentservice.rentserVice.Screens.Add_District_Screen"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.rentservice.my_application.Screens.InsertDivisionScreen"
+            android:name="com.rentservice.rentserVice.Screens.InsertDivisionScreen"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.rentservice.my_application.Screens.InsertCategoryScreen"
+            android:name="com.rentservice.rentserVice.Screens.InsertCategoryScreen"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.rentservice.my_application.Screens.AddPostScreen"
+            android:name="com.rentservice.rentserVice.Screens.AddPostScreen"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.rentservice.my_application.Screens.OtpScreen"
+            android:name="com.rentservice.rentserVice.Screens.OtpScreen"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.rentservice.my_application.Screens.DashBoardScreen"
+            android:name="com.rentservice.rentserVice.Screens.DashBoardScreen"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.rentservice.my_application.Screens.SignInScreen"
+            android:name="com.rentservice.rentserVice.Screens.SignInScreen"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.rentservice.my_application.Screens.SignUpScreen"
+            android:name="com.rentservice.rentserVice.Screens.SignUpScreen"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.rentservice.my_application.Screens.LoginScreen"
+            android:name="com.rentservice.rentserVice.Screens.LoginScreen"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.rentservice.my_application.Screens.MainActivity"
+            android:name="com.rentservice.rentserVice.Screens.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.My_Application">
