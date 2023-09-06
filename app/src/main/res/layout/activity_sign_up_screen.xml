@@ -11,16 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:boxCornerRadiusBottomEnd="0dp"
-            app:boxCornerRadiusBottomStart="0dp"
-            app:boxCornerRadiusTopEnd="0dp"
-            app:boxCornerRadiusTopStart="0dp">
-
-
-        </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -45,111 +35,168 @@
                     android:textSize="30sp"
                     android:textStyle="bold" />
 
-                <TextView
+                <!--                <TextView-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="10dp"-->
+                <!--                    android:gravity="center"-->
+                <!--                    android:text="@string/create_account_two"-->
+                <!--                    android:textColor="@color/text_color_two"-->
+                <!--                    android:textSize="20sp" />-->
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center"
-                    android:text="@string/create_account_two"
-                    android:textColor="@color/text_color_two"
-                    android:textSize="20sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:orientation="vertical"
-                android:padding="10dp">
-
-                <EditText
-                    android:id="@+id/took_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:background="@drawable/round_edittext"
-                    android:drawableLeft="@drawable/union"
-                    android:drawablePadding="5dp"
+                    android:layout_gravity="center"
                     android:hint="Your Name"
-                    android:padding="5dp" />
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    android:textColorHint="@color/call_button"
+                    app:boxBackgroundMode="none"
+                    app:hintTextColor="@color/text_color">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/took_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@drawable/round_edittext"
+                        android:drawablePadding="5dp"
+
+                        android:padding="5dp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:orientation="vertical"
-                android:padding="10dp">
+                android:layout_gravity="center">
 
-                <EditText
-                    android:id="@+id/phn_no"
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:background="@drawable/round_edittext"
-                    android:drawableLeft="@drawable/bd_flag"
-                    android:drawablePadding="5dp"
-                    android:inputType="phone"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:hint="Phone Number"
-                    android:padding="5dp" />
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    android:textColorHint="@color/call_button"
+                    app:boxBackgroundMode="none"
+                    app:hintTextColor="@color/text_color">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/phn_no"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@drawable/round_edittext"
+                        android:drawableLeft="@drawable/bd_flag"
+                        android:inputType="phone"
+                        android:padding="5dp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:orientation="vertical"
-                android:padding="10dp">
+                android:layout_gravity="center">
 
-                <EditText
-                    android:id="@+id/reg_address"
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:background="@drawable/round_edittext"
-                    android:drawablePadding="5dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:hint="Address"
-                    android:padding="5dp" />
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    android:textColorHint="@color/call_button"
+                    app:boxBackgroundMode="none"
+                    app:hintTextColor="@color/text_color">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/reg_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@drawable/round_edittext"
+                        android:drawablePadding="5dp"
+
+                        android:padding="5dp" />
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:orientation="vertical"
-                android:padding="10dp">
+                android:layout_gravity="center">
 
-                <EditText
-                    android:id="@+id/took_password"
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:background="@drawable/round_edittext"
-                    android:drawableLeft="@drawable/union"
-                    android:drawableRight="@drawable/ic_baseline_remove_red_eye_24"
-                    android:drawablePadding="5dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:hint="Password"
-                    android:padding="5dp" />
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    android:textColorHint="@color/call_button"
+                    app:boxBackgroundMode="none"
+                    app:hintTextColor="@color/text_color"
+                    app:passwordToggleEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/took_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@drawable/round_edittext"
+                        android:drawableLeft="@drawable/union"
+                        android:drawableRight="@drawable/ic_baseline_remove_red_eye_24"
+                        android:padding="5dp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:orientation="vertical"
-                android:padding="10dp">
+                android:layout_gravity="center">
 
-                <EditText
-                    android:id="@+id/took_confirm_password"
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:background="@drawable/round_edittext"
-                    android:drawableLeft="@drawable/union"
-                    android:drawableRight="@drawable/ic_baseline_remove_red_eye_24"
-                    android:drawablePadding="5dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:hint="Confirm Password"
-                    android:padding="5dp" />
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    android:textColorHint="@color/call_button"
+                    app:boxBackgroundMode="none"
+                    app:hintTextColor="@color/text_color"
+                    app:passwordToggleEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/took_confirm_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@drawable/round_edittext"
+                        android:drawableLeft="@drawable/union"
+                        android:drawableRight="@drawable/ic_baseline_remove_red_eye_24"
+                        android:padding="5dp" />
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
 
             </LinearLayout>
 

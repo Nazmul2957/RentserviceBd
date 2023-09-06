@@ -6,7 +6,7 @@
     <string name="welcome_page_two">Rent online and get awesome delivered from stores
         to your home in as fast as 1 hour .</string>
     <string name="create_account">Create An Account</string>
-    <string name="create_account_two">Fill your details or continue with social media</string>
+    <string name="create_account_two">Fill your details </string>
     <string name="sign_in_page_text">Enter your phone number and
 password to access your account</string>
     <string name="otp_page_text">Enter Verification Code</string>
