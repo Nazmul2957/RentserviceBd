@@ -27,7 +27,7 @@ public class SignInScreen extends AppCompatActivity {
 
     EditText Mobile_num, Password;
     Button SignIn;
-    TextView Goto_Signup,Forgot;
+    TextView Goto_Signup, Forgot;
     Api api;
     ProgressDialog progressDialog;
     String token;
@@ -40,8 +40,7 @@ public class SignInScreen extends AppCompatActivity {
         Password = findViewById(R.id.password_match);
         SignIn = findViewById(R.id.sign_ip);
         Goto_Signup = findViewById(R.id.new_registar);
-        Forgot=findViewById(R.id.forget_password);
-
+        Forgot = findViewById(R.id.forget_password);
 
 
         String Token = MySharedPreference.getInstance(getApplicationContext()).getString(Constant.TOKEN, "not found");
@@ -56,7 +55,7 @@ public class SignInScreen extends AppCompatActivity {
         Forgot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SignInScreen.this,Forgot_Password_Page_One.class));
+                startActivity(new Intent(SignInScreen.this, Forgot_Password_Page_One.class));
                 finish();
             }
         });

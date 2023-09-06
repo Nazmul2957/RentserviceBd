@@ -9,7 +9,7 @@ android {
         applicationId 'com.rentservice.rentserVice'
         minSdk 21
         targetSdk 31
-        versionCode 1
+        versionCode 3
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -53,19 +53,14 @@ dependencies {
     implementation "com.github.skydoves:expandablelayout:1.0.7"
 
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
-////swiperefreesh dependency
-
+    //swiperefreesh dependency
 
     implementation(platform("com.squareup.okhttp3:okhttp-bom:4.10.0"))
 
-    // define any required OkHttp artifacts without version
-//    implementation("com.squareup.okhttp3:okhttp")
-//    implementation("com.squareup.okhttp3:logging-interceptor")
-
-///image slider for details page
+//image slider for details page
     implementation 'com.github.denzcoskun:ImageSlideshow:0.1.2'
 
-  //  implementation 'com.github.smarteist:autoimageslider:1.4.0-appcompat'
+    //  implementation 'com.github.smarteist:autoimageslider:1.4.0-appcompat'
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01"
 }

@@ -6,16 +6,37 @@
     android:padding="10dp"
     app:cardCornerRadius="10dp"
     app:cardElevation="2dp"
+
     app:cardUseCompatPadding="true">
 
-    <TextView
-        android:id="@+id/cate_list"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Gopalgong"
-        android:padding="5dp"
-        android:textColor="@color/text_color"
-        android:textSize="20sp" />
+        android:layout_gravity="center"
+        android:padding="10dp"
+        android:background="#DFDFDF"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/logot"/>
+
+        <TextView
+            android:id="@+id/cate_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:hint="Gopalgong"
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
+            android:textAlignment="center"
+            android:textColor="@color/text_color"
+            android:textSize="20sp" />
+
+    </LinearLayout>
 
 
 </androidx.cardview.widget.CardView>

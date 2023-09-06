@@ -38,6 +38,7 @@ public class LoginScreen extends AppCompatActivity {
                 startActivity(new Intent(LoginScreen.this, SignInScreen.class));
             }
         });
+      // onshowquitedailog();
 
     }
 
@@ -70,7 +71,7 @@ public class LoginScreen extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
-          //  onshowquitedailog();
+         //  onshowquitedailog();
             super.onBackPressed();
             return;
         }

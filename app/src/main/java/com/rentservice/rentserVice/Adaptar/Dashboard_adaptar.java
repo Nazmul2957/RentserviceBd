@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.rentservice.rentserVice.Data_Model.Category_Search.PostCategory;
+import com.rentservice.rentserVice.Data_Model.Dashboard.Datum;
 import com.rentservice.rentserVice.Listner.DashboardItemClickMenu;
 import com.example.my_application.R;
 import com.rentservice.rentserVice.Screens.SinglePostViewScreen;
@@ -30,10 +31,10 @@ public class Dashboard_adaptar extends RecyclerView.Adapter<Dashboard_adaptar.Vi
         void onItemClick(int position);
     }
 
-    List<PostCategory> postlist = new ArrayList<>();
+    List<Datum> postlist = new ArrayList<>();
     Context context;
 
-    public Dashboard_adaptar(List<PostCategory> postlist, Context context,
+    public Dashboard_adaptar(List<Datum> postlist, Context context,
                              Dashboard_adaptar.OnItemClickListener listener) {
         this.postlist = postlist;
         this.context = context;

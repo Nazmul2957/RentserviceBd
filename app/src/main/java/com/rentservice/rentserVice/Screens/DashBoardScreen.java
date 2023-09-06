@@ -24,6 +24,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.rentservice.rentserVice.Adaptar.Dashboard_adaptar;
 import com.rentservice.rentserVice.Data_Model.Category_Search.CategorySearch;
+import com.rentservice.rentserVice.Data_Model.Dashboard.DashboardContainer;
 import com.rentservice.rentserVice.Data_Model.Profile.ProfileContainer;
 import com.rentservice.rentserVice.Network.Api;
 import com.rentservice.rentserVice.Network.RetrofitClient;
@@ -89,7 +90,7 @@ public class DashBoardScreen extends AppCompatActivity {
         api = RetrofitClient.get(getApplicationContext()).create(Api.class);
         Token = MySharedPreference.getInstance(getApplicationContext()).getString(Constant.TOKEN, "not found");
         PostId = getIntent().getStringExtra(Intent.EXTRA_UID);
-        Log.d("receive_categoryid", PostId);
+       // Log.d("receive_categoryid", PostId);
         progressDialog = new ProgressDialog(DashBoardScreen.this);
         progressDialog.setMessage("Please Wait......");
         progressDialog.setCancelable(false);
@@ -142,61 +143,61 @@ public class DashBoardScreen extends AppCompatActivity {
 
     public void data() {
 
-        api.categorysearch(PostId).enqueue(new Callback<CategorySearch>() {
-            @Override
-            public void onResponse(Call<CategorySearch> call, Response<CategorySearch> response) {
-                progressDialog.dismiss();
-                if (response.isSuccessful() && response.body() != null) {
-                    recyclerView.setHasFixedSize(true);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL,
-                            false));
-                    Dashboard_adaptar adaptar = new Dashboard_adaptar(response.body().getPosts(), getApplicationContext(), new Dashboard_adaptar.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(int position) {
-
-                        }
-                    });
-                    recyclerView.setAdapter(adaptar);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<CategorySearch> call, Throwable t) {
-                progressDialog.dismiss();
-            }
-        });
-
-
-//        api.getdashboarddata().enqueue(new Callback<DashboardContainer>() {
+//        api.categorysearch(PostId).enqueue(new Callback<CategorySearch>() {
 //            @Override
-//            public void onResponse(Call<DashboardContainer> call, Response<DashboardContainer> response) {
+//            public void onResponse(Call<CategorySearch> call, Response<CategorySearch> response) {
 //                progressDialog.dismiss();
 //                if (response.isSuccessful() && response.body() != null) {
 //                    recyclerView.setHasFixedSize(true);
-//                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(),
-//                            LinearLayoutManager.VERTICAL, false));
-//                    Dashboard_adaptar adaptar = new Dashboard_adaptar(response.body().getPosts(), getApplicationContext(),
-//                            new Dashboard_adaptar.OnItemClickListener() {
-//                                @Override
-//                                public void onItemClick(int position) {
+//                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL,
+//                            false));
+//                    Dashboard_adaptar adaptar = new Dashboard_adaptar(response.body().getPosts(), getApplicationContext(), new Dashboard_adaptar.OnItemClickListener() {
+//                        @Override
+//                        public void onItemClick(int position) {
 //
-//                                }
-//                            });
-//
+//                        }
+//                    });
 //                    recyclerView.setAdapter(adaptar);
-//
-//                    Log.d("respons", String.valueOf(response.body().getData().toString()));
-//
 //                }
 //            }
 //
 //            @Override
-//            public void onFailure(Call<DashboardContainer> call, Throwable t) {
+//            public void onFailure(Call<CategorySearch> call, Throwable t) {
 //                progressDialog.dismiss();
-//
-//
 //            }
 //        });
+
+
+        api.getdashboarddata().enqueue(new Callback<DashboardContainer>() {
+            @Override
+            public void onResponse(Call<DashboardContainer> call, Response<DashboardContainer> response) {
+                progressDialog.dismiss();
+                if (response.isSuccessful() && response.body() != null) {
+                    recyclerView.setHasFixedSize(true);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(),
+                            LinearLayoutManager.VERTICAL, false));
+                    Dashboard_adaptar adaptar = new Dashboard_adaptar(response.body().getData(), getApplicationContext(),
+                            new Dashboard_adaptar.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(int position) {
+
+                                }
+                            });
+
+                    recyclerView.setAdapter(adaptar);
+
+                    Log.d("respons", String.valueOf(response.body().getData().toString()));
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<DashboardContainer> call, Throwable t) {
+                progressDialog.dismiss();
+
+
+            }
+        });
     }
 
     public void customenavbar() {

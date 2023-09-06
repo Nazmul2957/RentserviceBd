@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.rentservice.rentserVice.Adaptar.Dashboard_adaptar;
 import com.rentservice.rentserVice.Data_Model.Category_Search.PostCategory;
+import com.rentservice.rentserVice.Data_Model.Dashboard.Datum;
 import com.rentservice.rentserVice.Network.Api;
 import com.rentservice.rentserVice.Network.RetrofitClient;
 import com.example.my_application.R;
@@ -24,16 +25,17 @@ public class DashboardItemClickMenu implements View.OnClickListener {
     Dashboard_adaptar dashboard_adaptar;
     Dashboard_adaptar.OnItemClickListener listenered;
     Dashboard_adaptar.ViewHolders viewHolders;
-    PostCategory datum;
+   // PostCategory datum;
     ProgressDialog progressDialog;
     Api api;
     Context context;
     String Token;
+    Datum datum;
 
 
     public DashboardItemClickMenu(Dashboard_adaptar dashboard_adaptar,
                                   Dashboard_adaptar.OnItemClickListener listenered,
-                                  Dashboard_adaptar.ViewHolders viewHolders, PostCategory datum
+                                  Dashboard_adaptar.ViewHolders viewHolders, Datum datum
     ) {
         this.dashboard_adaptar = dashboard_adaptar;
         this.listenered = listenered;
